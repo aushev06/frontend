@@ -1,0 +1,110 @@
+.w100 {
+  width: 100%;
+}
+
+.d-ib {
+  display: inline-block;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-color-600 {
+  color: var(--color--gray-600) !important;
+}
+
+.text-color-700 {
+  color: var(--color--gray-700) !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+.text-truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fw-bold {
+  font-weight: bold !important;
+}
+
+.fz-large-18 {
+  font-size: 1.125rem !important;
+}
+
+.fz-large-14 {
+  font-size: 0.875rem !important;
+}
+
+.fz-large-13 {
+  font-size: 0.8125rem !important;
+}
+
+.whiteBackground {
+  background-color: #fff;
+}
+
+.fz-large-26 {
+  font-size: 1.625rem !important;
+}
+
+.position-r {
+  position: relative;
+}
