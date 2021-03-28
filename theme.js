@@ -2,30 +2,33 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: '#04C800',
-    },
     background: {
-      default: '#191921',
+      default: 'var(#191921)',
     },
     text: {
-      primary: '#d0d0dd',
+      primary: 'var(#d0d0dd)',
     },
   },
-  spacing: 10,
+  spacing: [
+    'var(--spacing--10)',
+    'var(--spacing--20)',
+    'var(--spacing--30)',
+    'var(--spacing--40)',
+    'var(--spacing--50)',
+  ],
   typography: {
     fontFamily: [
-      'IBM Plex Sans',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      'Roboto',
-      'Segoe UI',
-      'Oxygen',
-      'Ubuntu',
-      'Cantarell',
-      'Fira Sans',
-      'Droid Sans',
-      'Helvetica Neue',
+      'var(IBM Plex Sans)',
+      'var(-apple-system)',
+      'var(BlinkMacSystemFont)',
+      'var(Roboto)',
+      'var(Segoe UI)',
+      'var(Oxygen)',
+      'var(Ubuntu)',
+      'var(Cantarell)',
+      'var(Fira Sans)',
+      'var(Droid Sans)',
+      'var(Helvetica Neue)',
     ].join(','),
   },
 });
