@@ -50,12 +50,10 @@ export const Checkbox: React.FC<CheckboxProps> = ({ checkedTitle, uncheckedTitle
     setChecked(event.target.checked);
   };
 
-  console.log(styles);
-
   return (
     <div className={clsx(styles.checkbox, 'd-flex justify-content-center')}>
       <span
-        className={clsx(styles.uncheckedTitle, !checked ? styles.checked : styles.unchecked)}
+        className={clsx(styles.uncheckedTitle, checked ? styles.unchecked : styles.checked)}
         onClick={() => setChecked(false)}
       >
         {uncheckedTitle}
