@@ -19,5 +19,38 @@
 }
 
 .checkbox {
-  // TODO
+  .root {
+    width: 39px;
+    height: 20px;
+    padding: 0;
+    display: flex;
+  }
+
+  .switchBase {
+    padding: 3px;
+    color: #ffffff;
+    &.checked {
+      transform: translateX(19px);
+      color: #ffffff;
+      & + .track {
+        opacity: 1;
+        background-color: #04c800;
+      }
+    }
+  }
+
+  .thumb {
+    width: 14px;
+    height: 14px;
+    box-shadow: none;
+  }
+
+  .track {
+    border-radius: 9px;
+    opacity: 1;
+    background-color: #5a5a68;
+  }
+
+  .checked {
+  }
 }

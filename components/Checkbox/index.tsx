@@ -50,15 +50,28 @@ export const Checkbox: React.FC<CheckboxProps> = ({ checkedTitle, uncheckedTitle
     setChecked(event.target.checked);
   };
 
+  console.log(styles);
+
   return (
-    <div className={`d-flex justify-content-center`}>
+    <div className={clsx(styles.checkbox, 'd-flex justify-content-center')}>
       <span
         className={clsx(styles.uncheckedTitle, !checked ? styles.checked : styles.unchecked)}
         onClick={() => setChecked(false)}
       >
         {uncheckedTitle}
       </span>
-      <CustomSwitch className={styles.checkbox} checked={checked} onChange={onChangeCheckbox} />
+      <Switch
+        className={styles.root}
+        classes={{
+          root: styles.root,
+          switchBase: styles.switchBase,
+          thumb: styles.thumb,
+          track: styles.track,
+          checked: styles.checked,
+        }}
+        checked={checked}
+        onChange={onChangeCheckbox}
+      />
       <span
         className={clsx(styles.checkedTitle, checked ? styles.checked : styles.unchecked)}
         onClick={() => setChecked(true)}
