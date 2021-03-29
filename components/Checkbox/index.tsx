@@ -32,7 +32,7 @@ const CustomSwitch = withStyles((theme) => ({
   track: {
     borderRadius: 9,
     opacity: 1,
-    backgroundColor: 'red',
+    backgroundColor: '#5A5A68',
   },
   checked: {},
 }))(Switch);
@@ -51,9 +51,13 @@ export const Checkbox: React.FC<CheckboxProps> = ({ checkedTitle, uncheckedTitle
 
   return (
     <div className={`d-flex justify-content-center`}>
-      <span className={styles.uncheckedTitle}>{uncheckedTitle}</span>
+      <span className={styles.uncheckedTitle} onClick={() => setChecked(false)}>
+        {uncheckedTitle}
+      </span>
       <CustomSwitch className={styles.checkbox} checked={checked} onChange={onChangeCheckbox} />
-      <span className={styles.checkedTitle}>{checkedTitle}</span>
+      <span className={styles.checkedTitle} onClick={() => setChecked(true)}>
+        {checkedTitle}
+      </span>
     </div>
   );
 };
