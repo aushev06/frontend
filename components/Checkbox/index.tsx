@@ -1,6 +1,7 @@
 import { Switch } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import clsx from 'clsx';
 
 import styles from './Checkbox.module.scss';
 
@@ -51,11 +52,17 @@ export const Checkbox: React.FC<CheckboxProps> = ({ checkedTitle, uncheckedTitle
 
   return (
     <div className={`d-flex justify-content-center`}>
-      <span className={styles.uncheckedTitle} onClick={() => setChecked(false)}>
+      <span
+        className={clsx(styles.uncheckedTitle, !checked ? styles.checked : styles.unchecked)}
+        onClick={() => setChecked(false)}
+      >
         {uncheckedTitle}
       </span>
       <CustomSwitch className={styles.checkbox} checked={checked} onChange={onChangeCheckbox} />
-      <span className={styles.checkedTitle} onClick={() => setChecked(true)}>
+      <span
+        className={clsx(styles.checkedTitle, checked ? styles.checked : styles.unchecked)}
+        onClick={() => setChecked(true)}
+      >
         {checkedTitle}
       </span>
     </div>
