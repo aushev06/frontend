@@ -3,10 +3,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     background: {
-      default: 'var(#191921)',
+      default: 'var(--background-color)',
     },
     text: {
-      primary: 'var(#d0d0dd)',
+      primary: 'var(--text-color)',
     },
   },
   spacing: [
@@ -17,19 +17,7 @@ const theme = createMuiTheme({
     'var(--spacing--50)',
   ],
   typography: {
-    fontFamily: [
-      'var(IBM Plex Sans)',
-      'var(-apple-system)',
-      'var(BlinkMacSystemFont)',
-      'var(Roboto)',
-      'var(Segoe UI)',
-      'var(Oxygen)',
-      'var(Ubuntu)',
-      'var(Cantarell)',
-      'var(Fira Sans)',
-      'var(Droid Sans)',
-      'var(Helvetica Neue)',
-    ].join(','),
+    fontFamily: 'var(--font--family--base',
   },
 });
 
