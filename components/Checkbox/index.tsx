@@ -4,9 +4,7 @@ import { Switch } from '@material-ui/core';
 import styles from './Checkbox.module.scss';
 
 interface CheckboxProps {
-  checkedTitle?: string;
-  uncheckedTitle?: string;
-  checked?: boolean;
+  checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
