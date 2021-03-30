@@ -1,0 +1,18 @@
+.checkedTitle {
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+.uncheckedTitle {
+  padding-right: 10px;
+  font-size: 14px;
+}
+
+.checked {
+  color: #d0d0dd;
+}
+
+.unchecked {
+  color: #9c9caa;
+  cursor: pointer;
+}
