@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 
 import styles from './Header.module.scss';
-import { Checkbox } from '../Checkbox';
+import { AvailableForWork } from '../AvailableForWork';
 
 export const Header: React.FC = () => {
+  const [checked, setChecked] = useState(false);
+
+  const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
+
   return (
     <header className={clsx(styles.header, 'd-flex justify-content-between')}>
       <img className={styles.logo} src="/logo.svg" alt="Logo" />
-      <Checkbox checkedTitle={'Доступен для работы'} uncheckedTitle={'Недоступен'} />
+      <AvailableForWork checked={checked} onChange={onChangeCheckbox} setChecked={setChecked} />
       <div>Правая часть</div>
     </header>
   );
