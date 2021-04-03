@@ -1,0 +1,75 @@
+$green: var(--secondary-color);
+$grey: var(--primary-color);
+$text-color: var(--text-color);
+$white: #ffffff;
+
+.button {
+  .root {
+    padding: 8px 15px;
+    text-transform: none;
+    color: $text-color;
+  }
+
+  .contained {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .containedPrimary {
+    background-color: $grey;
+  }
+
+  .containedPrimary:hover {
+    background-color: $grey;
+  }
+  .containedSecondary {
+    background-color: $green;
+    color: $white;
+  }
+  .containedSecondary:hover {
+    background-color: $green;
+  }
+
+  .outlined {
+    padding: 7px 10px;
+    background: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .outlinedPrimary {
+    border-color: $grey;
+  }
+
+  .outlinedPrimary:hover {
+    border-color: $grey;
+    background-color: transparent;
+  }
+
+  .outlinedSecondary {
+    background-color: transparent;
+    border-color: $green;
+    color: $green;
+  }
+
+  .outlinedSecondary:hover {
+    background-color: transparent;
+    border-color: $green;
+  }
+
+  .textPrimary:hover {
+    background-color: transparent;
+  }
+
+  .textSecondary {
+    color: $green;
+  }
+
+  .textSecondary:hover {
+    background-color: transparent;
+  }
+}

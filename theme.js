@@ -6,7 +6,7 @@ const theme = createMuiTheme({
       default: 'var(--background-color)',
     },
     text: {
-      primary: 'var(--text-color)',
+      // primary: 'var(--text-color)',
     },
   },
   spacing: [
@@ -17,7 +17,7 @@ const theme = createMuiTheme({
     'var(--spacing--50)',
   ],
   typography: {
-    fontFamily: 'var(--font--family--base',
+    fontFamily: 'var(--font--family--base)',
   },
 });
 
