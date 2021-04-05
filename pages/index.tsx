@@ -1,6 +1,7 @@
 import React from 'react';
 import { MainLayout } from '../layouts/MainLayout';
 import Button from '../components/Button';
+import PofilePopup from '../components/PofilePopup';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Button variant="outlined" color="primary">
           Новое
         </Button>
+        <PofilePopup user={{ name: 'Адам', login: '@balkoev', avatar: '' }} />
       </MainLayout>
     </main>
   );
