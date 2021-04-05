@@ -1,4 +1,3 @@
-import React, { ReactNode } from 'react';
 import clsx from 'clsx';
 import styles from './LikeBlock.module.scss';
 import { ThumbUpIcon } from './ThumbUpIcon';
