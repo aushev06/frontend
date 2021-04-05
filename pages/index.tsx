@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainLayout } from '../layouts/MainLayout';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import PofilePopup from '../components/PofilePopup';
 
 export default function Home() {

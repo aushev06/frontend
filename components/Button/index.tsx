@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Button } from '@material-ui/core';
+import { Button as ButtonBase } from '@material-ui/core';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
@@ -12,10 +12,10 @@ interface ButtonProps {
   className?: string;
 }
 
-const CustomButton: React.FC<ButtonProps> = ({ className, children, variant, color, startIcon, endIcon }) => {
+export const Button: React.FC<ButtonProps> = ({ className, children, variant, color, startIcon, endIcon }) => {
   return (
     <div className={styles.button}>
-      <Button
+      <ButtonBase
         className={className}
         variant={variant}
         color={color}
@@ -34,9 +34,7 @@ const CustomButton: React.FC<ButtonProps> = ({ className, children, variant, col
         endIcon={endIcon}
       >
         {children}
-      </Button>
+      </ButtonBase>
     </div>
   );
 };
-
-export default CustomButton;
