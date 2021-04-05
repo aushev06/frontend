@@ -7,15 +7,33 @@ interface LikeBlockProps {
   likes: number;
   dislikes: number;
   vote?: 'like' | 'dislike';
-  onChange: (vote: 'like' | 'dislike') => void;
+  onChange: (result: ILikeBlockResult) => void;
+}
+
+export interface ILikeBlockResult {
+  likes: 1 | 0 | -1;
+  dislikes: 1 | 0 | -1;
+  vote?: 'like' | 'dislike';
 }
 
 export const LikeBlock: React.FC<LikeBlockProps> = ({ mode, likes, dislikes, vote, onChange }) => {
   const onThumbUpClick = () => {
-    onChange('like');
+    if (vote === 'like') {
+      onChange({ likes: -1, dislikes: 0 });
+    } else if (vote === 'dislike') {
+      onChange({ likes: 1, dislikes: -1, vote: 'like' });
+    } else {
+      onChange({ likes: 1, dislikes: 0, vote: 'like' });
+    }
   };
   const onThumbDownClick = () => {
-    onChange('dislike');
+    if (vote === 'like') {
+      onChange({ likes: -1, dislikes: 1, vote: 'dislike' });
+    } else if (vote === 'dislike') {
+      onChange({ likes: 0, dislikes: -1 });
+    } else {
+      onChange({ likes: 0, dislikes: 1, vote: 'dislike' });
+    }
   };
 
   const {
