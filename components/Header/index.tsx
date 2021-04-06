@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import ProfilePopup from '../ProfilePopup';
 
 import styles from './Header.module.scss';
 import { AvailableForWork } from '../AvailableForWork';
@@ -15,7 +16,7 @@ export const Header: React.FC = () => {
     <header className={clsx(styles.header, 'd-flex justify-content-between')}>
       <img className={styles.logo} src="/logo.svg" alt="Logo" />
       <AvailableForWork checked={checked} onChange={onChangeCheckbox} setChecked={setChecked} />
-      <div>Правая часть</div>
+      <ProfilePopup user={{ name: 'Апачи', login: '@ingush06', avatar: '' }} />
     </header>
   );
 };
