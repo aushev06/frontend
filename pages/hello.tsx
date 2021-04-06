@@ -3,15 +3,17 @@ import { LikeBlock } from '../components/LikeBlock';
 import { ILikeBlockResult } from '../components/LikeBlock/LikeBlock';
 
 export default function HelloPage() {
-  const [vote, setVote] = useState(undefined);
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
+  const [data, setData] = useState({
+    vote: undefined,
+    likes: 5,
+    dislikes: 2,
+  });
+
   const onChange = (result: ILikeBlockResult) => {
-    setVote(result.vote);
-    setLikes(likes + result.likes);
-    setDislikes(dislikes + result.dislikes);
+    setData(result);
   };
 
+  const { vote, likes, dislikes } = data;
   return (
     <>
       <div className={'p-30'}>
