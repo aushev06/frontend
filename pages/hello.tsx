@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { LikeBlock } from '../components/LikeBlock';
-import { ILikeBlockResult } from '../components/LikeBlock/LikeBlock';
+import { ILikeBlockResult } from '../components/LikeBlock';
 
 export default function HelloPage() {
   const [data, setData] = useState({
