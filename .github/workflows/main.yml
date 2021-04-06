@@ -33,6 +33,6 @@ jobs:
           port: ${{ secrets.DEPLOY_SERVER_PORT }}
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
-          source: static
+          source: _static
           target: ~/public_html
           strip_components: 1
