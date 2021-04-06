@@ -1,0 +1,99 @@
+$text-color: #9c9caa;
+$like-color: var(--secondary-color);
+$dislike-color: var(--tertiary-color);
+
+.likeBlock {
+  .upBlock,
+  .downBlock {
+    cursor: pointer;
+  }
+}
+
+.likeBlockFull {
+  display: flex;
+  height: 20px;
+  font-size: 13px;
+
+  .upBlock,
+  .downBlock {
+    display: flex;
+    align-items: center;
+
+    & > span {
+      margin-left: 6px;
+    }
+  }
+
+  .upBlock {
+    margin-right: 15px;
+    & svg {
+      margin-bottom: 4px;
+    }
+  }
+
+  .downBlock {
+    & svg {
+      margin-top: 4px;
+    }
+  }
+}
+
+.likeBlockMini {
+  display: flex;
+  font-size: 13px;
+
+  .upBlock,
+  .downBlock {
+    padding: 10px 18px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    border: 1px solid #3a3a4b;
+    box-sizing: border-box;
+    & span {
+      margin-bottom: 3px;
+    }
+  }
+
+  .upBlock {
+    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    & svg {
+      margin-bottom: 4px;
+    }
+  }
+
+  .downBlock {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    & svg {
+      margin-top: 4px;
+    }
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.likeVoted {
+  color: $like-color;
+  & svg {
+    fill: $like-color;
+  }
+}
+
+.dislikeVoted {
+  color: $dislike-color;
+  & svg {
+    fill: $dislike-color;
+  }
+}
+
+.noVotes {
+  color: $text-color;
+  & svg {
+    fill: $text-color;
+  }
+}
