@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { LikeBlock } from '../components/LikeBlock';
-import { ILikeBlockResult } from '../components/LikeBlock';
+import { ILikeBlockResult, LikeBlock } from '../components/LikeBlock';
+import { ViewsAndComments } from '../components/ViewsAndComments';
 
 export default function HelloPage() {
   const [data, setData] = useState({
@@ -21,6 +21,9 @@ export default function HelloPage() {
       </div>
       <div className={'p-30'}>
         <LikeBlock mode={'mini'} likes={likes} dislikes={dislikes} vote={vote} onChange={onChange} />
+      </div>
+      <div className={'p-30'}>
+        <ViewsAndComments mode={'full'} views={12} comments={3} />
       </div>
     </>
   );
