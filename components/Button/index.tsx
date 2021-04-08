@@ -4,8 +4,8 @@ import styles from './Button.module.scss';
 
 interface ButtonProps {
   children: ReactNode;
-  variant: 'text' | 'outlined' | 'contained';
-  color: 'inherit' | 'primary' | 'secondary' | 'default';
+  variant?: 'text' | 'outlined' | 'contained';
+  color?: 'inherit' | 'primary' | 'secondary' | 'default';
   fullWidth?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;

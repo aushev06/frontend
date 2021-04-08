@@ -9,6 +9,7 @@ const theme = createMuiTheme({
       primary: '#d0d0dd',
     },
   },
+  shadows: ['none'],
   spacing: [
     'var(--spacing--10)',
     'var(--spacing--20)',
