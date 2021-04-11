@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ILikeBlockResult, LikeBlock } from '../components/LikeBlock';
+import { LikeBlockResult, LikeBlock } from '../components/LikeBlock';
 import { ViewsAndComments } from '../components/ViewsAndComments';
 
 export default function HelloPage() {
@@ -9,7 +9,7 @@ export default function HelloPage() {
     dislikes: 2,
   });
 
-  const onChange = (result: ILikeBlockResult) => {
+  const onChange = (result: LikeBlockResult) => {
     setData(result);
   };
 
