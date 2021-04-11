@@ -48,7 +48,7 @@ $dislike-color: var(--tertiary-color);
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    border: 1px solid #3a3a4b;
+    border: 1px solid var(--border-color);
     box-sizing: border-box;
     & span {
       margin-bottom: 3px;
