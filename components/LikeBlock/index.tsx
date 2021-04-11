@@ -9,10 +9,10 @@ interface LikeBlockProps {
   likes: number;
   dislikes: number;
   vote?: LikeBlockVote;
-  onChange: (result: ILikeBlockResult) => void;
+  onChange: (result: LikeBlockResult) => void;
 }
 
-export interface ILikeBlockResult {
+export interface LikeBlockResult {
   likes: number;
   dislikes: number;
   vote: LikeBlockVote;

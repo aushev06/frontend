@@ -4,7 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { CommentIcon } from '../icons/CommentIcon';
 import { EyeIcon } from '../icons/EyeIcon';
-import { ILikeBlockResult, LikeBlock, LikeBlockVote } from '../LikeBlock';
+import { LikeBlockResult, LikeBlock } from '../LikeBlock';
 import styles from './MiniPost.module.scss';
 
 export interface MiniPostData {
@@ -30,7 +30,7 @@ interface MiniPostProps {
   postData: MiniPostData;
 }
 
-const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
+export const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
   const {
     user,
     title,
@@ -44,7 +44,7 @@ const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
     dislikesCount,
     slug,
   } = postData;
-  const [likesAndDislikes, setLikesAndDislikes] = React.useState<ILikeBlockResult>({
+  const [likesAndDislikes, setLikesAndDislikes] = React.useState<LikeBlockResult>({
     likes: likesCount,
     dislikes: dislikesCount,
     vote: undefined,
@@ -95,5 +95,3 @@ const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
     </div>
   );
 };
-
-export default MiniPost;
