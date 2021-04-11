@@ -2,7 +2,7 @@ import React from 'react';
 import { MainLayout } from '../layouts/MainLayout';
 import { SideMenu } from '../components/SideMenu';
 import { SideComments } from '../components/SideComments';
-import MiniPost, { MiniPostData } from '../components/MiniPost';
+import { MiniPost, MiniPostData } from '../components/MiniPost';
 
 const miniPostTemplate: MiniPostData = {
   id: 0,
