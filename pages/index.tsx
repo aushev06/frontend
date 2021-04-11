@@ -2,6 +2,27 @@ import React from 'react';
 import { MainLayout } from '../layouts/MainLayout';
 import { SideMenu } from '../components/SideMenu';
 import { SideComments } from '../components/SideComments';
+import MiniPost, { MiniPostData } from '../components/MiniPost';
+
+const miniPostTemplate: MiniPostData = {
+  id: 0,
+  title: 'В Магасе прошел Meetup по программированию и безопасности',
+  user: {
+    id: 0,
+    name: 'Dr. Who',
+    avatarUrl: 'https://clck.ru/UDyci',
+  },
+  slug: 'mini-post',
+  tags: ['разработка'],
+  time: 1618128849922,
+  description:
+    'Никто не ожидал, что на GDG Magas 2019 придет столько людей. Зал ГБУ Инг НИИ был переполнен слушателями, среди которых было много гостей из Чечни и Дагестана.',
+  imageUrl: 'https://clck.ru/U7rDJ',
+  commentsCount: 21,
+  viewsCount: 234,
+  likesCount: 52,
+  dislikesCount: 12,
+};
 
 export default function Home() {
   return (
@@ -11,13 +32,7 @@ export default function Home() {
           <div className="left-side">
             <SideMenu newCount={24} />
           </div>
-          <div className="content">
-            {[...Array(10)].fill(
-              <div style={{ border: '1px solid #333', padding: 30, width: '100%', marginBottom: 30 }}>
-                <h2>Список новостей...</h2>
-              </div>,
-            )}
-          </div>
+          <div className="content">{[...Array(10)].fill(<MiniPost postData={miniPostTemplate} />)}</div>
           <div className="right-side">
             <SideComments
               comments={[

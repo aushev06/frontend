@@ -33,6 +33,10 @@ $secondary-color: #9c9caa;
   border-radius: 4px;
   border: 1px solid #3a3a4b;
   padding: 20px 25px;
+  margin-bottom: 15px;
+  &:last-child {
+    margin-bottom: unset;
+  }
 }
 
 .info {
