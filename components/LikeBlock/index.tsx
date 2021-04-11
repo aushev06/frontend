@@ -2,18 +2,20 @@ import clsx from 'clsx';
 import styles from './LikeBlock.module.scss';
 import { ThumbUpIcon } from '../icons/ThumbUpIcon';
 
+export type LikeBlockVote = 'like' | 'dislike' | undefined;
+
 interface LikeBlockProps {
   mode: 'mini' | 'full';
   likes: number;
   dislikes: number;
-  vote?: 'like' | 'dislike';
+  vote?: LikeBlockVote;
   onChange: (result: ILikeBlockResult) => void;
 }
 
 export interface ILikeBlockResult {
   likes: number;
   dislikes: number;
-  vote: 'like' | 'dislike' | undefined;
+  vote: LikeBlockVote;
 }
 
 export const LikeBlock: React.FC<LikeBlockProps> = ({ mode, likes, dislikes, vote, onChange }) => {
