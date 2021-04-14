@@ -1,0 +1,19 @@
+$color: var(--primary-color);
+
+.tag {
+  display: inline-block;
+  border-radius: 30px;
+  padding: 6px 14px;
+  margin-right: 7px;
+  margin-bottom: 10px;
+  background-color: var(--primary-color);
+  line-height: 19px;
+
+  &:hover {
+    background-color: lighten(#282832, 5);
+  }
+
+  &:active {
+    background-color: darken(#282832, 10);
+  }
+}

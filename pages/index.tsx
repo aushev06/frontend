@@ -3,6 +3,9 @@ import { MainLayout } from '../layouts/MainLayout';
 import { SideMenu } from '../components/SideMenu';
 import { SideComments } from '../components/SideComments';
 import { MiniPost, MiniPostData } from '../components/MiniPost';
+import { SideBlock } from '../components/SideBlock';
+import { Tags } from '../components/Tags';
+import { MenuList } from '../components/MenuList';
 
 const miniPostTemplate: MiniPostData = {
   id: 0,
@@ -30,7 +33,40 @@ export default function Home() {
       <MainLayout>
         <div className="wrapper">
           <div className="left-side">
-            <SideMenu newCount={24} />
+            <SideBlock>
+              <MenuList
+                items={[
+                  { name: 'Популярное', url: '/popular', icon: '/fire.svg', isActive: true, hasMore: true },
+                  { name: 'Новое', url: '/new', icon: '/news.svg' },
+                ]}
+              />
+            </SideBlock>
+            <SideBlock name="Подкасты">
+              <MenuList
+                items={[
+                  { name: 'Dev Battle', url: '/tags/dev-battle', icon: '/podcast_1.png' },
+                  { name: 'Design Battle', url: '/tags/dev-battle', icon: '/podcast_2.png' },
+                  { name: 'Design Review', url: '/tags/dev-battle', icon: '/podcast_3.png' },
+                  { name: 'Dev Review', url: '/tags/dev-battle', icon: '/podcast_4.png' },
+                  { name: 'Дизайн за чаем', url: '/tags/dev-battle', icon: '/podcast_5.png' },
+                ]}
+              />
+            </SideBlock>
+            <SideBlock name="Темы">
+              <Tags
+                items={[
+                  { name: 'разработка', url: '/tags/develop' },
+                  { name: 'советы', url: '/tags/tips' },
+                  { name: 'дизайн', url: '/tags/design' },
+                  { name: 'инструкции', url: '/tags/instructions' },
+                  { name: 'mvp', url: '/tags/mvp' },
+                  { name: 'проектирование', url: '/tags/test' },
+                  { name: 'инструментарий', url: '/tags/test' },
+                  { name: 'болтология', url: '/tags/test' },
+                  { name: 'работа', url: '/tags/test' },
+                ]}
+              />
+            </SideBlock>
           </div>
           <div className="content">{[...Array(10)].fill(<MiniPost postData={miniPostTemplate} />)}</div>
           <div className="right-side">
