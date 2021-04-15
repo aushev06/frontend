@@ -1,6 +1,5 @@
 import React from 'react';
 import { MainLayout } from '../layouts/MainLayout';
-import { SideMenu } from '../components/SideMenu';
 import { SideComments } from '../components/SideComments';
 import { MiniPost, MiniPostData } from '../components/MiniPost';
 import { SideBlock } from '../components/SideBlock';
