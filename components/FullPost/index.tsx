@@ -12,6 +12,7 @@ import { UserViewOnContent } from '../UserViewOnContent';
 import { ViewsAndComments } from '../ViewsAndComments';
 import { LikeBlockResult } from '../LikeBlock';
 import getBlockHTML, { Block } from './PostViewer';
+import { WarningIcon } from '../icons/WarningIcon';
 
 interface PostData {
   likesCount: number;
@@ -217,6 +218,19 @@ export const FullPost: React.FC = () => {
         </div>
       </div>
       {postData.content.blocks.map((block: Block) => getBlockHTML(block))}
+      <div className={styles.post_footer}>
+        <div className={styles.post_footer_icons}>
+          <FacebookIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
+          <VkIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
+          <TwitterIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
+          <TelegramIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
+          <WhatsappIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
+        </div>
+        <span className={styles.post_footer_complain}>
+          <WarningIcon className={styles.post_footer_complain_icon} />
+          Пожаловаться
+        </span>
+      </div>
     </div>
   );
 };
