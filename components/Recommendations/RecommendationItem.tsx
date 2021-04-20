@@ -21,11 +21,11 @@ export interface RecommendationItemData {
   viewsCount: number;
 }
 
-interface RecommendationData {
+interface RecommendationProps {
   data: RecommendationItemData
 }
 
-export const RecommendationItem:React.FC<RecommendationData> = ({ data }) => {
+export const RecommendationItem:React.FC<RecommendationProps> = ({ data }) => {
   const {
     title,
     user,
