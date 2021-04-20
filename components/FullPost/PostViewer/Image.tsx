@@ -8,6 +8,10 @@ export interface PostImageBlock {
     file: {
       url: string;
     };
+    caption: string;
+    withBorder: boolean;
+    stretched: boolean;
+    withBackground: boolean;
   };
 }
 

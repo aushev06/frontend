@@ -38,7 +38,7 @@
   background-color: var(--primary-color);
   border-radius: 4px;
   overflow: hidden;
-  margin: 20px 0;
+  margin: 10px 0;
   &_picture {
     width: 100%;
     display: none;
@@ -75,6 +75,20 @@
       animation: image-preloader-spin 2s infinite linear;
       box-sizing: border-box;
     }
+  }
+}
+
+.delimiter {
+  line-height: 1.6em;
+  text-align: center;
+  padding: 0.4em 0;
+  &::before {
+    display: inline-block;
+    content: '***';
+    font-size: 30px;
+    line-height: 65px;
+    height: 30px;
+    letter-spacing: 0.2em;
   }
 }
 

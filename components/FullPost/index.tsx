@@ -2,12 +2,15 @@ import React from 'react';
 import styles from './Post.module.scss';
 import getBlockHTML, { Block } from './PostViewer';
 
-const postData: { blocks: Block[] } = {
+interface PostData {
+  time: number;
+  blocks: Block[];
+  version: string;
+}
+
+const postData: PostData = {
   time: 1556098174501,
   blocks: [
-    {
-      type: 'quote',
-    },
     {
       type: 'header',
       data: {
