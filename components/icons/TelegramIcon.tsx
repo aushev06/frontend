@@ -9,21 +9,11 @@ interface TelegramIconProps {
 export const TelegramIcon: React.FC<TelegramIconProps> = ({ className, hoverClassName }) => {
   const [classes, setClasses] = React.useState(className);
 
-  const onHover = () => {
-    console.log('hover', hoverClassName);
-    setClasses(clsx(className, hoverClassName));
-  };
-
-  const onLeave = () => {
-    console.log('addfdsaf');
-    setClasses(className);
-  };
-
   return (
     <svg
       className={classes}
-      onMouseOver={onHover}
-      onMouseLeave={onLeave}
+      onMouseOver={() => setClasses(clsx(className, hoverClassName))}
+      onMouseLeave={() => setClasses(className)}
       width="20"
       height="17"
       viewBox="0 0 20 17"

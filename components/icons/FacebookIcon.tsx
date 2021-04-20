@@ -9,20 +9,11 @@ interface FacebookIconProps {
 export const FacebookIcon: React.FC<FacebookIconProps> = ({ className, hoverClassName }) => {
   const [classes, setClasses] = React.useState(className);
 
-  const onHover = () => {
-    console.log('hover', hoverClassName);
-    setClasses(clsx(className, hoverClassName));
-  };
-
-  const onLeave = () => {
-    console.log('addfdsaf');
-    setClasses(className);
-  };
   return (
     <svg
       className={classes}
-      onMouseOver={onHover}
-      onMouseLeave={onLeave}
+      onMouseOver={() => setClasses(clsx(className, hoverClassName))}
+      onMouseLeave={() => setClasses(className)}
       width="9"
       height="20"
       viewBox="0 0 9 20"
