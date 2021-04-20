@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './Post.module.scss';
-import getBlockHTML from './PostViewer';
-import { PostHeaderBlock } from './PostViewer/Header';
+import getBlockHTML, { Block } from './PostViewer';
 
-const postData = {
+const postData: { blocks: Block[] } = {
   time: 1556098174501,
   blocks: [
+    {
+      type: 'quote',
+    },
     {
       type: 'header',
       data: {
@@ -114,5 +116,5 @@ const postData = {
 };
 
 export const FullPost: React.FC = () => {
-  return <div className={styles.post}>{postData.blocks.map((block: PostHeaderBlock) => getBlockHTML(block))}</div>;
+  return <div className={styles.post}>{postData.blocks.map((block: Block) => getBlockHTML(block))}</div>;
 };

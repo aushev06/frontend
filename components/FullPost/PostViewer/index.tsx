@@ -2,6 +2,7 @@ import { HeaderBlock, PostHeaderBlock } from './Header';
 import { ImageBlock, PostImageBlock } from './Image';
 import { ListBlock, PostListBlock } from './List';
 import { ParagraphBlock, PostParagraphBlock } from './Paragraph';
+import { Unknown } from './Unknown';
 
 export type Block = PostHeaderBlock | PostParagraphBlock | PostListBlock | PostImageBlock;
 
@@ -16,6 +17,6 @@ export default function getBlockHTML(block: Block): JSX.Element {
     case 'image':
       return <ImageBlock block={block} />;
     default:
-      return <div></div>;
+      return <Unknown type={block!.type} />;
   }
 }
