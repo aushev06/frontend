@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './ViewsAndComments.module.scss';
+import { CommentIcon } from '../icons/CommentIcon';
+import { EyeIcon } from '../icons/EyeIcon';
 
 interface ViewsAndCommentsProps {
   mode: 'mini' | 'full';
@@ -27,9 +29,9 @@ export const ViewsAndComments: React.FC<ViewsAndCommentsProps> = ({ mode, views,
   const viewsTitle = mode === 'full' ? getFullTitle(views, 'просмотр', ['', 'а', 'ов']) : `${views}`;
   return (
     <div className={clsx(styles.viewsAndComments, 'd-flex align-items-center')}>
-      <img className={styles.icon} src="/comment.svg" alt="Comment icon" />
+      <CommentIcon className={styles.icon} />
       <span className={styles.count}>{commentsTitle}</span>
-      <img className={styles.icon} src="/eye.svg" alt="Eye icon" />
+      <EyeIcon className={styles.icon} />
       <span className={styles.count}>{viewsTitle}</span>
     </div>
   );

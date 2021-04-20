@@ -8,6 +8,7 @@ import { LikeBlockResult, LikeBlock } from '../LikeBlock';
 import styles from './MiniPost.module.scss';
 import { PastTimeLabel } from '../PastTimeLabel';
 import { UserViewOnContent } from '../UserViewOnContent';
+import { ViewsAndComments } from '../ViewsAndComments';
 
 export interface MiniPostData {
   id: number;
@@ -70,14 +71,7 @@ export const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
       <p className={styles.description}>{description}</p>
       <div className={styles.popularity}>
         <div className={styles.popularity_left}>
-          <div className={styles.comments}>
-            <CommentIcon />
-            <span className={styles.comments_count}>{commentsCount}</span>
-          </div>
-          <div className={styles.views}>
-            <EyeIcon />
-            <span className={styles.views_count}>{viewsCount}</span>
-          </div>
+          <ViewsAndComments comments={commentsCount} views={viewsCount} mode="mini" />
         </div>
         <div className={styles.popularity_right}>
           <LikeBlock

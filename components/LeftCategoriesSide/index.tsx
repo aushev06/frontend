@@ -1,11 +1,16 @@
 import React from 'react';
 import { SideBlock } from '../SideBlock';
 import { MenuList } from '../MenuList';
-import {Tags} from '../Tags'
+import { Tags } from '../Tags';
+import clsx from 'clsx';
 
-export const LeftCategoriesSide = () => {
+export interface LeftCategoriesSideProps {
+  className?: string;
+}
+
+export const LeftCategoriesSide: React.FC<LeftCategoriesSideProps> = ({ className }) => {
   return (
-    <div className="left-side">
+    <div className={clsx('left-side', className || '')}>
       <SideBlock>
         <MenuList
           items={[
