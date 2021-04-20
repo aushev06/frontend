@@ -6,6 +6,8 @@ import { CommentIcon } from '../icons/CommentIcon';
 import { EyeIcon } from '../icons/EyeIcon';
 import { LikeBlockResult, LikeBlock } from '../LikeBlock';
 import styles from './MiniPost.module.scss';
+import { PastTimeLabel } from '../PastTimeLabel';
+import { UserViewOnContent } from '../UserViewOnContent';
 
 export interface MiniPostData {
   id: number;
@@ -53,13 +55,8 @@ export const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
   return (
     <div className={styles.post}>
       <div className={styles.info}>
-        <Link href={`user/${user.id}`}>
-          <div className={styles.user}>
-            <img className={styles.user_avatar} src={user.avatarUrl} alt="Аватар" />
-            <span className={styles.user_name}>{user.name}</span>
-          </div>
-        </Link>
-        <span className={styles.time}>{formatDistanceToNow(time, { locale: ru, addSuffix: true })}</span>
+        <UserViewOnContent user={user} />
+        <PastTimeLabel time={time} leftSidePoint />
         <div className={styles.tags}>
           {tags.map((tag) => (
             <span className={styles.tag}>#{tag}</span>

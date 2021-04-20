@@ -1,0 +1,22 @@
+@mixin pointOnLeftSide {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  &::before {
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 2px;
+    background-color: var(--text-dark-color);
+    border-radius: 50%;
+    left: 10px;
+  }
+}
+
+.time {
+  font-size: 13px;
+  &_with_left_side_point {
+    @include pointOnLeftSide();
+  }
+}

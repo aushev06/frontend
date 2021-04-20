@@ -1,4 +1,5 @@
 import React from 'react';
+import { UserViewOnContent } from '../UserViewOnContent';
 import styles from './Post.module.scss';
 import getBlockHTML, { Block } from './PostViewer';
 
@@ -119,5 +120,17 @@ const postData: PostData = {
 };
 
 export const FullPost: React.FC = () => {
-  return <div className={styles.post}>{postData.blocks.map((block: Block) => getBlockHTML(block))}</div>;
+  return (
+    <div className={styles.post}>
+      <UserViewOnContent
+        user={{
+          id: 0,
+          name: 'Dr. Who',
+          avatarUrl: 'https://clck.ru/UDyci',
+        }}
+        time={1618128849922}
+      />
+      {postData.blocks.map((block: Block) => getBlockHTML(block))}
+    </div>
+  );
 };
