@@ -1,8 +1,57 @@
 .container {
   position: absolute;
   background-color: var(--grey-light-color);
-  width: 770px;
-  height: 548px;
-  top: 60px;
-  left: 1px;
+  top: 0px;
+  margin: 0 auto;
+  min-width: 700px;
+}
+
+.body {
+  padding: 10px 30px;
+}
+
+.divider {
+  background-color: #474758 !important;
+}
+
+.searchTitle {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 15px 0;
+  color: var(--text-dark-color);
+  cursor: pointer;
+}
+
+.searchTitleInner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchItems {
+  padding: 20px 0 16px 0;
+}
+
+.searchItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.showAll {
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration-line: underline;
+  color: var(--text-dark-color);
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  background-color: #282832;
+  padding: 20px 30px;
 }

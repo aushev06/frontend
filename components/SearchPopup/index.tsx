@@ -1,83 +1,76 @@
 import React, { useState } from 'react';
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import styles from './SearchPopup.module.scss';
 
+import styles from './SearchPopup.module.scss';
+import Item from './Item';
 interface SearchPopupProps {
-  isActive: boolean;
-  onOpen: () => void;
-  onClose: () => void;
+  isSearch: boolean;
+  searchInput: string;
 }
 
 const mockup = {
-  autrhor: [
+  authors: [
     {
+      id: 1,
       name: 'Харца Лелович',
     },
     {
+      id: 2,
       name: 'Нахал Ещетотович',
     },
   ],
-  article: [
+  articles: [
     {
+      id: 3,
       name: 'Соха-подкаст на Ingternet',
     },
     {
+      id: 4,
       name: 'Ха ха ха, говорю я всем, кому не смешно!',
     },
     {
+      id: 5,
+      name: 'Я сижу на кухне, хаваю борщь',
+    },
+    {
+      id: 6,
       name: 'Я сижу на кухне, хаваю борщь',
     },
   ],
   tags: [
     {
-      type: 'tags',
+      id: 7,
       name: 'Соха-подкаст на Ingternet',
     },
   ],
   comments: [
     {
-      type: 'comments',
+      id: 8,
       name: 'Соха-подкаст на Ingternet',
     },
   ],
-  podcast: [],
+  podcasts: [],
 };
 
-export const SearchPopup: React.FC<SearchPopupProps> = ({ isActive, onOpen, onClose }) => {
-  const [searchData, setSearchData] = useState();
-  if (!isActive) return <img onClick={onOpen} className="ml-45" src="/search.svg" alt="Search" />;
+const SearchPopup: React.FC<SearchPopupProps> = ({ isSearch, searchInput }) => {
+  const [searchData, setSearchData] = useState(mockup);
+
+  if (isSearch && searchData.articles.length === 0) return null;
 
   return (
-    <div className="position-r">
-      <div>
-        <img className="ml-45" src="/search.svg" alt="Search" />
-        <input></input>
-        <img onClick={onClose} className="ml-45" src="/close.svg" alt="close" />
+    <div className={styles.container}>
+      <div className={styles.body}>
+        <Item title="Авторы" data={searchData.authors} />
+        <Item title="Публикации" data={searchData.articles} />
+        <Item title="Тэги" data={searchData.tags} />
+        <Item title="Коментарии" data={searchData.comments} />
+        <Item title="Авторы" data={searchData.podcasts} />
       </div>
-      <div className={styles.container}>
-        {/* <Accordion>
-          <AccordionSummary
-            //   expandIcon={<ExpandMoreIcon />}
-            aria-label="Expand"
-            aria-controls="additional-actions1-content"
-            id="additional-actions1-header"
-          ></AccordionSummary>
-          <AccordionDetails>
-            <Typography color="textSecondary">
-              The click event of the nested action will propagate up and expand the accordion unless you explicitly stop
-              it.
-            </Typography>
-          </AccordionDetails>
-        </Accordion> */}
+      <div className={styles.footer}>
+        <img className="mr-10" src="/arrow-link.svg" alt="Поиск" />
+        <a>Показать все результаты по запросу “{searchInput}”</a>
       </div>
-      {/* <Backdrop className={styles.backdrop} open={isActive} onClick={onClose}>
-        <CircularProgress color="inherit" />
-      </Backdrop> */}
     </div>
   );
 };
+
+export default SearchPopup;
