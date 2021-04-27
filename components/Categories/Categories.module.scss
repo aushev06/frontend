@@ -1,0 +1,15 @@
+.button {
+  justify-content: flex-start !important;
+  height: 40px;
+  .icon {
+    margin: 0 4px 0 13px;
+    opacity: .5;
+  }
+  .count {
+    color: #7E7E8B;
+  }
+}
+
+.item {
+  margin-bottom: 5px;
+}

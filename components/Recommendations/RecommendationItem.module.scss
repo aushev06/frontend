@@ -1,0 +1,115 @@
+@mixin animatedLink {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.post {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: transparent;
+  padding: 25px 0;
+  border-bottom: 1px solid #3A3A4B;
+  &:last-child {
+    padding-bottom: 10px;
+    margin-bottom: unset;
+    border-bottom: none;
+  }
+}
+
+.imageBlock {
+  margin-right: 20px;
+  cursor: pointer;
+  height: 122px;
+}
+
+.image {
+  width: 163px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 6px 0;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  &_avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: 6px;
+    cursor: pointer;
+  }
+  &_name {
+    font-size: 14px;
+    font-weight: bold;
+    @include animatedLink();
+  }
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  line-height: 17px;
+  color: var(--text-dark-color);
+  padding-left: 15px;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 20px;
+  line-height: 26px;
+  @include animatedLink();
+}
+
+.description {
+  font-size: 16px;
+  line-height: 22px;
+  margin: 0 0 17px;
+  font-family: 'IBM Plex Serif', serif !important;
+}
+
+.popularity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &_left {
+    display: flex;
+  }
+}
+
+.comments,
+.views {
+  display: flex;
+  align-items: center;
+  &_count {
+    font-size: 13px;
+    margin-left: 6px;
+    color: var(--text-dark-color);
+    line-height: 17px;
+  }
+}
+
+.views {
+  margin-left: 15px;
+}
