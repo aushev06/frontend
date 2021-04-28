@@ -1,8 +1,11 @@
 .userCard {
-    
-   &_profile {
     display: flex;
     justify-content: center;
+   &_profile {
+       width: 670px;
+   }
+   &_user {
+    display: flex;
     margin-top: 40px;
    }
     &_dropDawn {
@@ -32,11 +35,17 @@
         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
         border-radius: 4px;
         left: -65px;
+        margin-top: 7px;
 
         &::after {
-            position: absolute;
-            width: 10px;
-            height: 10px;
+            content: ""; 
+            border: solid transparent;
+            position: absolute;    
+            left: 8px;    
+            bottom: 100%;
+            border-bottom-color: #3E3F4A;
+            border-width: 9px;
+            margin-left: 57px;
         }
 
         ul {
@@ -116,7 +125,6 @@
     &_section {
         display: flex;
         margin-top: 50px;
-        margin-left: 280px;
     }
 
     &_articles {
@@ -155,9 +163,14 @@
         left: 20px;
 
         &::before {
-            width: 10px;
-            height: 20px;
-            position: absolute;
+            content: ""; 
+            border: solid transparent;
+            position: absolute;    
+            left: 8px;    
+            bottom: 100%;
+            border-bottom-color: #3E3F4A;
+            border-width: 9px;
+            margin-left: 54px;
         }
 
         ul {

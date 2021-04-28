@@ -2,7 +2,14 @@ import React from 'react'
 
 import styles from './UserCard.module.scss';
 
-export default function UserCard ({nickname, profession, status, data}) {
+interface UserCardProps {
+    nickname: string;
+    profession: string;
+    status: string;
+    data: number;
+}
+
+const UserCard: React.FC<UserCardProps> = ({nickname, profession, status, data}) => {
 
     const [visiable, setVisiable] = React.useState(false);
     const [leak, setLeak] = React.useState(false);
@@ -19,6 +26,7 @@ export default function UserCard ({nickname, profession, status, data}) {
     return (
         <div className={styles.userCard}>
             <div className={styles.userCard_profile}>
+            <div className={styles.userCard_user}>
                 <div className={styles.userCard_avatar}>
                     <img src="/AvatarUsercard.png" alt="Users" />
                 </div>
@@ -90,6 +98,9 @@ export default function UserCard ({nickname, profession, status, data}) {
                 </div>
                 <div className={styles.userCard_comments}><span>Комментарии 634</span></div>
             </div>
+            </div>
         </div>
     )
-}
+};
+
+export default UserCard;
