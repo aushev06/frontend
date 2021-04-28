@@ -124,8 +124,7 @@ const _postData: PostData = {
         type: 'image',
         data: {
           file: {
-            url:
-              'https://st.depositphotos.com/1760224/3660/i/600/depositphotos_36606389-stock-photo-sport-success-on-sunset-background.jpg',
+            url: '/dummy_image.jpeg',
           },
           caption: '',
           withBorder: true,
@@ -161,12 +160,12 @@ export const FullPost: React.FC = () => {
         }}
         time={1618128849922}
       />
-      <div className={styles.post_info}>
-        <div className={styles.post_details}>
-          <h1 className={styles.post_header}>В Магасе прошел Meetup по программированию и безопасности</h1>
+      <div className={styles.postInfo}>
+        <div className={styles.postDetails}>
+          <h1 className={styles.postHeader}>В Магасе прошел Meetup по программированию и безопасности</h1>
           <ViewsAndComments comments={21} views={234} mode="full" />
         </div>
-        <div className={styles.post_actions}>
+        <div className={styles.postActions}>
           <LikeBlock
             likes={likesAndDislikes.likes}
             dislikes={likesAndDislikes.dislikes}
@@ -174,8 +173,8 @@ export const FullPost: React.FC = () => {
             onChange={setLikesAndDislikes}
             vote={likesAndDislikes.vote}
           />
-          <div className={styles.post_share} onClick={handleClick}>
-            <ShareIcon className={styles.post_share_icon} />
+          <div className={styles.postShare} onClick={handleClick}>
+            <ShareIcon className={styles.postShareIcon} />
             Поделиться
           </div>
           <Popover
@@ -183,7 +182,7 @@ export const FullPost: React.FC = () => {
             anchorEl={anchorEl}
             onClose={() => setAnchorEl(null)}
             classes={{
-              paper: styles.post_share_popup,
+              paper: styles.postSharePopup,
             }}
             anchorOrigin={{
               vertical: 'bottom',
@@ -194,40 +193,40 @@ export const FullPost: React.FC = () => {
               horizontal: 'center',
             }}
           >
-            <div className={styles.post_share_social}>
-              <FacebookIcon className={styles.post_share_social_icon} />
+            <div className={styles.postShareSocial}>
+              <FacebookIcon className={styles.postShareSocialIcon} />
               Facebook
             </div>
-            <div className={styles.post_share_social}>
-              <VkIcon className={styles.post_share_social_icon} />
+            <div className={styles.postShareSocial}>
+              <VkIcon className={styles.postShareSocialIcon} />
               Вконтакте
             </div>
-            <div className={styles.post_share_social}>
-              <TwitterIcon className={styles.post_share_social_icon} />
+            <div className={styles.postShareSocial}>
+              <TwitterIcon className={styles.postShareSocialIcon} />
               Twitter
             </div>
-            <div className={styles.post_share_social}>
-              <TelegramIcon className={styles.post_share_social_icon} />
+            <div className={styles.postShareSocial}>
+              <TelegramIcon className={styles.postShareSocialIcon} />
               Telegram
             </div>
-            <div className={styles.post_share_social}>
-              <WhatsappIcon className={styles.post_share_social_icon} />
+            <div className={styles.postShareSocial}>
+              <WhatsappIcon className={styles.postShareSocialIcon} />
               Whatsapp
             </div>
           </Popover>
         </div>
       </div>
       {postData.content.blocks.map((block: Block) => getBlockHTML(block))}
-      <div className={styles.post_footer}>
-        <div className={styles.post_footer_icons}>
-          <FacebookIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
-          <VkIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
-          <TwitterIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
-          <TelegramIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
-          <WhatsappIcon className={styles.post_footer_icon} hoverClassName={styles.post_footer_icon_hover} />
+      <div className={styles.postFooter}>
+        <div className={styles.postFooterIcons}>
+          <FacebookIcon className={styles.postFooterIcon} hoverClassName={styles.postFooterIconHover} />
+          <VkIcon className={styles.postFooterIcon} hoverClassName={styles.postFooterIconHover} />
+          <TwitterIcon className={styles.postFooterIcon} hoverClassName={styles.postFooterIconHover} />
+          <TelegramIcon className={styles.postFooterIcon} hoverClassName={styles.postFooterIconHover} />
+          <WhatsappIcon className={styles.postFooterIcon} hoverClassName={styles.postFooterIconHover} />
         </div>
-        <span className={styles.post_footer_complain}>
-          <WarningIcon className={styles.post_footer_complain_icon} />
+        <span className={styles.postFooterComplain}>
+          <WarningIcon className={styles.postFooterComplainIcon} />
           Пожаловаться
         </span>
       </div>

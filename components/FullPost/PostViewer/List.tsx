@@ -16,8 +16,8 @@ interface ListBlockProps {
 export const ListBlock: React.FC<ListBlockProps> = ({ block }) => {
   return (
     <ul className={styles.list}>
-      {block.data.items.map((item) => (
-        <li className={styles.list_item}>{item}</li>
+      {block.data.items.map((item, index) => (
+        <li key={index} className={styles.listItem}>{item}</li>
       ))}
     </ul>
   );

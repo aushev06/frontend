@@ -16,7 +16,7 @@
 
 .time {
   font-size: 13px;
-  &_with_left_side_point {
+  &WithLeftSidePoint {
     @include pointOnLeftSide();
   }
 }

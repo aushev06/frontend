@@ -6,10 +6,8 @@ export interface PostDelimiterBlock {
   data: {};
 }
 
-interface DelimiterBlockProps {
-  block: PostDelimiterBlock;
-}
+interface DelimiterBlockProps {}
 
-export const DelimiterBlock: React.FC<DelimiterBlockProps> = ({ block }) => {
+export const DelimiterBlock: React.FC<DelimiterBlockProps> = () => {
   return <div className={styles.delimiter}></div>;
 };

@@ -18,7 +18,7 @@ export default function getBlockHTML(block: Block): JSX.Element {
     case 'image':
       return <ImageBlock block={block} />;
     case 'delimiter':
-      return <DelimiterBlock block={block} />;
+      return <DelimiterBlock />;
     default:
       return <Unknown type={block!.type} />;
   }

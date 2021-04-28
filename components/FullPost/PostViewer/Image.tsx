@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
+import Image from 'next/image';
 import styles from '../Post.module.scss';
 
 export interface PostImageBlock {
@@ -20,24 +21,15 @@ interface ImageBlockProps {
 }
 
 export const ImageBlock: React.FC<ImageBlockProps> = ({ block }) => {
-  const [imageIsLoaded, setImageIsLoaded] = React.useState(false);
-  const imageRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (imageRef.current.complete) {
-      setImageIsLoaded(true);
-    }
-  }, []);
-
   return (
     <div className={styles.image}>
-      <img
-        ref={imageRef}
-        className={clsx(styles.image_picture, imageIsLoaded ? styles.image_picture_visible : '')}
+      <Image
+        layout="fill"
+        className={clsx(styles.imagePicture)}
         src={block.data.file.url}
-        alt="Картинка"
+        objectFit="cover"
+        alt={block.data.caption}
       />
-      <div className={clsx(styles.image_preloader, !imageIsLoaded ? styles.image_preloader_visible : '')}></div>
     </div>
   );
 };

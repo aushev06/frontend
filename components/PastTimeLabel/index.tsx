@@ -11,7 +11,7 @@ interface PastTimeLabelProps {
 
 export const PastTimeLabel: React.FC<PastTimeLabelProps> = ({ time, leftSidePoint }) => {
   return (
-    <span className={clsx(styles.time, leftSidePoint ? styles.time_with_left_side_point : '')}>
+    <span className={clsx(styles.time, {[styles.timeWithLeftSidePoint]: leftSidePoint})}>
       {formatDistanceToNow(time, { locale: ru, addSuffix: true })}
     </span>
   );
