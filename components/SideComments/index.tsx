@@ -9,7 +9,7 @@ interface SideCommentsProps {
   comments: CommentItem[];
 }
 
-type CommentItem = { id: string; user: any; rating?: number; text: string; post: { id: string; title: string } };
+export type CommentItem = { id: string; user: any; rating?: number; text: string; post: { id: string; title: string } };
 
 const CommentItem: React.FC<CommentItem> = ({ id, user, text, post, rating }) => {
   return (

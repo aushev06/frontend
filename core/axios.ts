@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export const API_URL = 'http://api.ingternet.ru';
+export const API_URL = 'http://localhost/';
 
 const instance = Axios.create({
   baseURL: API_URL,

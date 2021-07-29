@@ -10,15 +10,17 @@ interface ButtonProps {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   className?: string;
+  onClick?: () => {};
 }
 
-export const Button: React.FC<ButtonProps> = ({ className, children, variant, color, startIcon, endIcon }) => {
+export const Button: React.FC<ButtonProps> = ({ className, children, variant, color, startIcon, endIcon, onClick }) => {
   return (
     <div className={styles.button}>
       <ButtonBase
         className={className}
         variant={variant}
         color={color}
+        onClick={onClick}
         classes={{
           root: styles.root,
           contained: styles.contained,

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MainLayout } from '../layouts/MainLayout';
-import { SideComments } from '../components/SideComments';
+import { CommentItem, SideComments } from '../components/SideComments';
 import { MiniPost, MiniPostData } from '../components/MiniPost';
 import { SideBlock } from '../components/SideBlock';
 import { Tags } from '../components/Tags';
 import { MenuList } from '../components/MenuList';
 import { RecommendationsContainer, RecommendationItem, RecommendationItemData } from '../components/Recommendations';
+import { UserApi } from '../services/api/UserApi';
+import { getPosts } from '../services/api/PostApi';
+import { PostData, Comment } from '../interfaces';
+import { CommentApi } from '../services/api/CommentApi';
 
 const miniPostTemplate: MiniPostData = {
   id: 0,
@@ -17,7 +21,7 @@ const miniPostTemplate: MiniPostData = {
   },
   slug: 'mini-post',
   tags: ['разработка'],
-  time: 1618128849922,
+  time: new Date(),
   description:
     'Никто не ожидал, что на GDG Magas 2019 придет столько людей. Зал ГБУ Инг НИИ был переполнен слушателями, среди которых было много гостей из Чечни и Дагестана.',
   imageUrl: 'https://clck.ru/U7rDJ',
@@ -70,9 +74,27 @@ const arrRecommendations: Array<RecommendationItemData> = [
     commentsCount: 21,
     viewsCount: 234,
   },
-]
+];
 
 export default function Home() {
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const runEffect = async () => {
+      setIsLoading(true);
+      await UserApi.login('kayden.willms@example.net', 'password');
+      await UserApi.getMe();
+      setPosts(await getPosts());
+      setComments(await CommentApi.get());
+      setIsLoading(false);
+    };
+
+    runEffect();
+
+  }, []);
+
   return (
     <main>
       <MainLayout>
@@ -116,52 +138,47 @@ export default function Home() {
           <div className="content">
             <RecommendationsContainer>
               {arrRecommendations.length && arrRecommendations.map(item => (
-                <RecommendationItem key={item.id} data={item} />
+                <RecommendationItem key={item.id} data={item}/>
               ))}
             </RecommendationsContainer>
-            {[...Array(10)].fill(<MiniPost postData={miniPostTemplate} />)}
+
+            {isLoading && 'Загрука...'}
+
+            {posts.map((post, key) => {
+              return <MiniPost postData={{
+                commentsCount: post.comments_count,
+                description: post.description,
+                dislikesCount: post.dislikes,
+                likesCount: post.likes,
+                title: post.title,
+                viewsCount: post.views,
+                slug: post.slug,
+                user: {
+                  avatarUrl: post.user.avatar,
+                  id: post.user.id,
+                  name: post.user.name,
+                },
+                imageUrl: post.img,
+                id: post.id,
+                tags: [],
+                time: new Date(post.updated_at),
+              }}/>;
+            })}
+
           </div>
           <div className="right-side">
             <SideComments
-              comments={[
-                {
-                  id: '1',
-                  user: { fullname: 'Ваха Костоправ', avatarUrl: 'https://source.unsplash.com/random/100x100?1' },
-                  text: 'Когда у меня спрашивают, хочу ли я съесть эти свежие пончики, я отвеч...',
-                  post: { id: '3', title: 'Тестовая запись' },
-                  rating: 5,
-                },
-                {
-                  id: '2',
-                  user: { fullname: 'Генадий Горин', avatarUrl: 'https://source.unsplash.com/random/100x100?2' },
-                  text: 'Я сижу, делаю дизайн Ердуне без света. Зарядка почти на исходе, Кег...',
-                  post: { id: '3', title: 'Тестовая запись' },
-                },
-                {
-                  id: '3',
-                  user: { fullname: 'Алайг Чандиев', avatarUrl: 'https://source.unsplash.com/random/100x100?3' },
-                  text: 'Когда у меня спрашивают, хочу ли я съесть эти свежие пончики, я отвеч...',
-                  post: { id: '3', title: 'Тестовая запись' },
-                },
-                {
-                  id: '4',
-                  user: { fullname: 'Муртаз Буртубиев', avatarUrl: 'https://source.unsplash.com/random/100x100?4' },
-                  text: 'Когда у меня спрашивают, хочу ли я съесть эти свежие пончики, я отвеч...',
-                  post: { id: '3', title: 'Тестовая запись' },
-                },
-                {
-                  id: '5',
-                  user: { fullname: 'Генарг Хьажкиев', avatarUrl: 'https://source.unsplash.com/random/100x100?5' },
-                  text: 'Когда у меня спрашивают, хочу ли я съесть эти свежие пончики, я отвеч...',
-                  post: { id: '3', title: 'Тестовая запись' },
-                },
-                {
-                  id: '6',
-                  user: { fullname: 'Дулх Халтамиев', avatarUrl: 'https://source.unsplash.com/random/100x100?6' },
-                  text: 'Когда у меня спрашивают, хочу ли я съесть эти свежие пончики, я отвеч...',
-                  post: { id: '3', title: 'Тестовая запись' },
-                },
-              ]}
+              comments={
+                comments.map((item): CommentItem => {
+                  return {
+                    id: `${item.id}`,
+                    user: { fullname: item.user.name, avatarUrl: item.user.avatar },
+                    text: item.text,
+                    post: { id: `${item.post.id}`, title: item.post.title },
+                    rating: item.likes_count,
+                  };
+                })
+              }
             />
           </div>
         </div>

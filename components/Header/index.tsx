@@ -6,9 +6,11 @@ import ProfilePopup from '../ProfilePopup';
 import styles from './Header.module.scss';
 import { AvailableForWork } from '../AvailableForWork';
 import { Button } from '../Button';
+import { useRouter } from 'next/router';
 
 export const Header: React.FC = () => {
   const [checked, setChecked] = useState(false);
+  const router = useRouter()
 
   const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
@@ -32,7 +34,7 @@ export const Header: React.FC = () => {
         <div className="ml-35">
           <ProfilePopup user={{ name: 'Апачи', login: '@ingush06', avatar: '' }} />
         </div>
-        <Button variant="contained" color="secondary" className="ml-30">
+        <Button onClick={() => router.push('/write')} variant="contained" color="secondary" className="ml-30">
           Написать
         </Button>
       </div>

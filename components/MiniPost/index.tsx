@@ -17,7 +17,7 @@ export interface MiniPostData {
   };
   slug: string;
   tags: string[];
-  time: number;
+  time: Date;
   description: string;
   imageUrl: string;
   commentsCount: number;
