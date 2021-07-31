@@ -2,4 +2,28 @@
   background-color: #282832;
   padding: 20px 65px;
   height: 60px;
+  position: relative;
+
+  .backdrop {
+    z-index: 1;
+    top: 60px;
+  }
+}
+
+.search {
+  margin-left: 20%;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--text-color);
+  width: 440px;
+}
+
+.noscroll {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }

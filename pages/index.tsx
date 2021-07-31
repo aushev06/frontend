@@ -115,8 +115,9 @@ export default function Home() {
           </div>
           <div className="content">
             <RecommendationsContainer>
-              {arrRecommendations.length &&
-                arrRecommendations.map((item) => <RecommendationItem key={item.id} data={item} />)}
+              {arrRecommendations.length > 0 && arrRecommendations.map(item => (
+                <RecommendationItem key={item.id} data={item} />
+              ))}
             </RecommendationsContainer>
             {[...Array(10)].fill(<MiniPost postData={miniPostTemplate} />)}
           </div>
