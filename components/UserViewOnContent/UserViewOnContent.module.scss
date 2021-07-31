@@ -1,0 +1,33 @@
+@mixin animatedLink {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  &_avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: 6px;
+    cursor: pointer;
+    &_with_time {
+      width: 44px;
+      height: 44px;
+    }
+  }
+  &_info {
+    display: flex;
+    &_with_time {
+      flex-direction: column;
+    }
+  }
+  &_name {
+    font-size: 14px;
+    font-weight: bold;
+    @include animatedLink();
+  }
+}

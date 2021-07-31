@@ -70,7 +70,7 @@ const arrRecommendations: Array<RecommendationItemData> = [
     commentsCount: 21,
     viewsCount: 234,
   },
-]
+];
 
 export default function Home() {
   return (
@@ -115,7 +115,7 @@ export default function Home() {
           </div>
           <div className="content">
             <RecommendationsContainer>
-              {arrRecommendations.length && arrRecommendations.map(item => (
+              {arrRecommendations.length > 0 && arrRecommendations.map(item => (
                 <RecommendationItem key={item.id} data={item} />
               ))}
             </RecommendationsContainer>
