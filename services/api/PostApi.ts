@@ -1,5 +1,5 @@
 import axios from '../../core/axios';
-import { PostData } from '../../interfaces';
+import {PostData, Theme} from '../../interfaces';
 import { getCookie } from './UserApi';
 
 export const saveImage = (image: File) => {
@@ -11,18 +11,27 @@ export const saveImage = (image: File) => {
 export const savePost = (data: {
   title: string;
   body: any;
+  themes?: Theme[]
 }) => {
   axios.post('/api/posts', {
     body: data.body,
     title: data.title,
     description: 'Test',
+    themes: data.themes || []
   });
 };
 
 export const getPosts = async (params = {}): Promise<PostData[]> => {
-  const { data } = await axios.get('/api/posts', { ...params });
+  console.log(params);
+  const { data } = await axios.get('/api/posts', { params: {...params} });
 
   return data.data;
+};
+
+export const getThemes = async (): Promise<Theme[]> => {
+  const { data } = await axios.get('/api/posts/themes');
+
+  return data;
 };
 
 export const saveByUrl = async (url: string) => {
@@ -30,5 +39,13 @@ export const saveByUrl = async (url: string) => {
 };
 
 export const showPost = async (slug: string) => {
-  return await axios.get(`/v1/post/${slug}`);
+  const { data } =  await axios.get(`/api/posts/${slug}`);
+  return data;
 };
+
+export const getPostComments = async (id: number) => {
+  const { data } = await axios.get(`/api/posts/${id}/comments`)
+
+  return data;
+}
+

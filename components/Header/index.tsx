@@ -7,14 +7,34 @@ import styles from './Header.module.scss';
 import { AvailableForWork } from '../AvailableForWork';
 import { Button } from '../Button';
 import { useRouter } from 'next/router';
+import {UserApi} from "../../services/api/UserApi";
 
 export const Header: React.FC = () => {
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter()
 
   const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
+    handleChangeCheckbox(event.target.checked)
   };
+
+  const handleChangeCheckbox = (flag: boolean) => {
+    setChecked(flag);
+    setIsLoading(true)
+    UserApi
+        .updateProfile({ready_for_work: flag ? 1: 0})
+        .then((r) => {
+          setChecked(flag);
+        })
+        .catch(err => {
+          Object.values(err?.response?.data?.errors).forEach(e => {
+            alert(e)
+          })
+          setChecked(false);
+        })
+        .finally(() => setIsLoading(false))
+  }
 
   return (
     <header className={clsx(styles.header, 'd-flex justify-content-between')}>
@@ -28,7 +48,7 @@ export const Header: React.FC = () => {
         </Link>
       </div>
       <div className="d-flex align-items-center">
-        <AvailableForWork checked={checked} onChange={onChangeCheckbox} setChecked={setChecked} />
+        <AvailableForWork checked={checked} onChange={onChangeCheckbox} setChecked={handleChangeCheckbox} isLoading={isLoading} />
         <img className="ml-45" src="/search.svg" alt="Search" />
         <img className="ml-35" src="/notifications.svg" alt="Search" />
         <div className="ml-35">

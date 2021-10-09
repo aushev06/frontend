@@ -6,9 +6,9 @@ import { SideBlock } from '../components/SideBlock';
 import { Tags } from '../components/Tags';
 import { MenuList } from '../components/MenuList';
 import { RecommendationsContainer, RecommendationItem, RecommendationItemData } from '../components/Recommendations';
-import { UserApi } from '../services/api/UserApi';
-import { getPosts } from '../services/api/PostApi';
-import { PostData, Comment } from '../interfaces';
+import {getCookie, UserApi} from '../services/api/UserApi';
+import {getPosts, getThemes} from '../services/api/PostApi';
+import {PostData, Comment, Theme} from '../interfaces';
 import { CommentApi } from '../services/api/CommentApi';
 
 const miniPostTemplate: MiniPostData = {
@@ -78,22 +78,35 @@ const arrRecommendations: Array<RecommendationItemData> = [
 
 export default function Home() {
   const [posts, setPosts] = useState<PostData[]>([]);
+  const [themes, setThemes] = useState<Theme[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedThemes, setSelectedThemes] = useState<Theme[]>([]);
+
+  const runEffect = async () => {
+    setIsLoading(true);
+    setPosts(await getPosts({ themes: [...selectedThemes].map(t =>t.name.replace('#', '')).join(',') }))
+
+    if (!themes.length) {
+      setThemes(await getThemes());
+      setComments(await CommentApi.get());
+    }
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    const runEffect = async () => {
-      setIsLoading(true);
-      await UserApi.login('kayden.willms@example.net', 'password');
-      await UserApi.getMe();
-      setPosts(await getPosts());
-      setComments(await CommentApi.get());
-      setIsLoading(false);
-    };
+    // await getCookie();
+    // await UserApi.login('noe26@example.org', 'password');
+    // await UserApi.getMe();
 
     runEffect();
 
-  }, []);
+  }, [selectedThemes]);
+
+  const handleSelectTheme = async (t: Theme) => {
+    setSelectedThemes(() => [...selectedThemes, t]);
+  }
 
   return (
     <main>
@@ -121,48 +134,38 @@ export default function Home() {
             </SideBlock>
             <SideBlock name="Темы">
               <Tags
-                items={[
-                  { name: 'разработка', url: '/tags/develop' },
-                  { name: 'советы', url: '/tags/tips' },
-                  { name: 'дизайн', url: '/tags/design' },
-                  { name: 'инструкции', url: '/tags/instructions' },
-                  { name: 'mvp', url: '/tags/mvp' },
-                  { name: 'проектирование', url: '/tags/test' },
-                  { name: 'инструментарий', url: '/tags/test' },
-                  { name: 'болтология', url: '/tags/test' },
-                  { name: 'работа', url: '/tags/test' },
-                ]}
+                items={themes}
+                handleSelect={handleSelectTheme}
+                selectedItems={selectedThemes}
               />
             </SideBlock>
           </div>
           <div className="content">
-            <RecommendationsContainer>
-              {arrRecommendations.length && arrRecommendations.map(item => (
-                <RecommendationItem key={item.id} data={item}/>
-              ))}
-            </RecommendationsContainer>
+
 
             {isLoading && 'Загрука...'}
 
-            {posts.map((post, key) => {
-              return <MiniPost postData={{
-                commentsCount: post.comments_count,
-                description: post.description,
-                dislikesCount: post.dislikes,
-                likesCount: post.likes,
-                title: post.title,
-                viewsCount: post.views,
-                slug: post.slug,
-                user: {
-                  avatarUrl: post.user.avatar,
-                  id: post.user.id,
-                  name: post.user.name,
-                },
-                imageUrl: post.img,
-                id: post.id,
-                tags: [],
-                time: new Date(post.updated_at),
-              }}/>;
+            {!isLoading && posts.map((post, key) => {
+              return <MiniPost
+                  key={post.id}
+                  postData={{
+                    commentsCount: post.comments_count,
+                    description: post.description,
+                    dislikesCount: post.dislikes,
+                    likesCount: post.likes,
+                    title: post.title,
+                    viewsCount: post.views,
+                    slug: post.slug,
+                    user: {
+                      avatarUrl: post.user.avatar,
+                      id: post.user.id,
+                      name: post.user.name,
+                    },
+                    imageUrl: post.img,
+                    id: post.id,
+                    tags: [],
+                    time: new Date(post.updated_at),
+                  }}/>;
             })}
 
           </div>

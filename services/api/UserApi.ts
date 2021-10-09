@@ -17,7 +17,19 @@ export const UserApi = {
   getMe: async () => {
     const { data } = await axios.get('/api/user');
     return data;
+  },
+
+  updateProfile: async (data: unknown) => {
+    const formData = new FormData();
+
+    Object.keys(data).forEach((param) => {
+      formData.append(param, data[param]);
+    })
+    await axios.post('/api/user', formData)
+
+
   }
+
 
 };
 

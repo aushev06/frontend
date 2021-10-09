@@ -15,7 +15,8 @@ const WritePage = () => {
     console.log(data);
     savePost({
       title: data[0].data.text as string,
-      body: data
+      body: data,
+      themes: [{name: '#разработка', id: 0}]
     })
   }
 
