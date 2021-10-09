@@ -1,49 +1,19 @@
-import {useRouter} from 'next/router'
-import {getPostComments, showPost} from "../../services/api/PostApi";
-import {Comment, PostData} from "../../interfaces";
-import {MainLayout} from "../../layouts/MainLayout";
+import React from 'react';
+import { LeftCategoriesSide } from '../../components/LeftCategoriesSide';
+import { MainLayout } from '../../layouts/MainLayout';
+import { FullPost } from '../../components/FullPost';
 
-type Props = {
-    post: PostData;
-    comments: Comment[]
+export default function Post() {
+  return (
+    <main>
+      <MainLayout>
+        <div className="wrapper-center">
+          <LeftCategoriesSide className="left-side-no-margin" />
+          <div className="content">
+            <FullPost />
+          </div>
+        </div>
+      </MainLayout>
+    </main>
+  );
 }
-
-function PostPage({ post, comments }: Props) {
-    const router = useRouter()
-    const {slug} = router.query
-
-    return (
-        <MainLayout title="Написать">
-            <div className={'wrapper'}>
-                <div className={'content'}>
-                    <div dangerouslySetInnerHTML={{__html: post.html}}></div>
-
-
-                    <div className={'comments'}>
-                        {comments.map((item, idx) => {
-                            return (
-                                <div key={idx}>
-                                    ${item.text}
-                                </div>
-                            )
-                        })}
-                    </div>
-
-                </div>
-            </div>
-        </MainLayout>
-    );
-}
-
-export async function getServerSideProps(ctx) {
-    const response = await showPost(ctx.query.slug);
-    const responseComments = await getPostComments(response.data.id);
-    return {
-        props: {
-            post: response.data,
-            comments: responseComments
-        },
-    }
-}
-
-export default PostPage;

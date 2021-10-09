@@ -1,0 +1,227 @@
+.post {
+  width: 100%;
+  max-width: 950px;
+  height: 100%;
+  padding: 30px;
+  margin-bottom: 200px;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  &Info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+  }
+  &Header {
+    margin: 0;
+    margin-bottom: 25px;
+    font-size: 42px;
+    line-height: 44px;
+    color: var(--text-color);
+  }
+  &Share {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: var(--text-dark-color);
+    font-size: 14px;
+    cursor: pointer;
+    &:hover {
+      color: var(--text-color);
+    }
+    &Icon {
+      margin-right: 6px;
+    }
+    &Popup {
+      background-color: var(--grey-light-color) !important;
+      border-radius: 4px;
+      margin-top: 10px;
+      overflow: visible !important;
+      &::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        right: 45%;
+        border-bottom: 8px solid var(--grey-light-color);
+        border-right: 7px solid transparent;
+        border-left: 7px solid transparent;
+      }
+    }
+    &Social {
+      display: flex;
+      align-items: center;
+      padding: 5px 20px;
+      color: var(--text-dark-color);
+      font-size: 14px;
+      cursor: pointer;
+      &:hover {
+        color: var(--text-color);
+      }
+      &:first-child {
+        padding-top: 15px;
+      }
+      &:last-child {
+        padding-bottom: 15px;
+      }
+      &::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        right: 45%;
+        border-bottom: 8px solid var(--grey-light-color);
+        border-right: 7px solid transparent;
+        border-left: 7px solid transparent;
+      }
+      &Icon {
+        width: 30px;
+        margin-right: 10px;
+        fill: var(--text-dark-color);
+      }
+    }
+  }
+  &Footer {
+    display: flex;
+    margin-top: 30px;
+    &Icons {
+      margin-right: 30px;
+    }
+    &Icon {
+      margin-right: 20px;
+      cursor: pointer;
+      fill: var(--text-dark-color);
+      &Hover {
+        fill: var(--text-color);
+      }
+    }
+    &Complain {
+      display: flex;
+      align-items: center;
+      color: var(--text-dark-color);
+      cursor: pointer;
+      &:hover {
+        color: var(--text-color);
+      }
+      &Icon {
+        margin-right: 6px;
+      }
+    }
+  }
+}
+
+.header {
+  padding: 1em 0;
+  margin: 0;
+  margin-bottom: -0.9em;
+  line-height: 1.5em;
+  outline: none;
+}
+
+.paragraph {
+  line-height: 1.6em;
+  outline: none;
+  padding: 0.4em 0;
+  font-size: 16px;
+  font-family: var(--font--family--serif) !important;
+}
+
+.list {
+  list-style-type: disc;
+  margin: 0;
+  outline: none;
+  padding: 0.4em 0;
+  padding-left: 40px;
+  &Item {
+    padding: 5px 0 5px 3px;
+    line-height: 1.6em;
+  }
+}
+
+.image {
+  position: relative;
+  display: flex;
+  min-height: 200px;
+  max-height: 600px;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 10px 0;
+  &Picture {
+    width: 100%;
+    display: none;
+    &Visible {
+      display: block;
+    }
+  }
+  &Preloader {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    margin: auto;
+    position: relative;
+    background-color: var(--secondary-color);
+    background-position: center center;
+    &Visible {
+      display: block;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 3;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--secondary-color);
+      border-top-color: var(--text-color);
+      left: 50%;
+      top: 50%;
+      margin-top: -30px;
+      margin-left: -30px;
+      animation: image-preloader-spin 2s infinite linear;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.delimiter {
+  line-height: 1.6em;
+  text-align: center;
+  padding: 0.4em 0;
+  &::before {
+    display: inline-block;
+    content: '***';
+    font-size: 30px;
+    line-height: 65px;
+    height: 30px;
+    letter-spacing: 0.2em;
+  }
+}
+
+.unknown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--text-dark-color);
+  height: 100px;
+  border-radius: 4px;
+  &Title {
+    color: var(--primary-color);
+    font-size: 20px;
+    margin: 0;
+  }
+  &Description {
+    color: var(--primary-color);
+    font-size: 14px;
+  }
+}
+
+@keyframes image-preloader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
