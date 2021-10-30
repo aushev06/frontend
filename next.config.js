@@ -10,4 +10,7 @@ module.exports = {
 
     return config;
   },
+  images: {
+    domains: ['files.meelz.me'],
+  },
 };

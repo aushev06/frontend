@@ -23,11 +23,9 @@ interface ImageBlockProps {
 export const ImageBlock: React.FC<ImageBlockProps> = ({ block }) => {
   return (
     <div className={styles.image}>
-      <Image
-        layout="fill"
+      <img
         className={clsx(styles.imagePicture)}
         src={block.data.file.url}
-        objectFit="cover"
         alt={block.data.caption}
       />
     </div>

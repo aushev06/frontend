@@ -13,164 +13,47 @@ import { ViewsAndComments } from '../ViewsAndComments';
 import { LikeBlockResult } from '../LikeBlock';
 import getBlockHTML, { Block } from './PostViewer';
 import { WarningIcon } from '../icons/WarningIcon';
+import {PostData} from "../../interfaces";
 
-interface PostData {
-  likesCount: number;
-  dislikesCount: number;
-  content: {
-    time: number;
-    blocks: Block[];
-    version: string;
-  };
-}
-
-const _postData: PostData = {
-  likesCount: 52,
-  dislikesCount: 12,
-  content: {
-    time: 1556098174501,
-    blocks: [
-      {
-        type: 'header',
-        data: {
-          text: 'Editor.js',
-          level: 2,
-        },
-      },
-      {
-        type: 'paragraph',
-        data: {
-          text: 'Hey. Meet the new Editor. On this page you can see it in action — try to edit this text.',
-        },
-      },
-      {
-        type: 'header',
-        data: {
-          text: 'Key features',
-          level: 3,
-        },
-      },
-      {
-        type: 'list',
-        data: {
-          style: 'unordered',
-          items: [
-            'It is a block-styled editor',
-            'It returns clean data output in JSON',
-            'Designed to be extendable and pluggable with a simple API',
-          ],
-        },
-      },
-      {
-        type: 'header',
-        data: {
-          text: 'What does it mean «block-styled editor»',
-          level: 3,
-        },
-      },
-      {
-        type: 'paragraph',
-        data: {
-          text:
-            'Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class="cdx-marker">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor\'s Core.',
-        },
-      },
-      {
-        type: 'paragraph',
-        data: {
-          text:
-            'There are dozens of <a href="https://github.com/editor-js">ready-to-use Blocks</a> and the <a href="https://editorjs.io/creating-a-block-tool">simple API</a> for creation any Block you need. For example, you can implement Blocks for Tweets, Instagram posts, surveys and polls, CTA-buttons and even games.',
-        },
-      },
-      {
-        type: 'header',
-        data: {
-          text: 'What does it mean clean data output',
-          level: 3,
-        },
-      },
-      {
-        type: 'paragraph',
-        data: {
-          text:
-            'Classic WYSIWYG-editors produce raw HTML-markup with both content data and content appearance. On the contrary, Editor.js outputs JSON object with data of each Block. You can see an example below',
-        },
-      },
-      {
-        type: 'paragraph',
-        data: {
-          text:
-            'Given data can be used as you want: render with HTML for <code class="inline-code">Web clients</code>, render natively for <code class="inline-code">mobile apps</code>, create markup for <code class="inline-code">Facebook Instant Articles</code> or <code class="inline-code">Google AMP</code>, generate an <code class="inline-code">audio version</code> and so on.',
-        },
-      },
-      {
-        type: 'paragraph',
-        data: {
-          text: 'Clean data is useful to sanitize, validate and process on the backend.',
-        },
-      },
-      {
-        type: 'delimiter',
-        data: {},
-      },
-      {
-        type: 'paragraph',
-        data: {
-          text:
-            "We have been working on this project more than three years. Several large media projects help us to test and debug the Editor, to make it's core more stable. At the same time we significantly improved the API. Now, it can be used to create any plugin for any task. Hope you enjoy. 😏",
-        },
-      },
-      {
-        type: 'image',
-        data: {
-          file: {
-            url: '/dummy_image.jpeg',
-          },
-          caption: '',
-          withBorder: true,
-          stretched: false,
-          withBackground: false,
-        },
-      },
-    ],
-    version: '2.12.4',
-  },
-};
-
-export const FullPost: React.FC = () => {
-  const [postData, setPostData] = React.useState(_postData);
+export const FullPost: React.FC<{post: PostData, onSetLike: (postId: number, like: unknown) => void}> = ({post, onSetLike}) => {
+  const [postData, setPostData] = React.useState(post);
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
   const [likesAndDislikes, setLikesAndDislikes] = React.useState<LikeBlockResult>({
-    likes: postData.likesCount,
-    dislikes: postData.dislikesCount,
-    vote: undefined,
+    likes: postData.likes_count,
+    dislikes: postData.dislikes_count,
+    vote: post?.liked_type,
   });
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleSetLike =async (like: LikeBlockResult) => {
+    setLikesAndDislikes(like);
+    await onSetLike(post.id, like?.vote)
+  }
+
   return (
     <div className={styles.post}>
       <UserViewOnContent
         user={{
-          id: 0,
-          name: 'Dr. Who',
-          avatarUrl: 'https://clck.ru/UDyci',
+          id: post.user.id,
+          name: post.user.name,
+          avatarUrl: post.user.avatar,
         }}
-        time={1618128849922}
+        time={new Date(post.created_at).getTime()}
       />
       <div className={styles.postInfo}>
         <div className={styles.postDetails}>
-          <h1 className={styles.postHeader}>В Магасе прошел Meetup по программированию и безопасности</h1>
-          <ViewsAndComments comments={21} views={234} mode="full" />
+          <h1 className={styles.postHeader}>{post.title}</h1>
+          <ViewsAndComments comments={post.comments_count} views={post.views} mode="full" />
         </div>
         <div className={styles.postActions}>
           <LikeBlock
             likes={likesAndDislikes.likes}
             dislikes={likesAndDislikes.dislikes}
             mode="mini"
-            onChange={setLikesAndDislikes}
+            onChange={handleSetLike}
             vote={likesAndDislikes.vote}
           />
           <div className={styles.postShare} onClick={handleClick}>
@@ -216,7 +99,9 @@ export const FullPost: React.FC = () => {
           </Popover>
         </div>
       </div>
-      {postData.content.blocks.map((block: Block) => getBlockHTML(block))}
+      {postData.body.map((block: Block, idx) => (<div key={'block-' + idx}>
+        {getBlockHTML(block)}
+      </div>))}
       <div className={styles.postFooter}>
         <div className={styles.postFooterIcons}>
           <FacebookIcon className={styles.postFooterIcon} hoverClassName={styles.postFooterIconHover} />

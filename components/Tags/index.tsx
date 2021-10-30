@@ -10,7 +10,7 @@ type TagItem = { theme: Theme, onClick?: (t: Theme) => void, isActive: boolean};
 const Tag: React.FC<TagItem> = ({ theme, onClick, isActive }) => (
   <Link href={theme.name}>
     <a onClick={() => onClick(theme)} className={styles.tag}>
-        <Button variant={isActive ? 'contained' : 'text'}>
+        <Button className={styles.btn} variant={isActive ? 'contained' : 'text'}>
             {theme.name}
         </Button>
     </a>
@@ -21,7 +21,7 @@ export const Tags: React.FC<{ items: Theme[], selectedItems: Theme[], handleSele
   return (
     <>
       {items.map((obj) => (
-        <Tag key={obj.name} theme={obj} onClick={handleSelect} isActive={!!selectedItems.find(t => +t.id === +obj.id)} />
+        <Tag key={obj.name} theme={obj} onClick={handleSelect} isActive={!!selectedItems?.find(t => +t.id === +obj.id)} />
       ))}
     </>
   );

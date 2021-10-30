@@ -8,4 +8,16 @@ export const CommentApi = {
 
     return data;
   },
+
+  create: async (postId: number, text: string, toUserId?: number, parentCommentId?: number) => {
+    const { data } = await axios.post(`/api/comments`, {
+      post_id: postId,
+      text,
+      user_reply_id: toUserId,
+      parent_id: parentCommentId
+    });
+
+    return data
+  }
+
 };

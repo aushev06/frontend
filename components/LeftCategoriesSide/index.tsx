@@ -19,7 +19,7 @@ export const LeftCategoriesSide: React.FC<LeftCategoriesSideProps> = ({ classNam
           ]}
         />
       </SideBlock>
-      <SideBlock name="Подкасты">
+      <SideBlock name="Категории">
         <MenuList
           items={[
             { name: 'Dev Battle', url: '/tags/dev-battle', icon: '/podcast_1.png' },

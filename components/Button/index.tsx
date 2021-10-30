@@ -10,33 +10,48 @@ interface ButtonProps {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   className?: string;
-  onClick?: () => {};
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ className, children, variant, color, startIcon, endIcon, onClick }) => {
-  return (
-    <div className={styles.button}>
-      <ButtonBase
-        className={className}
-        variant={variant}
-        color={color}
-        onClick={onClick}
-        classes={{
-          root: styles.root,
-          contained: styles.contained,
-          outlined: styles.outlined,
-          containedPrimary: styles.containedPrimary,
-          containedSecondary: styles.containedSecondary,
-          outlinedPrimary: styles.outlinedPrimary,
-          outlinedSecondary: styles.outlinedSecondary,
-          textPrimary: styles.textPrimary,
-          textSecondary: styles.textSecondary,
-        }}
-        startIcon={startIcon}
-        endIcon={endIcon}
-      >
-        {children}
-      </ButtonBase>
-    </div>
-  );
+export const Button: React.FC<ButtonProps> = (
+    {
+        className,
+        children,
+        variant,
+        color,
+        startIcon,
+        endIcon,
+        onClick,
+        fullWidth,
+        disabled
+    }
+) => {
+    return (
+        <div className={styles.button}>
+            <ButtonBase
+                disabled={disabled}
+                className={className}
+                variant={variant}
+                color={color}
+                onClick={onClick}
+                classes={{
+                    root: styles.root,
+                    contained: styles.contained,
+                    outlined: styles.outlined,
+                    containedPrimary: styles.containedPrimary,
+                    containedSecondary: styles.containedSecondary,
+                    outlinedPrimary: styles.outlinedPrimary,
+                    outlinedSecondary: styles.outlinedSecondary,
+                    textPrimary: styles.textPrimary,
+                    textSecondary: styles.textSecondary,
+                }}
+                startIcon={startIcon}
+                endIcon={endIcon}
+                fullWidth={fullWidth || false}
+            >
+                {children}
+            </ButtonBase>
+        </div>
+    );
 };

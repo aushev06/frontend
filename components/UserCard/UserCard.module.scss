@@ -1,196 +1,217 @@
 .userCard {
-    display: flex;
-    justify-content: center;
-   &_profile {
-       width: 670px;
-   }
-   &_user {
+  display: flex;
+  justify-content: center;
+
+  &_avatar img {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+  }
+
+  &_profile {
+    width: 670px;
+  }
+
+  &_user {
     display: flex;
     margin-top: 40px;
-   }
-    &_dropDawn {
-        position: relative;
-        margin-top: 25px;
+  }
+
+  &_dropDawn {
+    position: relative;
+    margin-top: 25px;
+  }
+
+  &_dots {
+    height: 15px;
+    display: flex;
+    cursor: pointer;
+  }
+
+  &_dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 20px;
+    background: #757575;
+    margin-right: 3px;
+    border-radius: 20px;
+  }
+
+  &_dawn {
+    position: absolute;
+    background: #3E3F4A;
+    padding: 29px 31px 17px 19px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    left: -65px;
+    margin-top: 7px;
+
+    &::after {
+      content: "";
+      border: solid transparent;
+      position: absolute;
+      left: 8px;
+      bottom: 100%;
+      border-bottom-color: #3E3F4A;
+      border-width: 9px;
+      margin-left: 57px;
     }
 
-    &_dots {
-        height: 15px;
-        display: flex;
+    ul {
+      li {
+        margin-bottom: 10px;
         cursor: pointer;
+      }
+    }
+  }
+
+  &_editing {
+    margin-top: 15px;
+  }
+
+  &_description {
+    width: 475px;
+    margin-left: 30px;
+  }
+
+  &_nickname {
+    display: flex;
+    align-items: flex-start;
+
+    h1 {
+      margin: 0px;
+      padding: 0px;
+      font-size: 36px;
+      line-height: 47px;
+      letter-spacing: -1px;
+      color: #D0D0DD;
     }
 
-    &_dot {
-        width: 4px;
-        height: 4px;
-        border-radius: 20px;
-        background: #757575;
-        margin-right: 3px;
-        border-radius: 20px;
+    img {
+      margin-top: 5px;
+      margin-left: 4px;
+    }
+  }
+
+  &_info {
+    font-size: 13px;
+    color: #9C9CAA;
+    margin-top: 10px;
+  }
+
+  &_profession {
+    margin-left: 22px;
+  }
+
+  &_status {
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 10px;
+  }
+
+  &_communication {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+  }
+
+  &_socNetworks {
+    img {
+      margin-right: 20px;
+    }
+  }
+
+  &_workStatus {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 18px;
+    color: #04C800;
+  }
+
+  &_sts {
+    width: 8px;
+    height: 8px;
+    background: #04C800;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  &_section {
+    display: flex;
+    margin-top: 50px;
+  }
+
+  &_articles {
+    padding: 7px 10px;
+    border: 1px solid #04C800;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    span {
+      margin-right: 12px;
+      font-size: 14px;
+      line-height: 18px;
+      color: #04C800;
     }
 
-    &_dawn {
-        position: absolute;
-        background: #3E3F4A;
-        padding: 29px 31px 17px 19px;
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
-        border-radius: 4px;
-        left: -65px;
-        margin-top: 7px;
+    svg {
+      transform: rotate(180deg);
 
-        &::after {
-            content: ""; 
-            border: solid transparent;
-            position: absolute;    
-            left: 8px;    
-            bottom: 100%;
-            border-bottom-color: #3E3F4A;
-            border-width: 9px;
-            margin-left: 57px;
-        }
-
-        ul {
-            li{
-                margin-bottom: 10px;
-                cursor: pointer;
-            }
-        }
+      &.rotated {
+        transform: rotate(0deg);
+      }
     }
+  }
 
-    &_editing {
-        margin-top: 15px;
-    }
+  &_newPop {
+    position: absolute;
+    background: #3E3F4A;
+    width: 145px;
+    padding-left: 38px;
+    padding-top: 22px;
+    padding-bottom: 8px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    top: 40px;
+    left: 20px;
+    z-index: 11;
 
-    &_description {
-        width: 475px;
-        margin-left: 30px;
+    &::before {
+      content: "";
+      border: solid transparent;
+      position: absolute;
+      left: 8px;
+      bottom: 100%;
+      border-bottom-color: #3E3F4A;
+      border-width: 9px;
+      margin-left: 54px;
     }
 
-    &_nickname {
-        display: flex;
-        align-items: flex-start;
-        h1 {
-            margin: 0px;
-            padding: 0px;
-            font-size: 36px;
-            line-height: 47px;
-            letter-spacing: -1px;
-            color: #D0D0DD;
-        }
-        img {
-            margin-top: 5px;
-            margin-left: 4px;
-        }
-    }
-
-    &_info {
-        font-size: 13px;
-        color: #9C9CAA;
-        margin-top: 10px;
-    }
-
-    &_profession {
-        margin-left: 22px;
-    }
-    &_status {
-        font-size: 16px;
-        line-height: 22px;
-        margin-top: 10px;
-    }
-    &_communication {
-        margin-top: 25px;
-        display: flex;
-        align-items: center;
-    }
-    &_socNetworks {
-        img {
-            margin-right: 20px;
-        }
-    }
-    &_workStatus {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        line-height: 18px;
-        color: #04C800;
-    }
-    &_sts {
-        width: 8px;
-        height: 8px;
-        background: #04C800;
-        border-radius: 20px;
-        margin-right: 5px;
-        margin-left: 5px;
-    }
-
-    &_section {
-        display: flex;
-        margin-top: 50px;
-    }
-
-    &_articles {
-        padding: 7px 10px;
-        border: 1px solid #04C800;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
+    ul {
+      li {
+        margin-bottom: 14px;
         position: relative;
-        span {
-            margin-right: 12px;
-            font-size: 14px;
-            line-height: 18px;
-            color: #04C800;
-        }
+        margin-left: 7px;
 
         svg {
-            transform: rotate(180deg);
-
-            &.rotated {
-                transform: rotate(0deg);
-            }
+          transform: rotate(0deg);
+          position: absolute;
+          top: 7px;
+          left: -17px;
         }
+      }
     }
-    &_newPop {
-        position: absolute;
-        background: #3E3F4A;
-        width: 145px;
-        padding-left: 38px;
-        padding-top: 22px;
-        padding-bottom: 8px;
-        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
-        border-radius: 4px;
-        top: 40px;
-        left: 20px;
+  }
 
-        &::before {
-            content: ""; 
-            border: solid transparent;
-            position: absolute;    
-            left: 8px;    
-            bottom: 100%;
-            border-bottom-color: #3E3F4A;
-            border-width: 9px;
-            margin-left: 54px;
-        }
-
-        ul {
-            li {
-                margin-bottom: 14px;
-                position: relative;
-                margin-left: 7px;
-                svg {
-                    transform: rotate(0deg);
-                    position: absolute;
-                    top: 7px;
-                    left: -17px;
-                }   
-            }
-        }
-    }
-    &_comments {
-        margin-left: 15px;
-        margin-top: 5px;
-        color: #D0D0DD;
-    }
+  &_comments {
+    margin-left: 15px;
+    margin-top: 5px;
+    color: #D0D0DD;
+  }
 }
 

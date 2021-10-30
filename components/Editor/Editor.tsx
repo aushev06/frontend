@@ -4,9 +4,10 @@ import {saveByUrl, saveImage} from "../../services/api/PostApi";
 
 interface EditorJsWrapperProps extends ComponentProps<"div"> {
     config?: EditorConfig;
+    blocks: Array<any>,
 }
 
-export function EditorJsWrapper({config = {}, ...restProps}: EditorJsWrapperProps): JSX.Element {
+export function EditorJsWrapper({config = {}, blocks, ...restProps}: EditorJsWrapperProps): JSX.Element {
     const elmtRef = useRef<HTMLDivElement>();
 
     useEffect(() => {
@@ -68,9 +69,7 @@ export function EditorJsWrapper({config = {}, ...restProps}: EditorJsWrapperProp
                  * Previously saved data that should be rendered
                  */
                 data: {
-                    blocks: [
-                        {"type":"header","data":{"text":"","level":2}}
-                    ]
+                    blocks
                 },
             });
         })().catch((error): void => console.error(error));

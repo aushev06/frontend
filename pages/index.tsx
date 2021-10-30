@@ -10,6 +10,11 @@ import {getCookie, UserApi} from '../services/api/UserApi';
 import {getPosts, getThemes} from '../services/api/PostApi';
 import {PostData, Comment, Theme} from '../interfaces';
 import { CommentApi } from '../services/api/CommentApi';
+import {useDispatch, useSelector} from "react-redux";
+import {setUser} from "../redux/user/slice";
+import {selectUserState} from "../redux/user/user.selector";
+import {setLike} from "../services/api/LikeApi";
+import {AuthDialog} from "../components/AuthDialog";
 
 const miniPostTemplate: MiniPostData = {
   id: 0,
@@ -83,6 +88,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedThemes, setSelectedThemes] = useState<Theme[]>([]);
 
+
   const runEffect = async () => {
     setIsLoading(true);
     setPosts(await getPosts({ themes: [...selectedThemes].map(t =>t.name.replace('#', '')).join(',') }))
@@ -96,16 +102,16 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // await getCookie();
-    // await UserApi.login('noe26@example.org', 'password');
-    // await UserApi.getMe();
-
     runEffect();
 
   }, [selectedThemes]);
 
   const handleSelectTheme = async (t: Theme) => {
     setSelectedThemes(() => [...selectedThemes, t]);
+  }
+
+  const handleSetLike = async (postId: number, like?: 'like' | 'dislike') => {
+    await setLike(postId, 'post', like)
   }
 
   return (
@@ -121,7 +127,7 @@ export default function Home() {
                 ]}
               />
             </SideBlock>
-            <SideBlock name="Подкасты">
+            <SideBlock name="Категории">
               <MenuList
                 items={[
                   { name: 'Dev Battle', url: '/tags/dev-battle', icon: '/podcast_1.png' },
@@ -151,8 +157,8 @@ export default function Home() {
                   postData={{
                     commentsCount: post.comments_count,
                     description: post.description,
-                    dislikesCount: post.dislikes,
-                    likesCount: post.likes,
+                    dislikesCount: post.dislikes_count,
+                    likesCount: post.likes_count,
                     title: post.title,
                     viewsCount: post.views,
                     slug: post.slug,
@@ -165,7 +171,10 @@ export default function Home() {
                     id: post.id,
                     tags: [],
                     time: new Date(post.updated_at),
-                  }}/>;
+                    vote: post?.liked_type,
+                  }}
+                  onSetLike={handleSetLike}
+              />;
             })}
 
           </div>

@@ -1,0 +1,22 @@
+.comment {
+  padding: 20px;
+  background-color: #282832;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 742px;
+}
+
+.commentFlex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  margin-top: 15px;
+  margin-bottom: 21px;
+}
+
+.reply {
+cursor: pointer;
+}

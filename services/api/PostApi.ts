@@ -1,5 +1,5 @@
 import axios from '../../core/axios';
-import {PostData, Theme} from '../../interfaces';
+import {Category, PostData, Theme} from '../../interfaces';
 import { getCookie } from './UserApi';
 
 export const saveImage = (image: File) => {
@@ -8,21 +8,34 @@ export const saveImage = (image: File) => {
   return axios.post('/api/posts/image-by-url', formData);
 };
 
-export const savePost = (data: {
+export const savePost = async (postData: {
   title: string;
   body: any;
-  themes?: Theme[]
+  themes?: Theme[],
+  status?: string,
+  category?: Category,
+  id?: number,
 }) => {
-  axios.post('/api/posts', {
-    body: data.body,
-    title: data.title,
+  let body = {
+    body: postData.body,
+    title: postData.title,
     description: 'Test',
-    themes: data.themes || []
-  });
+    themes: postData.themes || [],
+    status: postData?.status,
+    category: postData.category,
+  };
+
+  if (postData?.id) {
+    const { data } = await axios.put(`/api/posts/${postData.id}`, body);
+    return data
+
+  } else {
+    const { data } = await axios.post(`/api/posts`, body);
+    return data
+  }
 };
 
 export const getPosts = async (params = {}): Promise<PostData[]> => {
-  console.log(params);
   const { data } = await axios.get('/api/posts', { params: {...params} });
 
   return data.data;
@@ -38,13 +51,22 @@ export const saveByUrl = async (url: string) => {
   return await axios.post('/api/posts/image-by-url', { url });
 };
 
-export const showPost = async (slug: string) => {
-  const { data } =  await axios.get(`/api/posts/${slug}`);
+export const showPost = async (slug: string, token?: string) => {
+  const { data } =  await axios.get(`/api/posts/${slug}`, {
+    headers: {
+      Authorization: token ? `Bearer ${token}` : ''
+    }
+  });
   return data;
 };
 
-export const getPostComments = async (id: number) => {
-  const { data } = await axios.get(`/api/posts/${id}/comments`)
+export const getPostComments = async (id: number, apiToken?: string) => {
+  const { data } = await axios.get(`/api/posts/${id}/comments`, {
+    headers: {
+      Authorization: apiToken ? `Bearer ${apiToken}` : ''
+    }
+  })
+  console.log(apiToken)
 
   return data;
 }

@@ -19,6 +19,11 @@ export const UserApi = {
     return data;
   },
 
+  show: async (id: number) => {
+    const { data } = await axios.get('/api/users/' + id);
+    return data;
+  },
+
   updateProfile: async (data: unknown) => {
     const formData = new FormData();
 
@@ -26,7 +31,6 @@ export const UserApi = {
       formData.append(param, data[param]);
     })
     await axios.post('/api/user', formData)
-
 
   }
 

@@ -1,17 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {HYDRATE} from "next-redux-wrapper";
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    fullname: '',
+    data: undefined
   },
   reducers: {
-    setFullName: (state) => {
-      state.fullname = 'Ваха Костоправ';
+    setUser: (state, action) => {
+      state.data = action.payload;
+      return state;
     },
   },
+
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.user,
+      };
+    },
+  },
+
 });
 
 // Action creators are generated for each case reducer function
-export const { setFullName } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 export const { reducer: userReducer } = userSlice;
