@@ -1,4 +1,4 @@
-import {User} from "../interfaces";
+import {Category, Theme, User} from "../interfaces";
 
 export enum LoadingState {
     LOADING = 'LOADING',
@@ -14,6 +14,14 @@ export interface UserState {
     authErrorMessage?: string;
 }
 
+export interface DirectoryState {
+    data: {
+        categories: Category[],
+        themes: Theme[]
+    }
+}
+
 export interface RootState {
     user: UserState
+    directory: DirectoryState
 }

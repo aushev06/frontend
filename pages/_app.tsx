@@ -8,6 +8,9 @@ import {setUser, userSlice} from "../redux/user/slice";
 import {useDispatch, useSelector} from "react-redux";
 import {selectUserState} from "../redux/user/user.selector";
 import {getCookie, UserApi} from "../services/api/UserApi";
+import {getCategories} from "../services/api/CategoryApi";
+import {DirectoryApi} from "../services/api/DirectoryApi";
+import {setDirectories} from "../redux/directory/slice";
 function MyApp({ Component, pageProps }) {
   const dispatch = useDispatch();
   const user = useSelector(selectUserState)
@@ -47,7 +50,8 @@ function MyApp({ Component, pageProps }) {
 }
 
 MyApp.getInitialProps = wrapper.getInitialAppProps(store => async ({Component, ctx}) => {
-
+  const data = await DirectoryApi.get({ categories: true, themes: true })
+  store.dispatch(setDirectories(data));
 
   return {
     pageProps: {

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userReducer } from './user/slice';
 import {createWrapper, HYDRATE} from "next-redux-wrapper";
+import {directoryReducer} from "./directory/slice";
 
 export const makeStore = () => configureStore({
   reducer: {
     user: userReducer,
+    directory: directoryReducer
   },
 });
 

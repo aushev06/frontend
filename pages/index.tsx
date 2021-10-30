@@ -15,6 +15,7 @@ import {setUser} from "../redux/user/slice";
 import {selectUserState} from "../redux/user/user.selector";
 import {setLike} from "../services/api/LikeApi";
 import {AuthDialog} from "../components/AuthDialog";
+import {selectCategoriesState, selectThemesState} from "../redux/directory/directory.selector";
 
 const miniPostTemplate: MiniPostData = {
   id: 0,
@@ -83,18 +84,17 @@ const arrRecommendations: Array<RecommendationItemData> = [
 
 export default function Home() {
   const [posts, setPosts] = useState<PostData[]>([]);
-  const [themes, setThemes] = useState<Theme[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedThemes, setSelectedThemes] = useState<Theme[]>([]);
-
+  const themes = useSelector(selectThemesState);
+  const categories = useSelector(selectCategoriesState);
 
   const runEffect = async () => {
     setIsLoading(true);
     setPosts(await getPosts({ themes: [...selectedThemes].map(t =>t.name.replace('#', '')).join(',') }))
 
-    if (!themes.length) {
-      setThemes(await getThemes());
+    if (!comments.length) {
       setComments(await CommentApi.get());
     }
 
@@ -129,13 +129,11 @@ export default function Home() {
             </SideBlock>
             <SideBlock name="Категории">
               <MenuList
-                items={[
-                  { name: 'Dev Battle', url: '/tags/dev-battle', icon: '/podcast_1.png' },
-                  { name: 'Design Battle', url: '/tags/dev-battle', icon: '/podcast_2.png' },
-                  { name: 'Design Review', url: '/tags/dev-battle', icon: '/podcast_3.png' },
-                  { name: 'Dev Review', url: '/tags/dev-battle', icon: '/podcast_4.png' },
-                  { name: 'Дизайн за чаем', url: '/tags/dev-battle', icon: '/podcast_5.png' },
-                ]}
+                items={categories.map(c => ({
+                  name: c.name,
+                  url: `/tags/${c.slug}`,
+                  icon: `/${c.slug}.png`
+                }))}
               />
             </SideBlock>
             <SideBlock name="Темы">

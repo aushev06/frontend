@@ -67,7 +67,7 @@ export const MiniPost: React.FC<MiniPostProps> = ({ postData, onSetLike }) => {
     <div className={styles.post}>
       <div className={styles.info}>
         <UserViewOnContent user={user} />
-        <PastTimeLabel time={time} leftSidePoint />
+        <PastTimeLabel time={time.getTime()} leftSidePoint />
         <div className={styles.tags}>
           {tags.map((tag) => (
             <span className={styles.tag}>#{tag}</span>
