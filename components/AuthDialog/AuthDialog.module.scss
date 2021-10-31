@@ -7,6 +7,11 @@
 .content {
   width: 60% !important;
   margin: 0 auto !important;
+
+  @include phone-m {
+    width: 100% !important;
+  }
+
   button {
     position: relative;
     border: 1px solid #474758 !important;

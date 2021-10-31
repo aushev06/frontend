@@ -10,10 +10,14 @@ export interface PofilePopupProps {
   user: User;
 }
 
-const ProfilePopup: React.FC<PofilePopupProps> = ({ user }) => {
+const ProfilePopup: React.FC<PofilePopupProps> = ({ user, onClick }) => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (onClick) {
+      onClick();
+    }
+
     setAnchorEl(event.currentTarget);
   };
 
@@ -33,41 +37,43 @@ const ProfilePopup: React.FC<PofilePopupProps> = ({ user }) => {
 
   return (
     <>
-      <Avatar className="cursor-pointer" alt={user.name} src={user.avatar} onClick={handleClick} />
-      <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        className={styles.popover}
-        classes={{
-          root: styles.root,
-          paper: styles.paper,
-        }}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-        <div className={clsx(styles.section1, 'd-flex')}>
-          <Avatar alt={user.name} src={user.avatar} className={styles.avatar} />
-          <div>
-            <a className={styles.name}>{user.name}</a>
-            {/*<div className={styles.login}>{user.login}</div>*/}
-          </div>
-        </div>
-        <Divider classes={{ root: styles.divider }} />
-        <div className={clsx(styles.section2, 'd-flex flex-column')}>
-          <Link href={`/profile/${user.id}?type=articles`}><a className="mb-3">Статьи</a></Link>
-          <Link href={`/profile/${user.id}?type=drafts`}><a className="mb-3">Черновики</a></Link>
-          <Link href={'/profile'}><a className="mb-3">Настройки</a></Link>
-        </div>
-        <Divider classes={{ root: styles.divider }} />
-        <a onClick={onLogout} className={clsx(styles.section2, 'd-flex flex-column')}>Выйти</a>
-      </Popover>
+      <Avatar className={clsx('cursor-pointer', styles.root)} alt={user?.name} src={user?.avatar} onClick={handleClick} />
+      {user?.id && (
+          <Popover
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              className={styles.popover}
+              classes={{
+                root: styles.root,
+                paper: styles.paper,
+              }}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+          >
+            <div className={clsx(styles.section1, 'd-flex')}>
+              <Avatar alt={user.name} src={user.avatar} className={styles.avatar} />
+              <div>
+                <a className={styles.name}>{user.name}</a>
+                {/*<div className={styles.login}>{user.login}</div>*/}
+              </div>
+            </div>
+            <Divider classes={{ root: styles.divider }} />
+            <div className={clsx(styles.section2, 'd-flex flex-column')}>
+              <Link href={`/profile/${user.id}?type=articles`}><a className="mb-3">Статьи</a></Link>
+              <Link href={`/profile/${user.id}?type=drafts`}><a className="mb-3">Черновики</a></Link>
+              <Link href={'/profile'}><a className="mb-3">Настройки</a></Link>
+            </div>
+            <Divider classes={{ root: styles.divider }} />
+            <a onClick={onLogout} className={clsx(styles.section2, 'd-flex flex-column')}>Выйти</a>
+          </Popover>
+      )}
     </>
   );
 };

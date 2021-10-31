@@ -109,10 +109,15 @@ export const Header = ({ onClickHamburger } : Props) => {
                 <Link href={'/'}>
                     <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
                 </Link>
-                <img className="ml-45 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
-                <img className="ml-35 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+                <img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
+                <img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+
+                <div className={'ml-10'}>
+                    <ProfilePopup onClick={handleClick} user={user?.data}/>
+                </div>
+
             </div>
-            <AuthDialog  onClose={() => { setIsVisible(false) }} open={isVisible} />
+            <AuthDialog size={'lg'}  onClose={() => { setIsVisible(false) }} open={isVisible} />
         </header>)
     }
 
@@ -143,7 +148,7 @@ export const Header = ({ onClickHamburger } : Props) => {
             </div>
 
 
-            <AuthDialog  onClose={() => { setIsVisible(false) }} open={isVisible} />
+            <AuthDialog  size={'xs'} onClose={() => { setIsVisible(false) }} open={isVisible} />
         </header>
     );
 };
