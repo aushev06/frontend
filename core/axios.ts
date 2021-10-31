@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export const API_URL = 'https://ca43273.tmweb.ru';
+export const API_URL = 'https://cj36413.tmweb.ru';
 
 const instance = Axios.create({
   baseURL: API_URL,
