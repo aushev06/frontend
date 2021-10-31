@@ -20,6 +20,6 @@ export default function getBlockHTML(block: Block): JSX.Element {
     case 'delimiter':
       return <DelimiterBlock />;
     default:
-      return <Unknown type={block!.type} />;
+      return <Unknown type={'TEST'} />;
   }
 }
