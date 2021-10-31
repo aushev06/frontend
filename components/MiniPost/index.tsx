@@ -20,20 +20,23 @@ export interface MiniPostData {
   };
   slug: string;
   tags: string[];
-  time: number;
+  time: Date;
   description: string;
   imageUrl: string;
   commentsCount: number;
   viewsCount: number;
   likesCount: number;
   dislikesCount: number;
+  vote?: 'like' | 'dislike' | null;
 }
 
 interface MiniPostProps {
   postData: MiniPostData;
+  onSetLike: (postId: number, like: unknown) => void
+
 }
 
-export const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
+export const MiniPost: React.FC<MiniPostProps> = ({ postData, onSetLike }) => {
   const {
     user,
     title,
@@ -46,18 +49,25 @@ export const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
     likesCount,
     dislikesCount,
     slug,
+    vote,
+    id
   } = postData;
   const [likesAndDislikes, setLikesAndDislikes] = React.useState<LikeBlockResult>({
     likes: likesCount,
     dislikes: dislikesCount,
-    vote: undefined,
+    vote,
   });
+
+  const handleSetLike = (like: LikeBlockResult) => {
+    setLikesAndDislikes(like)
+    onSetLike(id, like.vote)
+  }
 
   return (
     <div className={styles.post}>
       <div className={styles.info}>
         <UserViewOnContent user={user} />
-        <PastTimeLabel time={time} leftSidePoint />
+        <PastTimeLabel time={time.getTime()} leftSidePoint />
         <div className={styles.tags}>
           {tags.map((tag) => (
             <span className={styles.tag}>#{tag}</span>
@@ -79,7 +89,7 @@ export const MiniPost: React.FC<MiniPostProps> = ({ postData }) => {
             likes={likesAndDislikes.likes}
             dislikes={likesAndDislikes.dislikes}
             mode="full"
-            onChange={setLikesAndDislikes}
+            onChange={handleSetLike}
           />
         </div>
       </div>

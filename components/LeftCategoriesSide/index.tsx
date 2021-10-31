@@ -19,7 +19,7 @@ export const LeftCategoriesSide: React.FC<LeftCategoriesSideProps> = ({ classNam
           ]}
         />
       </SideBlock>
-      <SideBlock name="Подкасты">
+      <SideBlock name="Категории">
         <MenuList
           items={[
             { name: 'Dev Battle', url: '/tags/dev-battle', icon: '/podcast_1.png' },
@@ -31,19 +31,19 @@ export const LeftCategoriesSide: React.FC<LeftCategoriesSideProps> = ({ classNam
         />
       </SideBlock>
       <SideBlock name="Темы">
-        <Tags
-          items={[
-            { name: 'разработка', url: '/tags/develop' },
-            { name: 'советы', url: '/tags/tips' },
-            { name: 'дизайн', url: '/tags/design' },
-            { name: 'инструкции', url: '/tags/instructions' },
-            { name: 'mvp', url: '/tags/mvp' },
-            { name: 'проектирование', url: '/tags/test' },
-            { name: 'инструментарий', url: '/tags/test' },
-            { name: 'болтология', url: '/tags/test' },
-            { name: 'работа', url: '/tags/test' },
-          ]}
-        />
+        {/*<Tags*/}
+        {/*  items={[*/}
+        {/*    { name: 'разработка', url: '/tags/develop' },*/}
+        {/*    { name: 'советы', url: '/tags/tips' },*/}
+        {/*    { name: 'дизайн', url: '/tags/design' },*/}
+        {/*    { name: 'инструкции', url: '/tags/instructions' },*/}
+        {/*    { name: 'mvp', url: '/tags/mvp' },*/}
+        {/*    { name: 'проектирование', url: '/tags/test' },*/}
+        {/*    { name: 'инструментарий', url: '/tags/test' },*/}
+        {/*    { name: 'болтология', url: '/tags/test' },*/}
+        {/*    { name: 'работа', url: '/tags/test' },*/}
+        {/*  ]}*/}
+        {/*/>*/}
       </SideBlock>
     </div>
   );

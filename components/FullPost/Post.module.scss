@@ -1,9 +1,8 @@
 .post {
   width: 100%;
   max-width: 950px;
-  height: 100%;
   padding: 30px;
-  margin-bottom: 200px;
+  margin-bottom: 56px;
   background-color: var(--primary-color);
   border-radius: 4px;
   &Info {
@@ -146,7 +145,7 @@
   margin: 10px 0;
   &Picture {
     width: 100%;
-    display: none;
+    display: block;
     &Visible {
       display: block;
     }

@@ -2,10 +2,12 @@ import React from 'react';
 import { Popover, Avatar, Divider } from '@material-ui/core';
 import styles from './ProfilePopup.module.scss';
 import clsx from 'clsx';
+import Link from 'next/link';
+import {User} from "../../interfaces";
 
 export interface PofilePopupProps {
   onClick?: () => void;
-  user: any;
+  user: User;
 }
 
 const ProfilePopup: React.FC<PofilePopupProps> = ({ user }) => {
@@ -21,9 +23,17 @@ const ProfilePopup: React.FC<PofilePopupProps> = ({ user }) => {
 
   const open = Boolean(anchorEl);
 
+  const onLogout = () => {
+    if (window?.confirm('Вы действительно хотите покинуть сайт ?')) {
+      document.cookie = 'auth_token' + '=; Max-Age=0';
+      localStorage.removeItem('token');
+      location.href = '/';
+    }
+  }
+
   return (
     <>
-      <Avatar className="cursor-pointer" alt="Cindy Baker" src="/static/images/avatar/3.jpg" onClick={handleClick} />
+      <Avatar className="cursor-pointer" alt={user.name} src={user.avatar} onClick={handleClick} />
       <Popover
         open={open}
         anchorEl={anchorEl}
@@ -43,20 +53,20 @@ const ProfilePopup: React.FC<PofilePopupProps> = ({ user }) => {
         }}
       >
         <div className={clsx(styles.section1, 'd-flex')}>
-          <Avatar alt="Adam" src="/static/images/avatar/3.jpg" className={styles.avatar} />
+          <Avatar alt={user.name} src={user.avatar} className={styles.avatar} />
           <div>
             <a className={styles.name}>{user.name}</a>
-            <div className={styles.login}>{user.login}</div>
+            {/*<div className={styles.login}>{user.login}</div>*/}
           </div>
         </div>
         <Divider classes={{ root: styles.divider }} />
         <div className={clsx(styles.section2, 'd-flex flex-column')}>
-          <a className="mb-3">Статьи</a>
-          <a className="mb-3">Черновики</a>
-          <a>Настройки</a>
+          <Link href={`/profile/${user.id}?type=articles`}><a className="mb-3">Статьи</a></Link>
+          <Link href={`/profile/${user.id}?type=drafts`}><a className="mb-3">Черновики</a></Link>
+          <Link href={'/profile/1?type=articles'}><a className="mb-3">Настройки</a></Link>
         </div>
         <Divider classes={{ root: styles.divider }} />
-        <a className={clsx(styles.section2, 'd-flex flex-column')}>Выйти</a>
+        <a onClick={onLogout} className={clsx(styles.section2, 'd-flex flex-column')}>Выйти</a>
       </Popover>
     </>
   );

@@ -1,0 +1,49 @@
+@import "styles/media";
+
+.modal {
+  background-color: #282832 !important;
+}
+
+.content {
+  width: 60% !important;
+  margin: 0 auto !important;
+  button {
+    position: relative;
+    border: 1px solid #474758 !important;
+    svg {
+      position: absolute;
+      width: 24px !important;
+      left: 0;
+      margin-left: 21px;
+    }
+  }
+}
+
+.title {
+  font-size: 24px !important;
+  color: #D0D0DD !important;
+  font-weight: bold !important;
+}
+
+.subTitle {
+  color: #D0D0DD !important;
+  margin: 18px !important;
+  text-align: center !important;
+}
+
+
+@include phone-m {
+  .fullWidth {
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .scrollPaper {
+    align-items: stretch !important;
+  }
+
+  .paperScrollPaper {
+    max-height: 100% !important;
+  }
+}

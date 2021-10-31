@@ -1,0 +1,28 @@
+.comment {
+  background-color: #3C3D48;
+  margin-bottom: 30px;
+  position: relative;
+}
+.fieldRoot {
+  &:before, &:after {
+    display: none;
+  }
+
+  &::placeholder {
+    color: #fff !important;
+  }
+  color: #fff !important;
+  padding: 17px!important;
+  background-color: #3C3D48;
+  border-radius: 10px;
+  cursor: pointer !important;
+}
+
+
+.addButton {
+  background-color: #04C800 !important;
+  color: #fff !important;
+  position: absolute !important;
+  right: 15px;
+  bottom: 15px;
+}

@@ -6,9 +6,10 @@ import styles from './Checkbox.module.scss';
 interface CheckboxProps {
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange }) => {
+export const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, disabled }) => {
   return (
     <div className={clsx(styles.checkbox, 'd-flex justify-content-center')}>
       <Switch
@@ -20,6 +21,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange }) => {
           track: styles.track,
           checked: styles.checked,
         }}
+        disabled={disabled}
         checked={checked}
         onChange={onChange}
       />
