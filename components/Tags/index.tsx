@@ -4,13 +4,14 @@ import Link from 'next/link';
 import styles from './Tags.module.scss';
 import {Theme} from "../../interfaces";
 import { Button } from '../Button';
+import clsx from "clsx";
 
 type TagItem = { theme: Theme, onClick?: (t: Theme) => void, isActive: boolean};
 
 const Tag: React.FC<TagItem> = ({ theme, onClick, isActive }) => (
   <Link href={theme.name}>
     <a onClick={() => onClick(theme)} className={styles.tag}>
-        <Button className={styles.btn} variant={isActive ? 'contained' : 'text'}>
+        <Button className={clsx(styles.btn, isActive ? styles.active : '')} variant={isActive ? 'text' : 'text'}>
             {theme.name}
         </Button>
     </a>

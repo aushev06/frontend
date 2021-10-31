@@ -1,6 +1,7 @@
 export interface User {
     id: number;
     name: string;
+    email: string;
     avatar: string;
     comments_count: number;
     ready_for_work: boolean;
@@ -8,6 +9,7 @@ export interface User {
     description: string;
     position: string;
     created_at: string;
+    links: string[];
 }
 
 export interface PostData {

@@ -13,9 +13,15 @@ import {UserApi} from "../../services/api/UserApi";
 import {useSelector} from "react-redux";
 import {selectUserState} from "../../redux/user/user.selector";
 import {AuthDialog} from "../AuthDialog";
+import {useAllMQ} from "../../utils/useAllMQ";
 
-export const Header: React.FC = () => {
+type Props = {
+    onClickHamburger: () => void
+}
+
+export const Header = ({ onClickHamburger } : Props) => {
     const [isLoading, setIsLoading] = useState(false);
+    const mq = useAllMQ()
     const router = useRouter()
 
     const [checked, setChecked] = useState(false);
@@ -45,7 +51,7 @@ export const Header: React.FC = () => {
         setChecked(flag);
         setIsLoading(true)
         UserApi
-            .updateProfile({ready_for_work: flag ? 1 : 0})
+            .updateProfile({ready_for_work: flag ? true : false}, user.data?.id)
             .then((r) => {
                 setChecked(flag);
             })
@@ -89,6 +95,25 @@ export const Header: React.FC = () => {
                 </Backdrop>
             </header>
         );
+    }
+
+    if (mq.isXS) {
+        return ( <header className={clsx(styles.header, 'd-flex justify-content-between')}>
+            <div className="d-flex align-items-center">
+                <button type="button" className={styles.menuButton} onClick={onClickHamburger}>
+                    <svg viewBox="0 0 26 11" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1H16.5M1 10H24.5" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                </button>
+
+                <Link href={'/'}>
+                    <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
+                </Link>
+                <img className="ml-45 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
+                <img className="ml-35 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+            </div>
+            <AuthDialog  onClose={() => { setIsVisible(false) }} open={isVisible} />
+        </header>)
     }
 
     return (

@@ -7,11 +7,51 @@
   }
 }
 
+.container {
+  width: 900px;
+
+  @include phone-m {
+    width: 100% !important;
+  }
+
+}
+
 .formControl {
   width: 100% !important;
   margin-bottom: 20px !important;
 }
 
+.linkBlock {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+
+  input {
+    width: 100%;
+  }
+
+  img {
+    cursor: pointer;
+  }
+
+}
+
+.label {
+  font-family: Formular;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px !important;
+  line-height: 15px;
+  /* identical to box height */
+  margin-bottom: 25px !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9C9CAA;
+}
+
+.formBlock {
+  margin-bottom: 50px !important;
+}
 
 .nameField {
   display: flex;
@@ -33,9 +73,44 @@
 .text {
   color: #D0D0DD !important;
   font-size: 14px !important;
-  font-family: Formular !important;
+  font-family: Formular Bold !important;
+}
+
+.btns {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+
+  button {
+    font-family: Formular !important;
+  }
+
+  button:last-child {
+    margin-left: 10px;
+  }
 }
 
 .input {
   border: none !important;
+}
+
+.addMore {
+  color: #04C800;
+  font-family: Formular !important;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.inputLink {
+   & input {
+     background: none;
+     border: none;
+   }
+
+  input[value="https"] { color: #7E7E8B !important; }
+
+  input[value] {
+    color: #D0D0DD;
+  }
+
 }

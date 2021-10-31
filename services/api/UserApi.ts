@@ -1,4 +1,5 @@
 import axios from '../../core/axios';
+import {User} from "../../interfaces";
 
 export const UserApi = {
   login: async (email: string, password: string): Promise<any> => {
@@ -14,8 +15,12 @@ export const UserApi = {
     return data;
   },
 
-  getMe: async () => {
-    const { data } = await axios.get('/api/user');
+  getMe: async (token?: string) => {
+    const { data } = await axios.get('/api/user', {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : ''
+      }
+    });
     return data;
   },
 
@@ -24,13 +29,22 @@ export const UserApi = {
     return data;
   },
 
-  updateProfile: async (data: unknown) => {
+  updateProfile: async (data: Partial<User>, id: number) => {
     const formData = new FormData();
 
     Object.keys(data).forEach((param) => {
-      formData.append(param, data[param]);
+      if (param !== 'links') {
+        formData.append(param, data[param]);
+      }
     })
-    await axios.post('/api/user', formData)
+
+    if (data.links?.length) {
+      data.links.map((l, key) => {
+        formData.append(`links[${key}]`, l);
+      })
+    }
+
+    await axios.patch(`/api/user/${id}`, data)
 
   }
 

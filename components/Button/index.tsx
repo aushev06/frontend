@@ -12,6 +12,7 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   disabled?: boolean;
+  type?: 'button' | 'submit';
 }
 
 export const Button: React.FC<ButtonProps> = (
@@ -24,7 +25,8 @@ export const Button: React.FC<ButtonProps> = (
         endIcon,
         onClick,
         fullWidth,
-        disabled
+        disabled,
+        type
     }
 ) => {
     return (
@@ -49,6 +51,7 @@ export const Button: React.FC<ButtonProps> = (
                 startIcon={startIcon}
                 endIcon={endIcon}
                 fullWidth={fullWidth || false}
+                type={type}
             >
                 {children}
             </ButtonBase>

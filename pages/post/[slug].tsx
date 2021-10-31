@@ -14,10 +14,12 @@ import {Tags} from "../../components/Tags";
 import {Theme} from "../../interfaces";
 import {useSelector} from "react-redux";
 import {selectCategoriesState, selectThemesState} from "../../redux/directory/directory.selector";
+import {useAllMQ} from "../../utils/useAllMQ";
 
 export const PostContext = React.createContext({});
 
 export default function Post({post, comments}) {
+    const mq = useAllMQ();
     const [selectedThemes, setSelectedThemes] = useState<Theme[]>([]);
     const themes = useSelector(selectThemesState);
     const categories = useSelector(selectCategoriesState);
@@ -42,38 +44,40 @@ export default function Post({post, comments}) {
             <MainLayout>
                 <div className="wrapper-center">
 
-                    <div className={'left-side-no-margin'}>
-                        <SideBlock>
-                            <MenuList
-                                items={[
-                                    {
-                                        name: 'Популярное',
-                                        url: '/popular',
-                                        icon: '/fire.svg',
-                                        isActive: true,
-                                        hasMore: true
-                                    },
-                                    {name: 'Новое', url: '/new', icon: '/news.svg'},
-                                ]}
-                            />
-                        </SideBlock>
-                        <SideBlock name="Категории">
-                            <MenuList
-                                items={categories.map(c => ({
-                                    name: c.name,
-                                    url: `/tags/${c.slug}`,
-                                    icon: `/${c.slug}.png`
-                                }))}
-                            />
-                        </SideBlock>
-                        <SideBlock name="Темы">
-                            <Tags
-                                items={themes}
-                                handleSelect={handleSelectTheme}
-                                selectedItems={selectedThemes}
-                            />
-                        </SideBlock>
-                    </div>
+                    {!mq.isXS && (
+                        <div className={'left-side-no-margin'}>
+                            <SideBlock>
+                                <MenuList
+                                    items={[
+                                        {
+                                            name: 'Популярное',
+                                            url: '/popular',
+                                            icon: '/fire.svg',
+                                            isActive: true,
+                                            hasMore: true
+                                        },
+                                        {name: 'Новое', url: '/new', icon: '/news.svg'},
+                                    ]}
+                                />
+                            </SideBlock>
+                            <SideBlock name="Категории">
+                                <MenuList
+                                    items={categories.map(c => ({
+                                        name: c.name,
+                                        url: `/tags/${c.slug}`,
+                                        icon: `/${c.slug}.png`
+                                    }))}
+                                />
+                            </SideBlock>
+                            <SideBlock name="Темы">
+                                <Tags
+                                    items={themes}
+                                    handleSelect={handleSelectTheme}
+                                    selectedItems={selectedThemes}
+                                />
+                            </SideBlock>
+                        </div>
+                    )}
 
                     <div className="content">
                         <FullPost post={post} onSetLike={handleSetLike}/>

@@ -18,6 +18,7 @@ import {PostData} from "../../interfaces";
 export const FullPost: React.FC<{post: PostData, onSetLike: (postId: number, like: unknown) => void}> = ({post, onSetLike}) => {
   const [postData, setPostData] = React.useState(post);
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
+  console.log(postData)
   const [likesAndDislikes, setLikesAndDislikes] = React.useState<LikeBlockResult>({
     likes: postData.likes_count,
     dislikes: postData.dislikes_count,

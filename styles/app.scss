@@ -123,7 +123,7 @@
 }
 
 @font-face {
-  font-family: 'Formular';
+  font-family: 'Formular Bold';
   src: url('./fonts/Formular-Bold.eot');
   src: local('Formular Bold'), local('./fonts/Formular-Bold'),
   url('./fonts/Formular-Bold.eot?#iefix') format('embedded-opentype'),
@@ -145,4 +145,34 @@
 
 .MuiSelect-icon {
   color: #D0D0DD !important;
+}
+
+.MuiCheckbox-root {
+
+}
+
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: #04C800 !important;
+}
+
+.green-btn {
+  background-color: #04C800 !important;
+  color: #fff !important;
+}
+
+
+.wrapper-center {
+  @include phone-m {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+
+.content {
+  @include phone-m {
+    padding: 0 !important;
+    margin: 10px !important;
+  }
 }

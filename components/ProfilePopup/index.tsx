@@ -63,7 +63,7 @@ const ProfilePopup: React.FC<PofilePopupProps> = ({ user }) => {
         <div className={clsx(styles.section2, 'd-flex flex-column')}>
           <Link href={`/profile/${user.id}?type=articles`}><a className="mb-3">Статьи</a></Link>
           <Link href={`/profile/${user.id}?type=drafts`}><a className="mb-3">Черновики</a></Link>
-          <Link href={'/profile/1?type=articles'}><a className="mb-3">Настройки</a></Link>
+          <Link href={'/profile'}><a className="mb-3">Настройки</a></Link>
         </div>
         <Divider classes={{ root: styles.divider }} />
         <a onClick={onLogout} className={clsx(styles.section2, 'd-flex flex-column')}>Выйти</a>

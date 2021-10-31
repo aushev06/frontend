@@ -16,6 +16,7 @@ import {selectUserState} from "../redux/user/user.selector";
 import {setLike} from "../services/api/LikeApi";
 import {AuthDialog} from "../components/AuthDialog";
 import {selectCategoriesState, selectThemesState} from "../redux/directory/directory.selector";
+import {useAllMQ} from "../utils/useAllMQ";
 
 const miniPostTemplate: MiniPostData = {
   id: 0,
@@ -89,6 +90,7 @@ export default function Home() {
   const [selectedThemes, setSelectedThemes] = useState<Theme[]>([]);
   const themes = useSelector(selectThemesState);
   const categories = useSelector(selectCategoriesState);
+  const mq = useAllMQ()
 
   const runEffect = async () => {
     setIsLoading(true);
@@ -118,32 +120,37 @@ export default function Home() {
     <main>
       <MainLayout>
         <div className="wrapper">
-          <div className="left-side">
-            <SideBlock>
-              <MenuList
-                items={[
-                  { name: 'Популярное', url: '/popular', icon: '/fire.svg', isActive: true, hasMore: true },
-                  { name: 'Новое', url: '/new', icon: '/news.svg' },
-                ]}
-              />
-            </SideBlock>
-            <SideBlock name="Категории">
-              <MenuList
-                items={categories.map(c => ({
-                  name: c.name,
-                  url: `/tags/${c.slug}`,
-                  icon: `/${c.slug}.png`
-                }))}
-              />
-            </SideBlock>
-            <SideBlock name="Темы">
-              <Tags
-                items={themes}
-                handleSelect={handleSelectTheme}
-                selectedItems={selectedThemes}
-              />
-            </SideBlock>
-          </div>
+
+          {!mq.isXS && (
+              <div className="left-side">
+                <SideBlock>
+                  <MenuList
+                      items={[
+                        { name: 'Популярное', url: '/popular', icon: '/fire.svg', isActive: true, hasMore: true },
+                        { name: 'Новое', url: '/new', icon: '/news.svg' },
+                      ]}
+                  />
+                </SideBlock>
+                <SideBlock name="Категории">
+                  <MenuList
+                      items={categories.map(c => ({
+                        name: c.name,
+                        url: `/tags/${c.slug}`,
+                        icon: `/${c.slug}.png`
+                      }))}
+                  />
+                </SideBlock>
+                <SideBlock name="Темы">
+                  <Tags
+                      items={themes}
+                      handleSelect={handleSelectTheme}
+                      selectedItems={selectedThemes}
+                  />
+                </SideBlock>
+              </div>
+          )}
+
+
           <div className="content">
 
 
@@ -176,21 +183,23 @@ export default function Home() {
             })}
 
           </div>
-          <div className="right-side">
-            <SideComments
-              comments={
-                comments.map((item): CommentItem => {
-                  return {
-                    id: `${item.id}`,
-                    user: { fullname: item.user.name, avatarUrl: item.user.avatar },
-                    text: item.text,
-                    post: { id: `${item.post.id}`, title: item.post.title },
-                    rating: item.likes_count,
-                  };
-                })
-              }
-            />
-          </div>
+          {!mq.isXS && (
+              <div className="right-side">
+                <SideComments
+                    comments={
+                      comments.map((item): CommentItem => {
+                        return {
+                          id: `${item.id}`,
+                          user: { fullname: item.user.name, avatarUrl: item.user.avatar },
+                          text: item.text,
+                          post: { id: `${item.post.id}`, title: item.post.title },
+                          rating: item.likes_count,
+                        };
+                      })
+                    }
+                />
+              </div>
+          )}
         </div>
       </MainLayout>
     </main>

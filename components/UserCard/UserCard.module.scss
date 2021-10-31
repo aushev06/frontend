@@ -1,6 +1,12 @@
+@import "styles/media";
+
 .userCard {
   display: flex;
   justify-content: center;
+
+  @include phone-m {
+    margin: 10px;
+  }
 
   &_avatar img {
     width: 145px;
@@ -10,6 +16,10 @@
 
   &_profile {
     width: 670px;
+
+    @include phone-m {
+      width: 100% !important;
+    }
   }
 
   &_user {
@@ -72,6 +82,11 @@
   &_description {
     width: 475px;
     margin-left: 30px;
+
+    @include phone-m {
+      width: 100% !important;
+    }
+
   }
 
   &_nickname {

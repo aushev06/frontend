@@ -10,6 +10,26 @@
   }
 }
 
+
+.menuButton {
+  margin-right: var(--spacing--30);
+  padding: 0;
+  width: max-content;
+  height: max-content;
+  font-size: 27px;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+
+  svg {
+    width: 1em;
+    height: 1em;
+    display: flex;
+    stroke: #D0D0DD;
+  }
+}
+
 .search {
   margin-left: 20%;
 }
