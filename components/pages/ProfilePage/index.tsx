@@ -2,7 +2,6 @@ import {yupResolver} from '@hookform/resolvers/yup';
 
 import styles from './ProfilePage.module.scss';
 import {Checkbox, FormControl, FormControlLabel, MenuItem, Select, TextField, Typography} from "@material-ui/core";
-import {FormField} from "../../FormField";
 import format from "date-fns/format";
 import {FieldValues, useForm, Controller, useFieldArray} from "react-hook-form";
 import React from "react";
