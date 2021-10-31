@@ -5,6 +5,7 @@
   margin-bottom: 56px;
   background-color: var(--primary-color);
   border-radius: 4px;
+  word-break: break-all !important;
   &Info {
     display: flex;
     justify-content: space-between;
