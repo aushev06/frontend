@@ -19,8 +19,8 @@ function MyApp({ Component, pageProps }) {
     if (window?.location.search.includes('token')) {
       const splitToken = window?.location.search.split('=');
       const token = splitToken[splitToken.length - 1];
-      window.document.cookie = `auth_token=${token}`;
-      window.localStorage.setItem('token', token)
+      window.document.cookie = `auth_token=${token.replace('%7C', '|')}`;
+      window.localStorage.setItem('token', token.replace('%7C', '|'))
       UserApi.getMe().then(responseUser => {
         dispatch(setUser(responseUser))
       });
