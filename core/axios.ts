@@ -10,7 +10,7 @@ const instance = Axios.create({
 instance.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
     // eslint-disable-next-line no-param-reassign
-    config.headers.Authorization = `Bearer ${window.localStorage.getItem('token')}`;
+    config.headers.Authorization = `Bearer ${window.localStorage.getItem('token')?.replace('%7C', '|')}`;
   }
   return config;
 });
