@@ -103,7 +103,7 @@ export const ProfilePageComponent = () => {
                         <FormControl variant="standard" className={styles.formControl}>
                             {fields.map((l, index) => {
                                 return (
-                                    <div className={styles.linkBlock}>
+                                    <div className={styles.linkBlock} key={index}>
                                         <input defaultValue={l.name} key={index} {...register(`links[${index}].name`)} name={`links[${index}].name`}/>
                                         <img src={'/close.svg'} width={'20'} height={'20'} onClick={() => remove(index)} />
                                     </div>
