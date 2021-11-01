@@ -14,6 +14,8 @@ import {useSelector} from "react-redux";
 import {selectUserState} from "../../redux/user/user.selector";
 import {AuthDialog} from "../AuthDialog";
 import {useAllMQ} from "../../utils/useAllMQ";
+import MobileProfilePopup from "../MobileProfilePopup";
+import Avatar from "@material-ui/core/Avatar";
 
 type Props = {
     onClickHamburger: () => void
@@ -26,6 +28,8 @@ export const Header = ({ onClickHamburger } : Props) => {
 
     const [checked, setChecked] = useState(false);
     const [isSearch, setIsSearch] = useState(false);
+    const [isMobilePopup, setIsMobilePopup] = useState(false);
+
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -71,7 +75,6 @@ export const Header = ({ onClickHamburger } : Props) => {
         }
 
         router.push('/write')
-
     }
 
     if (isSearch) {
@@ -97,6 +100,35 @@ export const Header = ({ onClickHamburger } : Props) => {
         );
     }
 
+    if (isMobilePopup) {
+        return (
+            <header className={clsx(styles.header, 'd-flex justify-content-between')}>
+                <div className="d-flex align-items-center">
+                    <button type="button" className={styles.menuButton} onClick={onClickHamburger}>
+                        <svg viewBox="0 0 26 11" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1H16.5M1 10H24.5" strokeWidth="2" strokeLinecap="round" />
+                        </svg>
+                    </button>
+                    <Link href={'/'}>
+                        <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
+                    </Link>
+                    <img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
+                    <img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+
+                    <div className={'ml-10'}>
+                        <Avatar alt={user?.data?.name} src={user?.data?.avatar} onClick={() => setIsMobilePopup(false)} />
+                    </div>
+                    <Backdrop classes={{root: styles.backdrop}} open={isMobilePopup}>
+                        <MobileProfilePopup checked={checked} onChange={onChangeCheckbox} setChecked={handleChangeCheckbox}
+                                            isLoading={isLoading} />
+                    </Backdrop>
+                </div>
+
+            </header>
+        )
+    }
+
+
     if (mq.isXS) {
         return ( <header className={clsx(styles.header, 'd-flex justify-content-between')}>
             <div className="d-flex align-items-center">
@@ -113,7 +145,7 @@ export const Header = ({ onClickHamburger } : Props) => {
                 <img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
 
                 <div className={'ml-10'}>
-                    <ProfilePopup onClick={handleClick} user={user?.data}/>
+                    <ProfilePopup onClick={() => !user?.data?.id ? setIsVisible(true) : setIsMobilePopup(true)} user={user?.data}/>
                 </div>
 
             </div>

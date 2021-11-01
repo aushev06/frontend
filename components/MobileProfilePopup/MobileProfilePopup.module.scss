@@ -1,0 +1,95 @@
+.container {
+  position: absolute;
+  background-color: var(--grey-light-color);
+  top: 0px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  border-bottom: 1px solid #474758;
+  width: 100% !important;
+  &_profile {
+    display: flex;
+    font-family: Formular !important;
+  }
+
+  button {
+    margin-bottom: 15px;
+  }
+
+}
+
+.name {
+  font-family: Formular !important;
+  margin-left: 10px !important;
+}
+
+.available {
+  border-bottom: 1px solid #474758;
+  div {
+    margin-bottom: 5px;
+  }
+}
+
+.section2 {
+  margin-top: 15px;
+  font-size: 14px !important;
+
+  a {
+    font-size: 14px !important;
+    font-family: Formular !important;
+  }
+
+}
+
+
+.body {
+  padding: 10px 30px;
+}
+
+.divider {
+  background-color: #474758 !important;
+}
+
+.searchTitle {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 15px 0;
+  color: var(--text-dark-color);
+  cursor: pointer;
+}
+
+.searchTitleInner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchItems {
+  padding: 20px 0 16px 0;
+}
+
+.searchItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.showAll {
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration-line: underline;
+  color: var(--text-dark-color);
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  background-color: #282832;
+  padding: 20px 30px;
+}
