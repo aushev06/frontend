@@ -23,10 +23,11 @@ type Props = {
 
 export const Header = ({ onClickHamburger } : Props) => {
     const [isLoading, setIsLoading] = useState(false);
+    const user = useSelector(selectUserState);
     const mq = useAllMQ()
     const router = useRouter()
 
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(user?.data?.ready_for_work || false);
     const [isSearch, setIsSearch] = useState(false);
     const [isMobilePopup, setIsMobilePopup] = useState(false);
 
@@ -34,10 +35,9 @@ export const Header = ({ onClickHamburger } : Props) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const [searchInput, setSearchInput] = useState<string>('');
-    const user = useSelector(selectUserState);
     useEffect(() => {
-        isSearch ? document.body.classList.add(styles.noscroll) : document.body.classList.remove(styles.noscroll);
-    }, [isSearch]);
+        isSearch || isMobilePopup ? document.body.classList.add(styles.noscroll) : document.body.classList.remove(styles.noscroll);
+    }, [isSearch, isMobilePopup]);
 
     const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
         handleChangeCheckbox(event.target.checked)

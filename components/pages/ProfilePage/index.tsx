@@ -13,6 +13,7 @@ import {useSelector} from "react-redux";
 import {selectUserState} from "../../../redux/user/user.selector";
 import {Button} from "../../Button";
 import {UserApi} from "../../../services/api/UserApi";
+import {useAlert} from "../../../hooks/useAlert";
 
 const img = 'https://sun9-27.userapi.com/impg/MjbQlat29eVjsDctQcL0E36sm906zxUEp3i2RQ/5noF257iHOE.jpg?size=2560x1920&quality=95&sign=16d7f16668e650250c6554065f0d7aed&type=album';
 
@@ -30,7 +31,7 @@ export interface SettingsFormFieldsProps extends FieldValues {
 
 export const ProfilePageComponent = () => {
     const user = useSelector(selectUserState).data;
-
+    const { openAlert } = useAlert();
     const [loading, setLoading] = React.useState<boolean>(false);
 
     const {register, handleSubmit, control, formState, getValues} = useForm<SettingsFormFieldsProps>({
@@ -53,10 +54,17 @@ export const ProfilePageComponent = () => {
     });
 
     const onSubmit = async (data) => {
-        await UserApi.updateProfile({
-            ...data,
-            links: data.links.map(l => l.name)
-        }, user.id)
+       try {
+           await UserApi.updateProfile({
+               ...data,
+               links: data.links.map(l => l.name)
+           }, user.id)
+
+           openAlert('Данные успешно сохранены', 'success');
+
+       } catch (e) {
+           openAlert('Данные не сохранены', 'error');
+       }
     }
 
     return (
