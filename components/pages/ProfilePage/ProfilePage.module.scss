@@ -53,6 +53,42 @@
   margin-bottom: 50px !important;
 }
 
+
+.avatar {
+  width: 145px !important;
+  height: 145px !important;
+  margin-right: 30px;
+}
+
+.chooseAvatar {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+
+  .name {
+    font-size: 36px !important;
+  }
+
+  @include phone-m {
+    display: block !important;
+  }
+
+}
+
+.selectAvatar {
+  position: relative;
+  cursor: pointer;
+}
+
+.photo {
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  cursor: pointer;
+}
+
+
+
 .nameField {
   display: flex;
   > div {

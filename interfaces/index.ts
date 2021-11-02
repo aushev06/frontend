@@ -3,6 +3,7 @@ export interface User {
     name: string;
     email: string;
     avatar: string;
+    login: string;
     comments_count: number;
     ready_for_work: boolean;
     recognized: boolean;
