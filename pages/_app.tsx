@@ -97,8 +97,12 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(store => async ({Component, c
     const token = ctx?.req?.cookies?.auth_token
 
     if (token) {
-        const user = await UserApi.getMe(token);
-        store.dispatch(setUser(user));
+       try {
+           const user = await UserApi.getMe(token);
+           store.dispatch(setUser(user));
+       } catch (e) {
+           console.log(e);
+       }
     }
 
     return {
