@@ -89,9 +89,9 @@ const UserCard: React.FC<UserCardProps> = (
                                 <img src="/vk.svg" alt="vk"/>
                                 <img src="/twitter.svg" alt="twitter"/>
                             </div>
-                            <div className={styles.userCard_workStatus}>
-                                <div className={styles.userCard_sts}></div>
-                                <span>Доступен для работы</span>
+                            <div className={readyForWork ? styles.userCard_workStatus : styles.userCard_workNotAvailableStatus}>
+                                <div className={readyForWork ? styles.userCard_sts : styles.userCard_sts_not_available}></div>
+                                <span>{readyForWork ? 'Доступен для работы' : 'Не доступен для работы'}</span>
                             </div>
                         </div>
                     </div>

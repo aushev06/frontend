@@ -150,10 +150,28 @@
     color: #04C800;
   }
 
+  &_workNotAvailableStatus {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 18px;
+    color: #c80000 !important;
+  }
+
+
   &_sts {
     width: 8px;
     height: 8px;
     background: #04C800;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  &_sts_not_available {
+    width: 8px;
+    height: 8px;
+    background: #c80000;
     border-radius: 20px;
     margin-right: 5px;
     margin-left: 5px;
