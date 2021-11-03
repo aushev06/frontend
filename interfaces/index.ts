@@ -67,13 +67,15 @@ export interface SpecialistCategory {
     count: number;
 }
 
-export interface Pagination {
-    current_page: number;
-    data: Array<User | PostData | Comment>,
-    first_page_url: string;
-    from: number;
-    last_page: number;
-    last_page_url: string;
-    next_page_url: string;
-    total: number;
+export interface Pagination<T> {
+    data: Array<T>,
+    meta: {
+        current_page: number;
+        first_page_url: string;
+        from: number;
+        last_page: number;
+        last_page_url: string;
+        next_page_url: string;
+        total: number;
+    }
 }

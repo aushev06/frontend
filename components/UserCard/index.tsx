@@ -14,6 +14,7 @@ interface UserCardProps {
     recognized?: boolean;
     isAuthUser?: boolean;
     avatar: string;
+    postCount: number;
 }
 
 export function ActiveSvg(props: { leak: boolean }) {
@@ -43,7 +44,8 @@ const UserCard: React.FC<UserCardProps> = (
         readyForWork,
         articleType,
         isAuthUser,
-        avatar
+        avatar,
+        postCount,
     }
 ) => {
 
@@ -119,7 +121,7 @@ const UserCard: React.FC<UserCardProps> = (
                 </div>
                 <div className={styles.userCard_section}>
                     <div onClick={() => toggleLeak()} className={styles.userCard_articles}>
-                        <span>{type === 'articles' ? 'Статьи' : 'Черновики'} <b>24</b></span>
+                        <span>{type === 'articles' ? 'Статьи' : 'Черновики'} <b>{postCount}</b></span>
                         <ActiveSvg leak={leak}/>
                         {
                             leak && <div className={styles.userCard_newPop}>

@@ -7,7 +7,7 @@ import {MiniPost} from "../../components/MiniPost";
 import {useSelector} from "react-redux";
 import {selectUserState} from "../../redux/user/user.selector";
 import {setLike} from "../../services/api/LikeApi";
-import {PostData, User} from "../../interfaces";
+import {Pagination, PostData, User} from "../../interfaces";
 import {UserApi} from "../../services/api/UserApi";
 
 
@@ -20,12 +20,17 @@ export default function Profile (props) {
         articles: 'active'
     }
 
-    const [posts, setPosts] = React.useState<PostData[]>([]);
+    const [posts, setPosts] = React.useState<Partial<Pagination<PostData>>>({})
+    const [isLoading, setIsLoading] = React.useState(false);
 
 
     React.useEffect(() => {
+        setIsLoading(true)
         const effect = async () => {
-            setPosts(await getPosts({user_ids: id, status: types[type as string]}))
+            const responsePosts = await getPosts({user_ids: id, status: types[type as string]});
+            setPosts(responsePosts)
+            setIsLoading(false);
+            console.log(responsePosts)
         }
 
         effect();
@@ -33,11 +38,16 @@ export default function Profile (props) {
     }, [type])
 
     const onTypeChange = async (t: string) => {
-        setPosts(await getPosts({status: types[t]}))
+        const posts = await getPosts({status: types[t]});
+        setPosts(posts)
     }
 
     const handleSetLike = async (postId: number, like?: 'like' | 'dislike') => {
         await setLike(postId, 'post', like);
+    }
+
+    if (isLoading || posts === {}) {
+        return null
     }
 
     return(
@@ -53,12 +63,13 @@ export default function Profile (props) {
                       isAuthUser={!!user?.id}
                       recognized={!!user.recognized}
                       avatar={user.avatar}
+                      postCount={posts?.meta?.total}
 
             />
 
 
            <div className={'content mt-15 m-15'}>
-               {posts.map(post => {
+               {posts?.data?.map(post => {
                    return  <MiniPost
                        key={post.id}
                        postData={{

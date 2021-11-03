@@ -9,7 +9,7 @@ import {getCategories} from "../../services/api/CategoryApi";
 
 
 export default function Home(props) {
-    const [posts, setPosts] = useState<PostData[]>(props.posts);
+    const [posts, setPosts] = useState<PostData[]>(props.posts.data);
     const [isLoading, setIsLoading] = useState(false);
     const mq = useAllMQ()
 

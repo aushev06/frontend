@@ -16,7 +16,7 @@
 
   &_profile {
     width: 670px;
-
+    position: relative;
     @include phone-m {
       width: 100% !important;
     }
@@ -25,11 +25,21 @@
   &_user {
     display: flex;
     margin-top: 40px;
+
+    @include phone-m {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
   &_dropDawn {
     position: relative;
     margin-top: 25px;
+    @include phone-m {
+      position: absolute;
+      right: 0;
+      top: 15px;
+    }
   }
 
   &_dots {
@@ -66,6 +76,17 @@
       border-width: 9px;
       margin-left: 57px;
     }
+    @include phone-m {
+
+      & {
+        left: -120px;
+      }
+
+      &::after {
+        content: unset;
+      }
+    }
+
 
     ul {
       li {

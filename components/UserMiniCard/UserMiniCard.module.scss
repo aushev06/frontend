@@ -3,7 +3,7 @@
 .userCard {
   border-bottom: 1px solid var(--border-color);
   max-width: 1092px;
-
+  cursor: pointer;
   @include phone-m {
     margin: 10px;
   }

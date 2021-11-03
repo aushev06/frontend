@@ -169,10 +169,21 @@
   }
 }
 
+.wrapper {
+  @include phone-m {
+    display: block;
+  }
+}
+
 
 .content {
   @include phone-m {
     padding: 0 !important;
     margin: 10px !important;
   }
+}
+
+.MuiButton-outlined {
+  border-color: #9C9CAA !important;
+  color: #9C9CAA !important;
 }

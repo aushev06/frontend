@@ -10,7 +10,9 @@ interface UserCardProps {
     status: string;
     readyForWork: boolean;
     links: Array<{key: string, value: string}>
-    avatar?: string
+    avatar?: string;
+    id: number;
+    login?: string;
 }
 
 function ActiveSvg(props: { leak: boolean }) {
@@ -35,53 +37,56 @@ const UserMiniCard: React.FC<UserCardProps> = (
         status,
         readyForWork,
         links,
-        avatar
+        avatar,
+        id
     }
 ) => {
 
     return (
-        <div className={styles.userCard}>
-            <div className={styles.userCard_profile}>
-                <div className={styles.userCard_user}>
-                    <div className={styles.userCard_avatar}>
-                        {avatar && <img src={avatar} alt="Users" style={{ borderRadius: '50%' }}/>}
-                        {!avatar && <Avatar  />}
-                    </div>
-                    <div className={styles.userCard_description}>
-                       <div className={styles.userCard_description_header}>
-                           <div className={styles.userCard_nickname}>
-                               <h1>{nickname}</h1>
+       <Link href={`/profile/${id}`}>
+           <div className={styles.userCard}>
+               <div className={styles.userCard_profile}>
+                   <div className={styles.userCard_user}>
+                       <div className={styles.userCard_avatar}>
+                           {avatar && <img src={avatar} alt="Users" style={{ borderRadius: '50%' }}/>}
+                           {!avatar && <Avatar  />}
+                       </div>
+                       <div className={styles.userCard_description}>
+                           <div className={styles.userCard_description_header}>
+                               <div className={styles.userCard_nickname}>
+                                   <h1>{nickname}</h1>
+                               </div>
+
+                               <div className={readyForWork ? styles.userCard_workStatus : styles.userCard_workNotAvailableStatus}>
+                                   <div className={readyForWork ? styles.userCard_sts : styles.userCard_sts_not_available}></div>
+                                   <span>{readyForWork ? 'Доступен для работы' : 'Не доступен для работы'}</span>
+                               </div>
                            </div>
 
-                           <div className={readyForWork ? styles.userCard_workStatus : styles.userCard_workNotAvailableStatus}>
-                               <div className={readyForWork ? styles.userCard_sts : styles.userCard_sts_not_available}></div>
-                               <span>{readyForWork ? 'Доступен для работы' : 'Не доступен для работы'}</span>
+                           <div className={styles.userCard_info}>
+                               <span className={styles.userCard_profession}>{profession}</span>
+                           </div>
+                           <div className={styles.userCard_status}>
+                               <span>{status}</span>
+                           </div>
+                           <div className={styles.userCard_communication}>
+                               <div className={styles.userCard_socNetworks}>
+                                   {links.map((link, key) => {
+                                       return (
+                                           <Link key={'link-' + key} href={link.value}>
+                                               <a>
+                                                   <img src={`/${link.key}.svg`} alt={link.key} />
+                                               </a>
+                                           </Link>
+                                       )
+                                   })}
+                               </div>
                            </div>
                        </div>
-
-                        <div className={styles.userCard_info}>
-                            <span className={styles.userCard_profession}>{profession}</span>
-                        </div>
-                        <div className={styles.userCard_status}>
-                            <span>{status}</span>
-                        </div>
-                        <div className={styles.userCard_communication}>
-                            <div className={styles.userCard_socNetworks}>
-                                {links.map((link, key) => {
-                                    return (
-                                        <Link key={'link-' + key} href={link.value}>
-                                            <a>
-                                                <img src={`/${link.key}.svg`} alt={link.key} />
-                                            </a>
-                                        </Link>
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                   </div>
+               </div>
+           </div>
+       </Link>
     )
 };
 

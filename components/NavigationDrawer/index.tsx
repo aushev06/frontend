@@ -87,6 +87,13 @@ export const NavigationDrawer: React.FC<NavigationProps> = ({ menuOpened, onClos
       </button>
       <nav className={styles.root}>
 
+        <Link href="/specialists">
+          <a className="d-flex mb-3 ml-10">
+            <img className="mr-10" src="/users.svg" alt="Специалисты"/>
+            Специалисты
+          </a>
+        </Link>
+
         <SideBlock name="Категории">
           <MenuList
               items={categories.map(c => ({

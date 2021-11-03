@@ -1,5 +1,5 @@
 import axios from '../../core/axios';
-import {Category, PostData, Theme} from '../../interfaces';
+import {Category, Pagination, PostData, Theme} from '../../interfaces';
 import {getCookie} from './UserApi';
 
 export const saveImage = (image: File) => {
@@ -35,7 +35,7 @@ export const savePost = async (postData: {
     }
 };
 
-export const getPosts = async (params = {}, token?: string): Promise<PostData[]> => {
+export const getPosts = async (params = {}, token?: string): Promise<Pagination<PostData>> => {
     const {data} = await axios.get('/api/posts', {
         params,
         headers: {
@@ -43,7 +43,7 @@ export const getPosts = async (params = {}, token?: string): Promise<PostData[]>
         }
     });
 
-    return data.data;
+    return data;
 };
 
 export const getThemes = async (): Promise<Theme[]> => {

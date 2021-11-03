@@ -94,7 +94,9 @@ export default function Home() {
 
   const runEffect = async () => {
     setIsLoading(true);
-    setPosts(await getPosts({ themes: [...selectedThemes].map(t =>t.name.replace('#', '')).join(',') }))
+    const posts = await getPosts({ themes: [...selectedThemes].map(t =>t.name.replace('#', '')).join(',') });
+
+    setPosts(posts.data)
 
     if (!comments.length) {
       setComments(await CommentApi.get());

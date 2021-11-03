@@ -112,8 +112,8 @@ export const Header = ({ onClickHamburger } : Props) => {
                     <Link href={'/'}>
                         <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
                     </Link>
-                    <img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
-                    <img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+                    {/*<img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>*/}
+                    {/*<img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>*/}
 
                     <div className={'ml-10'}>
                         <Avatar alt={user?.data?.name} src={user?.data?.avatar} onClick={() => setIsMobilePopup(false)} />
@@ -131,7 +131,7 @@ export const Header = ({ onClickHamburger } : Props) => {
 
     if (mq.isXS) {
         return ( <header className={clsx(styles.header, 'd-flex justify-content-between')}>
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center justify-content-between w100">
                 <button type="button" className={styles.menuButton} onClick={onClickHamburger}>
                     <svg viewBox="0 0 26 11" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 1H16.5M1 10H24.5" strokeWidth="2" strokeLinecap="round" />
@@ -141,10 +141,10 @@ export const Header = ({ onClickHamburger } : Props) => {
                 <Link href={'/'}>
                     <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
                 </Link>
-                <img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
-                <img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+                {/*<img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>*/}
+                {/*<img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>*/}
 
-                <div className={'ml-10'}>
+                <div>
                     <ProfilePopup onClick={() => !user?.data?.id ? setIsVisible(true) : setIsMobilePopup(true)} user={user?.data}/>
                 </div>
 
@@ -169,8 +169,8 @@ export const Header = ({ onClickHamburger } : Props) => {
             <div className="d-flex align-items-center">
                 <AvailableForWork checked={checked} onChange={onChangeCheckbox} setChecked={handleChangeCheckbox}
                                   isLoading={isLoading}/>
-                <img className="ml-45 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
-                <img className="ml-35 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+                {/*<img className="ml-45 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>*/}
+                {/*<img className="ml-35 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>*/}
                 <div className="ml-35">
                     {user.data && <ProfilePopup user={user.data}/>}
                 </div>

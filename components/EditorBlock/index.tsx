@@ -37,7 +37,7 @@ export function EditorBlock({ categories, serverSidePost }: Props) {
            });
 
            setPost(response.data);
-           setMessage('Сохранено в черновик...')
+           setMessage(status === 'draft' ? 'Сохранено в черновик...' : 'Опубликовано...')
        } catch (e) {
            setMessage('Произошла ошибка')
        }
