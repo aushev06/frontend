@@ -93,6 +93,10 @@
 
     &_header {
       display: flex;
+
+      @include phone-m {
+        display: block !important;
+      }
     }
   }
 
