@@ -1,7 +1,13 @@
+@import "styles/media";
+
 .comments {
   overflow: hidden;
   border: 1px solid var(--border-color);
   border-top-left-radius: 5px;
+
+  @include phone-m {
+    width: 100% !important;
+  }
 
   h5 {
     margin: 0;
