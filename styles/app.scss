@@ -179,11 +179,14 @@
 .content {
   @include phone-m {
     padding: 0 !important;
-    margin: 0px !important;
+    margin: 10px !important;
   }
 }
 
 .MuiButton-outlined {
   border-color: #9C9CAA !important;
   color: #9C9CAA !important;
+}
+.m-0 {
+  margin: 0px !important;
 }

@@ -19,6 +19,7 @@ import {selectCategoriesState, selectThemesState} from "../redux/directory/direc
 import {useAllMQ} from "../utils/useAllMQ";
 import {Button} from "../components/Button";
 import {InlineMenuMobile} from "../components/InlineMenuMobile";
+import clsx from "clsx";
 
 const miniPostTemplate: MiniPostData = {
     id: 0,
@@ -174,7 +175,7 @@ export default function Home(props) {
                     )}
 
 
-                    <div className="content">
+                    <div className={clsx('content', mq.isXS ? 'm-0' : '')}>
 
 
                         {mq.isXS && <InlineMenuMobile activeMenu={activeMenu} menus={menus} onSelect={onSelectMenu}/>}
