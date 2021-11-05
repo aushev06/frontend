@@ -74,7 +74,7 @@ export const MiniPost: React.FC<MiniPostProps> = ({ postData, onSetLike }) => {
           ))}
         </div>
       </div>
-      <img className={styles.image} src={imageUrl} alt="Здесь должна была быть картинка, но её нет..." />
+      {postData.imageUrl && <img className={styles.image} src={imageUrl} alt="Здесь должна была быть картинка, но её нет..." />}
       <h2 className={styles.title}>
         <Link href={`/post/${slug}`}>{title}</Link>
       </h2>
