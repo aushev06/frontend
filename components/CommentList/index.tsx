@@ -8,17 +8,22 @@ type Props = {
     onSetLike: (commentId: number, like: unknown) => void
 }
 
-export const CommentList = ({comments, onReplyComment, onSetLike }: Props) => {
+export const CommentList = ({comments, onReplyComment, onSetLike}: Props) => {
     return (
-       <div>
-           {comments.map(comment =>  {
-               return (
-                   <div key={comment.id}>
-                       <PostComment onReplyComment={onReplyComment}  comment={comment} onSetLike={onSetLike}/>
-                       {comment.comments.map(childrenComment => <PostComment onSetLike={onSetLike} key={childrenComment.id} isChildren comment={childrenComment} onReplyComment={onReplyComment} />)}
-                   </div>
-               )
-           })}
-       </div>
+        <div>
+            {comments.map(comment => {
+                return (
+                    <div key={comment.id}>
+                        <PostComment onReplyComment={onReplyComment} comment={comment} onSetLike={onSetLike}/>
+                        {comment.comments.map(childrenComment => <PostComment
+                            onSetLike={onSetLike}
+                            key={childrenComment.id} isChildren
+                            comment={childrenComment}
+                            onReplyComment={onReplyComment}
+                        />)}
+                    </div>
+                )
+            })}
+        </div>
     )
 }

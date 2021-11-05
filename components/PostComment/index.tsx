@@ -9,12 +9,13 @@ import MuiMenuItem from '@material-ui/core/MenuItem';
 
 type Props = {
     comment: Comment;
-    onReplyComment: (text: string, userId: number, parentId: number) => void;
+    onReplyComment: (text: string, userId: number, parentId: number, commentId?: number) => void;
     isChildren?: boolean;
     userCanChangeComment?: boolean;
     onSetLike: (postId: number, like: unknown) => void
 }
-export function PostComment({ comment, onReplyComment, isChildren, onSetLike }: Props) {
+
+export function PostComment({comment, onReplyComment, isChildren, onSetLike}: Props) {
     const [showReply, setShowReply] = useState(false);
     const [showChange, setShowChange] = useState(false);
     const [likesAndDislikes, setLikesAndDislikes] = React.useState<LikeBlockResult>({
@@ -27,6 +28,15 @@ export function PostComment({ comment, onReplyComment, isChildren, onSetLike }: 
     const handleCommentSetLike = (like: LikeBlockResult) => {
         setLikesAndDislikes(like);
         onSetLike(comment.id, like.vote)
+    }
+
+    const onCloseInput = () => {
+        setShowChange(false);
+    }
+
+    const onSaveComment = async (text: string, userId: number, parentId?: number, commentId?: number) => {
+        await onReplyComment(text, userId, parentId, commentId)
+        onCloseInput()
     }
 
     return <div className={styles.comment} style={{marginLeft: isChildren ? 10 : 0}}>
@@ -55,7 +65,8 @@ export function PostComment({ comment, onReplyComment, isChildren, onSetLike }: 
                             Изменить
                         </MuiMenuItem>
 
-                        <MuiMenuItem disabled={false} onClick={() => {}}>
+                        <MuiMenuItem disabled={false} onClick={() => {
+                        }}>
                             Удалить
                         </MuiMenuItem>
 
@@ -67,7 +78,13 @@ export function PostComment({ comment, onReplyComment, isChildren, onSetLike }: 
         </div>
 
         <div className={styles.text}>
-            {!showChange ? comment.text : <AddCommentBlock onAddComment={onReplyComment} toUser={comment.user} parentComment={comment} />}
+            {!showChange ? comment.text : <AddCommentBlock
+                comment={comment}
+                onAddComment={onSaveComment}
+                toUser={comment.user}
+                parentComment={comment}
+
+            />}
         </div>
 
 
@@ -86,7 +103,7 @@ export function PostComment({ comment, onReplyComment, isChildren, onSetLike }: 
 
         </div>
 
-        {showReply && <AddCommentBlock onAddComment={onReplyComment} toUser={comment.user} parentComment={comment} />}
+        {showReply && <AddCommentBlock onAddComment={onSaveComment} toUser={comment.user} parentComment={comment}/>}
 
     </div>;
 }

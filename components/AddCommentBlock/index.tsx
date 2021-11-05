@@ -5,16 +5,19 @@ import Button from "@mui/material/Button";
 import {Comment, User} from "../../interfaces";
 
 type Props = {
-    onAddComment: (data: string, userId?: number, parentCommentId?: number) => void;
+    onAddComment: (data: string, userId?: number, parentCommentId?: number, commentId?: number) => void;
     toUser?: User;
     parentComment?: Comment;
+    comment?: Comment;
+    onCloseInput?: () => void
 }
-export const AddCommentBlock: React.FC<Props> = ({ onAddComment, toUser, parentComment }) => {
+export const AddCommentBlock: React.FC<Props> = ({ onAddComment, toUser, parentComment, comment, onCloseInput }) => {
     const [isClicked, setIsClicked] = useState(false)
-    const [text, setText] = useState(toUser ? `@${toUser.name},` : '');
+    const [text, setText] = useState(comment?.id ? comment.text : toUser ? `@${toUser.name},` : '');
 
     const handleAddComment = () => {
-        onAddComment(text, toUser?.id, parentComment?.parent_id || parentComment?.id)
+        onAddComment(text, toUser?.id, parentComment?.parent_id || parentComment?.id, comment?.id)
+        onCloseInput && onCloseInput()
         setText('')
     }
 

@@ -18,17 +18,20 @@ import {useAllMQ} from "../../utils/useAllMQ";
 
 export const PostContext = React.createContext({});
 
-export default function Post({post, comments}) {
+export default function Post({post, serverSideComments}) {
     const mq = useAllMQ();
     const [selectedThemes, setSelectedThemes] = useState<Theme[]>([]);
+    const [comments, setComments] = useState(serverSideComments)
     const themes = useSelector(selectThemesState);
     const categories = useSelector(selectCategoriesState);
     const handleSelectTheme = async (t: Theme) => {
         setSelectedThemes(() => [...selectedThemes, t]);
     }
 
-    const onAddComment = async (text: string, toUserId?: number, parentId?: number) => {
-        await CommentApi.create(post.id, text, toUserId, parentId);
+    const onAddComment = async (text: string, toUserId?: number, parentId?: number, commentId?: number) => {
+        await CommentApi.save(post.id, text, toUserId, parentId, commentId);
+
+        setComments(await getPostComments(post.id));
     }
 
     const handleCommentSetLike = async (id: number, like?: 'like' | 'dislike') => {
@@ -89,7 +92,8 @@ export default function Post({post, comments}) {
                                 <div style={{marginTop: 15}}>
                                     <CommentList
                                         onSetLike={handleCommentSetLike}
-                                        comments={comments} onReplyComment={onAddComment}/>
+                                        comments={comments} onReplyComment={onAddComment}
+                                    />
                                 </div>
 
                             </div>
@@ -108,7 +112,7 @@ export async function getServerSideProps(ctx) {
     return {
         props: {
             post: response.data,
-            comments: responseComments
+            serverSideComments: responseComments
         },
     }
 }

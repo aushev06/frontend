@@ -14,7 +14,7 @@ export function EditorJsWrapper({config = {}, blocks, ...restProps}: EditorJsWra
         if (!elmtRef.current) {
             return;
         }
-
+        elmtRef.current.focus()
         // @ts-ignore
         let editorJs;
 
@@ -36,6 +36,7 @@ export function EditorJsWrapper({config = {}, blocks, ...restProps}: EditorJsWra
 
             editorJs = new EditorJS({
                 ...config,
+
                 holder: elmtRef.current,
                 tools: {
                     header: {
@@ -43,7 +44,7 @@ export function EditorJsWrapper({config = {}, blocks, ...restProps}: EditorJsWra
                         inlineToolbar: true,
                         config: {
                             placeholder: 'Введите заголовок'
-                        }
+                        },
                     },
                     Code,
                     Quote,
