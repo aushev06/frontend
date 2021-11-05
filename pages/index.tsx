@@ -88,6 +88,7 @@ const arrRecommendations: Array<RecommendationItemData> = [
 ];
 
 export default function Home(props) {
+    const [skipUseEffect, setSkipUseEffect] = React.useState(true);
     const [posts, setPosts] = useState<Pagination<PostData>>(props.posts);
     const [page, setPage] = useState(props.posts.meta.current_page)
     const [maxPage, setMaxPage] = useState(props.posts.meta.last_page)
@@ -119,7 +120,10 @@ export default function Home(props) {
     };
 
     useEffect(() => {
-        runEffect(activeMenu);
+        setSkipUseEffect(false)
+        if (!skipUseEffect) {
+            runEffect(activeMenu);
+        }
 
     }, [selectedThemes, activeMenu, page]);
 
