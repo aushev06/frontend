@@ -36,11 +36,17 @@ export const savePost = async (postData: {
 };
 
 export const getPosts = async (params = {}, token?: string): Promise<Pagination<PostData>> => {
+    let headers = {};
+
+    if (token) {
+        headers = {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
     const {data} = await axios.get('/api/posts', {
         params,
-        headers: {
-            Authorization: token ? `Bearer ${token}` : ''
-        }
+        headers
     });
 
     return data;
