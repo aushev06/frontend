@@ -3,11 +3,9 @@ import {Comment} from '../../interfaces';
 
 
 export const CommentApi = {
-    get: async (token?: string): Promise<Comment[]> => {
+    get: async (params = {}): Promise<Comment[]> => {
         const {data} = await axios.get('/api/comments', {
-            headers: {
-                Authorization: token ? `Bearer ${token}` : null
-            }
+          params
         });
 
         return data;

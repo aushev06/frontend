@@ -8,7 +8,7 @@ import {MenuList} from '../components/MenuList';
 import {RecommendationsContainer, RecommendationItem, RecommendationItemData} from '../components/Recommendations';
 import {getCookie, UserApi} from '../services/api/UserApi';
 import {getPostComments, getPosts, getThemes, showPost} from '../services/api/PostApi';
-import {PostData, Comment, Theme} from '../interfaces';
+import {PostData, Comment, Theme, Pagination} from '../interfaces';
 import {CommentApi} from '../services/api/CommentApi';
 import {useDispatch, useSelector} from "react-redux";
 import {setUser} from "../redux/user/slice";
@@ -20,6 +20,7 @@ import {useAllMQ} from "../utils/useAllMQ";
 import {Button} from "../components/Button";
 import {InlineMenuMobile} from "../components/InlineMenuMobile";
 import clsx from "clsx";
+import {LoadMore} from "../components/LoadMore";
 
 const miniPostTemplate: MiniPostData = {
     id: 0,
@@ -87,7 +88,9 @@ const arrRecommendations: Array<RecommendationItemData> = [
 ];
 
 export default function Home(props) {
-    const [posts, setPosts] = useState<PostData[]>(props.posts);
+    const [posts, setPosts] = useState<Pagination<PostData>>(props.posts);
+    const [page, setPage] = useState(props.posts.meta.current_page)
+    const [maxPage, setMaxPage] = useState(props.posts.meta.last_page)
     const [comments, setComments] = useState<Comment[]>(props.comments);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedThemes, setSelectedThemes] = useState<Theme[]>([]);
@@ -102,10 +105,11 @@ export default function Home(props) {
         setIsLoading(true);
         const posts = await getPosts({
             themes: [...selectedThemes].map(t => t.name.replace('#', '')).join(','),
-            popular: menu === 'Популярное' ? true : undefined
+            popular: menu === 'Популярное' ? true : undefined,
+            page
         });
 
-        setPosts(posts.data)
+        setPosts(posts)
 
         if (!comments.length) {
             setComments(await CommentApi.get());
@@ -115,11 +119,12 @@ export default function Home(props) {
     };
 
     useEffect(() => {
-        // runEffect();
+        runEffect(activeMenu);
 
-    }, [selectedThemes, activeMenu]);
+    }, [selectedThemes, activeMenu, page]);
 
     const handleSelectTheme = async (t: Theme) => {
+        setPage(1)
         setSelectedThemes(() => [...selectedThemes, t]);
     }
 
@@ -148,10 +153,18 @@ export default function Home(props) {
                                             name: 'Популярное',
                                             url: '/popular',
                                             icon: '/fire.svg',
-                                            isActive: true,
-                                            hasMore: true
+                                            isActive: activeMenu === 'Популярное',
+                                            hasMore: activeMenu === 'Популярное' && isLoading,
+                                            onClick: () => setActiveMenu('Популярное'),
                                         },
-                                        {name: 'Новое', url: '/new', icon: '/news.svg'},
+                                        {
+                                            name: 'Новое',
+                                            url: '/new',
+                                            icon: '/news.svg',
+                                            isActive: activeMenu === 'Новое',
+                                            hasMore: activeMenu === 'Новое' && isLoading,
+                                            onClick: () => setActiveMenu('Новое'),
+                                        },
                                     ]}
                                 />
                             </SideBlock>
@@ -180,7 +193,7 @@ export default function Home(props) {
 
                         {mq.isXS && <InlineMenuMobile activeMenu={activeMenu} menus={menus} onSelect={onSelectMenu}/>}
 
-                        {!isLoading && showPosts && posts.map((post, key) => {
+                        {!isLoading && showPosts && posts?.data.map((post, key) => {
                             return <MiniPost
                                 key={post.id}
                                 postData={{
@@ -223,6 +236,10 @@ export default function Home(props) {
                         {isLoading && 'Загрука...'}
 
 
+                        {!isLoading && showPosts && page !== maxPage && (
+                            <LoadMore onClick={() => setPage(page + 1)}/>
+                        )}
+
                     </div>
                     {!mq.isXS && (
                         <div className="right-side">
@@ -249,10 +266,10 @@ export default function Home(props) {
 
 export async function getServerSideProps(ctx) {
     const response = await getPosts({popular: true}, ctx.req.cookies?.auth_token);
-    const responseComments = await CommentApi.get(ctx.req.cookies?.auth_token);
+    const responseComments = await CommentApi.get();
     return {
         props: {
-            posts: response.data,
+            posts: response,
             comments: responseComments
         },
     }

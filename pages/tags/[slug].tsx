@@ -1,21 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAllMQ} from "../../utils/useAllMQ";
 import {setLike} from "../../services/api/LikeApi";
 import {MainLayout} from "../../layouts/MainLayout";
 import {MiniPost} from "../../components/MiniPost";
-import {PostData} from "../../interfaces";
+import {Pagination, PostData} from "../../interfaces";
 import {getPosts, showPost} from "../../services/api/PostApi";
 import {getCategories} from "../../services/api/CategoryApi";
+import {LoadMore} from "../../components/LoadMore";
 
 
 export default function Home(props) {
-    const [posts, setPosts] = useState<PostData[]>(props.posts.data);
     const [isLoading, setIsLoading] = useState(false);
     const mq = useAllMQ()
 
     const handleSetLike = async (postId: number, like?: 'like' | 'dislike') => {
         await setLike(postId, 'post', like)
     }
+
+
+    const [posts, setPosts] = useState<Pagination<PostData>>(props.posts);
+    const [page, setPage] = useState(props.posts.meta.current_page)
+    const [maxPage, setMaxPage] = useState(props.posts.meta.last_page)
+
+
+    React.useEffect(() => {
+        const runEffect = async () => {
+            setPosts(await getPosts({page}))
+        }
+
+        runEffect();
+
+    }, [page])
 
     return (
         <main>
@@ -33,7 +48,7 @@ export default function Home(props) {
 
                         {isLoading && 'Загрука...'}
 
-                        {!isLoading && posts.map((post, key) => {
+                        {!isLoading && posts?.data.map((post, key) => {
                             return <MiniPost
                                 key={post.id}
                                 postData={{
@@ -59,6 +74,10 @@ export default function Home(props) {
                             />;
                         })}
 
+                        {!isLoading && page !== maxPage && (
+                            <LoadMore onClick={() => setPage(page + 1)}/>
+                        )}
+
                     </div>
                     {!mq.isXS && (
                         <div className="right-side">
@@ -72,7 +91,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(ctx) {
-    const posts =  await getPosts({categories: ctx.query?.slug}, ctx.req.cookies?.auth_token);
+    const posts = await getPosts({categories: ctx.query?.slug}, ctx.req.cookies?.auth_token);
 
     return {
         props: {
