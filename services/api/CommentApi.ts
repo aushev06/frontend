@@ -6,7 +6,7 @@ export const CommentApi = {
     get: async (token?: string): Promise<Comment[]> => {
         const {data} = await axios.get('/api/comments', {
             headers: {
-                Authorization: token ? `Bearer ${token}` : undefined
+                Authorization: token ? `Bearer ${token}` : null
             }
         });
 
