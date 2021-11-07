@@ -94,7 +94,7 @@ export const Header = ({ onClickHamburger } : Props) => {
                     <img onClick={onCloseSearch} className="ml-auto cursor-pointer" src="/close.svg" alt="Закрыть"/>
                 </div>
                 <Backdrop classes={{root: styles.backdrop}} open={isSearch}>
-                    <SearchPopup isSearch={isSearch} searchInput={searchInput}/>
+                    <SearchPopup handleClick={onCloseSearch} isSearch={isSearch} searchInput={searchInput}/>
                 </Backdrop>
             </header>
         );
@@ -169,8 +169,8 @@ export const Header = ({ onClickHamburger } : Props) => {
             <div className="d-flex align-items-center">
                 <AvailableForWork checked={checked} onChange={onChangeCheckbox} setChecked={handleChangeCheckbox}
                                   isLoading={isLoading}/>
-                {/*<img className="ml-45 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>*/}
-                {/*<img className="ml-35 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>*/}
+                <img className="ml-45 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
+                <img className="ml-35 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
                 <div className="ml-35">
                     {user.data && <ProfilePopup user={user.data}/>}
                 </div>

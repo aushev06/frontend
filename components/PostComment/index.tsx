@@ -12,10 +12,11 @@ type Props = {
     onReplyComment: (text: string, userId: number, parentId: number, commentId?: number) => void;
     isChildren?: boolean;
     userCanChangeComment?: boolean;
-    onSetLike: (postId: number, like: unknown) => void
+    onSetLike: (postId: number, like: unknown) => void;
+    isMyComment: boolean;
 }
 
-export function PostComment({comment, onReplyComment, isChildren, onSetLike}: Props) {
+export function PostComment({comment, onReplyComment, isChildren, onSetLike, isMyComment}: Props) {
     const [showReply, setShowReply] = useState(false);
     const [showChange, setShowChange] = useState(false);
     const [likesAndDislikes, setLikesAndDislikes] = React.useState<LikeBlockResult>({
@@ -52,7 +53,7 @@ export function PostComment({comment, onReplyComment, isChildren, onSetLike}: Pr
                     }}/>
             </div>
 
-            <div className={styles.actions}>
+            {isMyComment && ( <div className={styles.actions}>
 
 
                 <div className="ml-10">
@@ -73,7 +74,7 @@ export function PostComment({comment, onReplyComment, isChildren, onSetLike}: Pr
                     </Dropdown>
                 </div>
 
-            </div>
+            </div>)}
 
         </div>
 
