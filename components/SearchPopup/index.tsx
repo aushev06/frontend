@@ -23,17 +23,19 @@ const SearchPopup: React.FC<SearchPopupProps> = ({isSearch, searchInput, handleC
     const themes = useSelector(selectThemesState).filter(theme => theme.name.includes(searchInput));
 
     React.useEffect(() => {
-        getSpecialists({name: searchInput}).then(users => {
-            setAuthors(users.data)
-        })
+        if (searchInput.length) {
+            getSpecialists({name: searchInput}).then(users => {
+                setAuthors(users.data)
+            })
 
-        CommentApi.get({text: searchInput}).then(response => {
-            setComments(response);
-        });
+            CommentApi.get({text: searchInput}).then(response => {
+                setComments(response);
+            });
 
-        getPosts({title: searchInput}).then(response => {
-            setPosts(response.data);
-        })
+            getPosts({title: searchInput}).then(response => {
+                setPosts(response.data);
+            })
+        }
 
 
     }, [searchInput])
@@ -57,7 +59,7 @@ const SearchPopup: React.FC<SearchPopupProps> = ({isSearch, searchInput, handleC
                       onClose={handleClick}
                 />
                 <Item title="Тэги" data={
-                    themes.map(theme => ({
+                    !searchInput.length ? [] : themes.map(theme => ({
                         id: theme.id,
                         name: theme.name,
                         link: '/themes'

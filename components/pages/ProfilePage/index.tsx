@@ -218,6 +218,7 @@ export const ProfilePageComponent = () => {
                                 label="Ваша профессия"
                                 onChange={onChange}
                                 value={value}
+                                className={styles.ul}
                             >
                                 {POSITIONS.map((position, key) => {
                                     return (

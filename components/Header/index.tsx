@@ -16,6 +16,7 @@ import {AuthDialog} from "../AuthDialog";
 import {useAllMQ} from "../../utils/useAllMQ";
 import MobileProfilePopup from "../MobileProfilePopup";
 import Avatar from "@material-ui/core/Avatar";
+import {NotificationDropdown} from "../NotificationDropdown";
 
 type Props = {
     onClickHamburger: () => void
@@ -48,6 +49,7 @@ export const Header = ({ onClickHamburger } : Props) => {
     };
 
     const onCloseSearch = () => {
+        setSearchInput('');
         setIsSearch(false);
     };
 
@@ -112,7 +114,7 @@ export const Header = ({ onClickHamburger } : Props) => {
                     <Link href={'/'}>
                         <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
                     </Link>
-                    {/*<img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>*/}
+                    <img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
                     {/*<img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>*/}
 
                     <div className={'ml-10'}>
@@ -141,9 +143,8 @@ export const Header = ({ onClickHamburger } : Props) => {
                 <Link href={'/'}>
                     <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
                 </Link>
-                {/*<img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>*/}
-                {/*<img className="ml-10 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>*/}
-
+                <img className="ml-10 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
+                    <NotificationDropdown />
                 <div>
                     <ProfilePopup onClick={() => !user?.data?.id ? setIsVisible(true) : setIsMobilePopup(true)} user={user?.data}/>
                 </div>
@@ -170,7 +171,7 @@ export const Header = ({ onClickHamburger } : Props) => {
                 <AvailableForWork checked={checked} onChange={onChangeCheckbox} setChecked={handleChangeCheckbox}
                                   isLoading={isLoading}/>
                 <img className="ml-45 cursor-pointer" src="/search.svg" alt="Поиск" onClick={onOpenSearch}/>
-                <img className="ml-35 cursor-pointer" src="/notifications.svg" alt="Уведомления"/>
+                <NotificationDropdown />
                 <div className="ml-35">
                     {user.data && <ProfilePopup user={user.data}/>}
                 </div>

@@ -24,6 +24,15 @@ export const UserApi = {
     return data;
   },
 
+  getNotifications: async (token?: string) => {
+    const { data } = await axios.get('/api/user/notifications', {
+      headers: {
+        Authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+    return data;
+  },
+
   show: async (id: number) => {
     const { data } = await axios.get('/api/users/' + id);
     return data;

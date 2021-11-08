@@ -150,3 +150,9 @@
   }
 
 }
+
+.ul {
+  &:focus {
+    background: #000 !important;
+  }
+}

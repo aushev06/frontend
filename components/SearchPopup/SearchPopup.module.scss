@@ -1,9 +1,16 @@
+@import "styles/media";
+
 .container {
   position: absolute;
   background-color: var(--grey-light-color);
   top: 0px;
   margin: 0 auto;
   min-width: 700px;
+
+  @include phone-m {
+    width: 100% !important;
+    min-width: unset;
+  }
 }
 
 .body {

@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../theme';
 import '../styles/app.scss';
 import {wrapper} from "../redux/store";
-import {setUser, userSlice} from "../redux/user/slice";
+import {setNotifications, setUser, userSlice} from "../redux/user/slice";
 import {useDispatch, useSelector} from "react-redux";
 import {selectUserState} from "../redux/user/user.selector";
 import {getCookie, UserApi} from "../services/api/UserApi";
@@ -100,6 +100,7 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(store => async ({Component, c
        try {
            const user = await UserApi.getMe(token);
            store.dispatch(setUser(user));
+           store.dispatch(setNotifications(await UserApi.getNotifications(token)));
        } catch (e) {
            console.log(e);
        }

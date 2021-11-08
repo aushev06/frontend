@@ -13,6 +13,13 @@ export interface User {
     links: string[];
 }
 
+
+export interface Notification {
+    id: string;
+    type: string;
+    data: unknown
+}
+
 export interface PostData {
     id: number;
     title: string;
