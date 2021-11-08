@@ -73,7 +73,7 @@ export const NotificationDropdown: React.FC = (): React.ReactElement => {
                                         <li key={notification.id} className={'newItem'}>
                                             <div className={styles.listContent}>
                                                 <h4>test</h4>
-                                                <p>{notification.data.text}</p>
+                                                <p></p>
                                                 <span>test</span>
                                             </div>
                                         </li>
