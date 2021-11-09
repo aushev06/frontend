@@ -1,4 +1,4 @@
-import {Category, Comment, Notification, PostData, Theme, User} from "../interfaces";
+import {Category, Comment, Likeable, Notification, PostData, Theme, User} from "../interfaces";
 
 export enum LoadingState {
     LOADING = 'LOADING',
@@ -10,7 +10,7 @@ export enum LoadingState {
 
 export interface UserState {
     data: User | null;
-    notifications: Notification<Comment | User | PostData>[]
+    notifications: Notification<Comment | User | PostData | Likeable>[]
     status: LoadingState;
     authErrorMessage?: string;
 }
