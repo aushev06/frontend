@@ -14,11 +14,21 @@ export interface User {
 }
 
 
-export interface Notification {
+export interface Notification<T> {
     id: string;
     type: string;
-    data: unknown
+    data: T
 }
+
+export interface Likeable {
+    id: number;
+    likeable_type: string;
+    type: 'like' | 'dislike';
+    user: User;
+    post: PostData;
+    comment: Comment;
+}
+
 
 export interface PostData {
     id: number;

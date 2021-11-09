@@ -1,4 +1,4 @@
-import {Badge, IconButton, List, Popover, Typography} from '@material-ui/core';
+import {Avatar, Badge, IconButton, List, Popover, Typography} from '@material-ui/core';
 import format from 'date-fns/format';
 import React from 'react';
 
@@ -6,6 +6,7 @@ import styles from './NotificationDropdown.module.scss';
 import {Notification, User} from "../../interfaces";
 import {useSelector} from "react-redux";
 import {selectUserNotifications} from "../../redux/user/user.selector";
+import Item from "./item";
 
 export const NotificationDropdown: React.FC = (): React.ReactElement => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -70,12 +71,8 @@ export const NotificationDropdown: React.FC = (): React.ReactElement => {
                             {notifications.length ? (
                                 notifications.map((notification) => {
                                     return (
-                                        <li key={notification.id} className={'newItem'}>
-                                            <div className={styles.listContent}>
-                                                <h4>test</h4>
-                                                <p></p>
-                                                <span>test</span>
-                                            </div>
+                                        <li key={notification.id}>
+                                           <Item item={notification} />
                                         </li>
                                     );
                                 })
