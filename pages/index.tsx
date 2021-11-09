@@ -191,11 +191,10 @@ export default function Home(props) {
                         </div>
                     )}
 
+                    {mq.isXS && <InlineMenuMobile activeMenu={activeMenu} menus={menus} onSelect={onSelectMenu}/>}
 
                     <div className={clsx('content', mq.isXS ? 'm-0' : '')}>
 
-
-                        {mq.isXS && <InlineMenuMobile activeMenu={activeMenu} menus={menus} onSelect={onSelectMenu}/>}
 
                         {!isLoading && showPosts && posts?.data.map((post, key) => {
                             return <MiniPost

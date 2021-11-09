@@ -29,7 +29,7 @@
 }
 
 @mixin phone-m {
-  @media (max-width: 576px) {
+  @media (max-width: 599px) {
     @content;
   }
 }
