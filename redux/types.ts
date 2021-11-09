@@ -10,7 +10,7 @@ export enum LoadingState {
 
 export interface UserState {
     data: User | null;
-    notifications: Notification<Comment | User | PostData | Likeable>[]
+    notifications: Notification<Comment | PostData | Likeable>[]
     status: LoadingState;
     authErrorMessage?: string;
 }
