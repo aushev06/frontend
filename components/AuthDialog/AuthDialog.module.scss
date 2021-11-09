@@ -1,4 +1,4 @@
-@import "styles/media";
+@import 'styles/media';
 
 .modal {
   background-color: #282832 !important;
@@ -16,7 +16,7 @@
     position: relative;
     border: 1px solid #474758 !important;
     margin-bottom: 5px;
-    color: #D0D0DD !important;
+    color: #d0d0dd !important;
     font-size: 14px;
     text-transform: unset !important;
 
@@ -30,16 +30,28 @@
 
 .title {
   font-size: 24px !important;
-  color: #D0D0DD !important;
+  color: #d0d0dd !important;
   font-weight: bold !important;
 }
 
 .subTitle {
-  color: #D0D0DD !important;
+  color: #d0d0dd !important;
   margin: 18px !important;
   text-align: center !important;
 }
 
+.text {
+  color: #d0d0dd !important;
+}
+
+.link {
+  color: #04c800 !important;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
 
 @include phone-m {
   .fullWidth {
