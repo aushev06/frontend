@@ -1,3 +1,5 @@
+@import "styles/media";
+
 @mixin animatedLink {
   cursor: pointer;
   &:hover {
@@ -23,16 +25,21 @@
 
 .post {
   width: 100%;
-  max-width: 950px;
+  max-width: 650px;
   //max-height: 600px;
   background-color: var(--primary-color);
   border-radius: 6px;
   padding: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   &:last-child {
     margin-bottom: 10px;
   }
+  @include phone-m {
+    padding: 15px;
+    border-radius: 0;
+  }
 }
+
 
 .info {
   display: flex;

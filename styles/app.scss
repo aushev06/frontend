@@ -7,7 +7,7 @@
 
 .comments {
   width: 100%;
-  max-width: 950px;
+  max-width: 650px;
   height: 100%;
   padding: 30px;
   margin-bottom: 56px;
@@ -187,14 +187,22 @@
   border-color: #9C9CAA !important;
   color: #9C9CAA !important;
 }
+.MuiButton-root{
+  min-width:0!important;
+}
 .m-0 {
   margin: 0px !important;
 }
 
-ul {
-  list-style: none !important;
-}
-
-[aria-labelledby="demo-simple-select-standard-label"] {
-  background-color: #282832 !important;
+.left-side{
+  .MuiButton-startIcon {
+    margin-left: 0!important;
+  }
+  .MuiButtonBase-root{
+    padding-left: 0!important;
+    &.MuiButton-contained{
+      padding-left: 10px!important;
+      margin-left: -10px;
+    }
+  }
 }
