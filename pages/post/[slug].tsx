@@ -15,6 +15,8 @@ import {Theme} from "../../interfaces";
 import {useSelector} from "react-redux";
 import {selectCategoriesState, selectThemesState} from "../../redux/directory/directory.selector";
 import {useAllMQ} from "../../utils/useAllMQ";
+import {echo} from "../../utils/echo";
+import {useAlert} from "../../hooks/useAlert";
 
 export const PostContext = React.createContext({});
 
@@ -24,14 +26,14 @@ export default function Post({post, serverSideComments}) {
     const [comments, setComments] = useState(serverSideComments)
     const themes = useSelector(selectThemesState);
     const categories = useSelector(selectCategoriesState);
+    const {openAlert} = useAlert();
+
     const handleSelectTheme = async (t: Theme) => {
         setSelectedThemes(() => [...selectedThemes, t]);
     }
 
     const onAddComment = async (text: string, toUserId?: number, parentId?: number, commentId?: number) => {
         await CommentApi.save(post.id, text, toUserId, parentId, commentId);
-
-        setComments(await getPostComments(post.id));
     }
 
     const handleCommentSetLike = async (id: number, like?: 'like' | 'dislike') => {
@@ -41,6 +43,39 @@ export default function Post({post, serverSideComments}) {
     const handleSetLike = async (postId: number, like?: 'like' | 'dislike') => {
         await setLike(postId, 'post', like)
     }
+
+    React.useEffect(() => {
+        if (typeof window !== "undefined") {
+            echo().channel('laravel_database_comments_' + post?.id).listen('.new-comment', data => {
+                openAlert('Появился новый комментарий!')
+                setComments(!data.comment.parent_id ? [data.comment, ...comments] : comments.map(comment => {
+                    if (data.comment.parent_id === comment.id) {
+                        return {
+                            ...comment,
+                            comments: [...comment.comments, data.comment]
+                        }
+                    }
+
+                    return comment;
+
+                }))
+            })
+            echo().channel('laravel_database_comments_' + post?.id).listen('.updated-comment', data => {
+                openAlert(`Пользователь ${data.comment.user.name} изменил свой комментарий!`)
+                setComments(comments.map(comment => {
+                    if (comment.id == data.comment.id) {
+                        return data.comment
+                    }
+
+                    return comment;
+                }))
+            })
+        }
+
+        return () => {
+            echo().leave('laravel_database_comments_' + post?.id)
+        }
+    })
 
     return (
         <main>

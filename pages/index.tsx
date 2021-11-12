@@ -21,6 +21,7 @@ import {Button} from "../components/Button";
 import {InlineMenuMobile} from "../components/InlineMenuMobile";
 import clsx from "clsx";
 import {LoadMore} from "../components/LoadMore";
+import {echo} from "../utils/echo";
 
 const miniPostTemplate: MiniPostData = {
     id: 0,
@@ -120,11 +121,17 @@ export default function Home(props) {
     };
 
     useEffect(() => {
+        echo().channel('laravel_database_comments-list').listen('.get', data => {
+            setComments([data.comment, ...comments])
+        })
+
         setSkipUseEffect(false)
         if (!skipUseEffect) {
             runEffect(activeMenu);
         }
-
+        return () => {
+            echo().leave('laravel_database_comments-list')
+        }
     }, [selectedThemes, activeMenu, page]);
 
     const handleSelectTheme = async (t: Theme) => {

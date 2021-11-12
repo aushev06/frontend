@@ -77,8 +77,6 @@ export const getPostComments = async (id: number, apiToken?: string) => {
             Authorization: apiToken ? `Bearer ${apiToken}` : ''
         }
     })
-    console.log(apiToken)
-
     return data;
 }
 
