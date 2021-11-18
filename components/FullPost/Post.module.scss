@@ -1,6 +1,10 @@
+.postWrapper{
+max-width: 710px;
+}
+
 .post {
   width: 100%;
-  max-width: 950px;
+  max-width: 970px;
   padding: 30px;
   margin-bottom: 56px;
   background-color: var(--primary-color);
@@ -12,7 +16,8 @@
     margin-top: 18px;
   }
   &Header {
-    margin: 0;
+    margin: 0 30px 0 0;
+    max-width: 710px;
     margin-bottom: 25px;
     font-size: 42px;
     line-height: 44px;
@@ -106,20 +111,20 @@
     }
   }
 }
-
 .header {
   padding: 1em 0;
   margin: 0;
   margin-bottom: -0.9em;
   line-height: 1.5em;
   outline: none;
+  font-size: 36px;
 }
 
 .paragraph {
   line-height: 1.6em;
   outline: none;
   padding: 0.4em 0;
-  font-size: 16px;
+  font-size: 20px;
   font-family: var(--font--family--serif) !important;
 }
 

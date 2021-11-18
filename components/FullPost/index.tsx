@@ -104,9 +104,11 @@ export const FullPost: React.FC<{post: PostData, onSetLike: (postId: number, lik
             </div>
         )}
       </div>
-      {postData.body.map((block: Block, idx) => (<div key={'block-' + idx}>
-        {getBlockHTML(block)}
+        <div className={styles.postWrapper}>
+            {postData.body.map((block: Block, idx) => (<div key={'block-' + idx}>
+            {getBlockHTML(block)}
       </div>))}
+        </div>
       <div className={styles.postFooter}>
         <div className={styles.postFooterIcons}>
           <FacebookIcon className={styles.postFooterIcon} hoverClassName={styles.postFooterIconHover} />

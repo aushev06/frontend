@@ -4,10 +4,10 @@
     text-decoration: underline;
   }
 }
-
 .user {
   display: flex;
   align-items: center;
+  max-width: 710px;
   &_avatar {
     width: 22px;
     height: 22px;

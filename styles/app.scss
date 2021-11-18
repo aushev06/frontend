@@ -162,6 +162,7 @@
 
 
 .wrapper-center {
+  margin: 30px 30px 0;
   @include phone-m {
     display: block;
     padding: 0 !important;
@@ -194,7 +195,7 @@
   margin: 0px !important;
 }
 
-.left-side{
+.left-side, .left-side-no-margin{
   .MuiButton-startIcon {
     margin-left: 0!important;
   }
