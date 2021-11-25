@@ -8,7 +8,7 @@ COPY . .
 
 RUN yarn
 
-#RUN yarn build
+RUN yarn build
 
 EXPOSE 80
 
