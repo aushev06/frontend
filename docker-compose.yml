@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  ingternet-nginx:
+    build: ./docker/nginx
+    container_name: ingternet-nginx
+    image: ingternet-nginx:${TAG:-latest}
+    ports:
+      - "80:80"
+    links:
+      - ingternet-frontend
+
+  ingternet-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ingternet-frontend
+    image: ingternet-frontend:${TAG:-latest}
+    ports:
+      - "7777:7777"
+
+  ingternet-dozzle:
+    container_name: ingternet-dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "7891:8081"

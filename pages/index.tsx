@@ -121,7 +121,7 @@ export default function Home(props) {
     };
 
     useEffect(() => {
-        echo().channel('laravel_database_comments-list').listen('.get', data => {
+        echo().channel('ingternet-comments-list').listen('.get', data => {
             setComments([data.comment, ...comments])
         })
 
@@ -130,7 +130,7 @@ export default function Home(props) {
             runEffect(activeMenu);
         }
         return () => {
-            echo().leave('laravel_database_comments-list')
+            echo().leave('ingternet-comments-list')
         }
     }, [selectedThemes, activeMenu, page]);
 

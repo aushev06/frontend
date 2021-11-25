@@ -5,11 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
+    "start": "next start -p 7777",
     "static-generate": "next export -o _static"
-  },
-  "engines": {
-    "node": "14.17.5"
   },
   "dependencies": {
     "@editorjs/code": "^2.7.0",

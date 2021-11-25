@@ -24,6 +24,22 @@ const AddCommentItem = ({notification}: { notification: Notification<Comment> })
     )
 }
 
+const ReplyToCommentItem = ({notification}: { notification: Notification<Comment> }) => {
+    return (
+        <div className={styles.item}>
+            <Avatar alt={'User'} src={notification.data?.user?.avatar} className={styles.avatar}/>
+            <div className={styles.listContent}>
+                <b>{notification.data.user.name}</b> ответил на Ваш комментарий к записи&nbsp;
+                <Link href={'#'}>
+                    <a>
+                        “{notification.data.post.title}”
+                    </a>
+                </Link>
+            </div>
+        </div>
+    )
+}
+
 const SetLikeOrDislikeItem = ({notification}: { notification: Notification<Likeable> }) => {
     const isLike = notification.data.type === 'like'
 
@@ -66,5 +82,14 @@ export default function Item({item}: Props) {
         return <AddCommentItem notification={item as Notification<Comment>}/>
     }
 
-    return <SetLikeOrDislikeItem notification={item as Notification<Likeable>}/>
+    if (item.type.includes('ReplyToCommentNotification')) {
+        return <ReplyToCommentItem notification={item as Notification<Comment>}/>
+    }
+
+    if (item.type.includes('SetLikeOrDislikeNotification')) {
+        return <SetLikeOrDislikeItem notification={item as Notification<Likeable>}/>
+    }
+
+    return null;
+
 }
