@@ -6,7 +6,7 @@ services:
     container_name: ingternet-nginx
     image: ingternet-nginx:${TAG:-latest}
     ports:
-      - "80:80"
+      - "2222:2222"
     links:
       - ingternet-frontend
 
