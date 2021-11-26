@@ -42,6 +42,15 @@ function MyApp({Component, pageProps}) {
         if (jssStyles) {
             jssStyles.parentElement.removeChild(jssStyles);
         }
+
+        if (user) {
+            UserApi.getNotifications(localStorage.getItem('token')).then(response => {
+                dispatch(setNotifications(response));
+            })
+
+
+        }
+
     }, []);
 
     const [alertInfo, setAlertInfo] = React.useState<AlertContextProps['alertInfo']>({
@@ -100,7 +109,6 @@ MyApp.getInitialProps = wrapper.getInitialAppProps(store => async ({Component, c
        try {
            const user = await UserApi.getMe(token);
            store.dispatch(setUser(user));
-           store.dispatch(setNotifications(await UserApi.getNotifications(token)));
        } catch (e) {
            console.log(e);
        }

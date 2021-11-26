@@ -234,9 +234,9 @@ export default function Home(props) {
                                 comments.map((item): CommentItem => {
                                     return {
                                         id: `${item.id}`,
-                                        user: {fullname: item.user.name, avatarUrl: item.user.avatar},
+                                        user: item.user,
                                         text: item.text,
-                                        post: {id: `${item.post.id}`, title: item.post.title},
+                                        post: {id: `${item.post.id}`, title: item.post.title, slug: item.post.slug},
                                         rating: item.likes_count,
                                     };
                                 })
