@@ -52,7 +52,7 @@ export const AuthDialog: React.FC<ModalProps> = ({
             <Typography className={styles.title}> Добро пожаловать </Typography>
             <Typography className={styles.subTitle}> Рады видеть вас снова! </Typography>
 
-            <Link href={`${API_URL}/social/vk`}>
+            <Link href={`${API_URL}/api/social/vk`}>
               <a>
                 <Button fullWidth={true} variant={'outlined'}>
                   <img src="/vk.png" alt="" />
@@ -60,7 +60,7 @@ export const AuthDialog: React.FC<ModalProps> = ({
                 </Button>
               </a>
             </Link>
-            <Link href={`${API_URL}/social/google`}>
+            <Link href={`${API_URL}/api/social/google`}>
               <a>
                 <Button fullWidth={true} variant={'outlined'}>
                   <img src="/google.png" alt="" />

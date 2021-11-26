@@ -12,16 +12,15 @@ import {UserApi} from "../../services/api/UserApi";
 import {CommentApi} from "../../services/api/CommentApi";
 import {LoadMore} from "../../components/LoadMore";
 
-
+const types = {
+    drafts: 'draft',
+    articles: 'active'
+}
 export default function Profile(props) {
     const [user, setUser] = useState<User>(props.user);
     const authUser = useSelector(selectUserState)['data'];
     const router = useRouter()
     const {id, type} = router.query
-    const types = {
-        drafts: 'draft',
-        articles: 'active'
-    }
 
     const [posts, setPosts] = React.useState<Partial<Pagination<PostData>>>(props.posts)
     const [isLoading, setIsLoading] = React.useState(false);
@@ -116,7 +115,9 @@ export default function Profile(props) {
 
 
 export async function getServerSideProps(ctx) {
-    const posts = await getPosts({user_ids: ctx.query.id})
+    // @ts-ignore
+    const token = ctx?.req?.cookies?.auth_token
+    const posts = await getPosts({user_ids: ctx.query.id, status: types[ctx.query.type]}, token)
     const comments = await CommentApi.get({user_ids: ctx.query.id})
     return {
         props: {

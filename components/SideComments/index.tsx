@@ -4,23 +4,24 @@ import React from 'react';
 import Link from 'next/link';
 
 import styles from './SideComments.module.scss';
+import {User} from "../../interfaces";
 
 interface SideCommentsProps {
   comments: CommentItem[];
 }
 
-export type CommentItem = { id: string; user: any; rating?: number; text: string; post: { id: string; title: string } };
+export type CommentItem = { id: string; user: User; rating?: number; text: string; post: { id: string; title: string, slug: string } };
 
 const CommentItem: React.FC<CommentItem> = ({ id, user, text, post, rating }) => {
   return (
     <div className={clsx(styles.comment, 'pl-25 pt-25 pr-25 pb-25')}>
       <div className={clsx(styles.commentTop, 'd-flex justify-content-between')}>
         <div className="d-flex">
-          <Avatar src={user.avatarUrl} />
+          <Avatar src={user.avatar} />
           <div className="d-flex flex-column ml-10">
-            <Link href="/profile/1">
+            <Link href={`/profile/${user.id}`}>
               <a>
-                <b>{user.fullname}</b>
+                <b>{user.name}</b>
               </a>
             </Link>
             <span className={styles.commentTime}>3 часа назад</span>
@@ -37,7 +38,7 @@ const CommentItem: React.FC<CommentItem> = ({ id, user, text, post, rating }) =>
           <p className={styles.commentText}>{text}</p>
         </a>
       </Link>
-      <Link href={`/post/${post.id}`}>
+      <Link href={`/post/${post.slug}#${post.id}`}>
         <a className={styles.commentPostLink}>{post.title}</a>
       </Link>
     </div>
