@@ -121,8 +121,8 @@ export default function Home(props) {
     };
 
     useEffect(() => {
-        echo().channel('ingternet-comments-list').listen('.get', data => {
-            setComments([data.comment, ...comments])
+        echo().channel('ingternet-comments-list').listen('.get', comment => {
+            setComments([comment, ...comments])
         })
 
         setSkipUseEffect(false)

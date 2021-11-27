@@ -5,6 +5,7 @@ import {MenuList} from "../MenuList";
 import React, {useState} from "react";
 import {Typography} from "@material-ui/core";
 import clsx from "clsx";
+import {Divider} from "@mui/material";
 
 type Props = {
     categories: Category[],
@@ -21,7 +22,7 @@ function ActiveSvg(props: { leak: boolean }) {
 }
 
 export const SelectCategory = ({categories, onSelect, selectedCategory}: Props) => {
-    const [category, setCategory] = useState(selectedCategory)
+    const [category, setCategory] = useState(selectedCategory?.id ? selectedCategory : { name: 'Мой блог', slug: 'home', id: 0 })
     const [visiable, setVisiable] = React.useState(false);
     const [leak, setLeak] = React.useState(false);
 
@@ -34,7 +35,7 @@ export const SelectCategory = ({categories, onSelect, selectedCategory}: Props) 
 
     const handleSelectCategory = (c: Category) => {
         onSelect(c);
-        setCategory(c);
+        setCategory(c?.id ? c : { name: 'Мой блог', slug: 'home', id: 0 });
     }
 
     return (
@@ -51,6 +52,13 @@ export const SelectCategory = ({categories, onSelect, selectedCategory}: Props) 
             {
                 leak && <div className={styles.newPop}>
                     <ul>
+                        <li onClick={() => handleSelectCategory(null)}>
+                            <img src={`/home.png`}/>
+                            Мой блог
+                        </li>
+
+                        <Divider />
+                        <br/>
                         {categories.map((c, idx) => {
                             return (
                                 <li key={idx} onClick={() => handleSelectCategory(c)}>

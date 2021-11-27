@@ -15,12 +15,12 @@ type Props = {
 
 export function EditorBlock({ categories, serverSidePost }: Props) {
     const router = useRouter();
-    const [data, setData] = useState<Array<any>>(serverSidePost ? serverSidePost.body : [
+    const [data, setData] = useState<Array<any>>(serverSidePost ? [ {"type": "header", "data": {"text": serverSidePost.title, "level": 2}}, ...serverSidePost.body] : [
         {"type": "header", "data": {"text": "", "level": 2}}
     ]);
 
     const [post, setPost] = useState<PostData>(serverSidePost || null);
-    const [category, setCategory] = useState<Category>(serverSidePost?.category || categories[0]);
+    const [category, setCategory] = useState<Category>(serverSidePost?.category || { name: 'Мой блог', slug: 'home', id: 0 });
 
     const [message, setMessage] = useState('');
 
@@ -32,7 +32,7 @@ export function EditorBlock({ categories, serverSidePost }: Props) {
                body: data,
                themes: [{name: '#разработка', id: 0}],
                status,
-               category,
+               category: category.id > 0 ? category : null,
                id: post?.id
            });
 
