@@ -160,7 +160,7 @@ export const Header = ({ onClickHamburger } : Props) => {
                 <Link href={'/'}>
                     <a><img className={styles.logo} src="/logo.svg" alt="Logo"/></a>
                 </Link>
-                <Link href="/specialists">
+                <Link href="/">
                     <a className="d-flex align-items-center ml-45">
                         <img className="mr-10" src="/users.svg" alt="Специалисты"/>
                         Специалисты

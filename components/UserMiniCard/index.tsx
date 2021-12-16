@@ -72,10 +72,22 @@ const UserMiniCard: React.FC<UserCardProps> = (
                            <div className={styles.userCard_communication}>
                                <div className={styles.userCard_socNetworks}>
                                    {links.map((link, key) => {
+                                       let domain = ''
+
+                                       if (link.value.includes('facebook')) {
+                                           domain = 'facebook'
+                                       } else if (link.value.includes('vk')) {
+                                           domain = 'vk'
+                                       } else if (link.value.includes('twitter')) {
+                                           domain = 'twitter'
+                                       } else if (link.value.includes('github')) {
+                                           domain = 'github'
+                                       }
+
                                        return (
                                            <Link key={'link-' + key} href={link.value}>
                                                <a>
-                                                   <img src={`/${link.key}.svg`} alt={link.key} />
+                                                   <img src={`/${domain}.svg`} alt={link.value} />
                                                </a>
                                            </Link>
                                        )

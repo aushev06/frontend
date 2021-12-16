@@ -43,7 +43,7 @@ function MyApp({Component, pageProps}) {
             jssStyles.parentElement.removeChild(jssStyles);
         }
 
-        if (user) {
+        if (user?.data) {
             UserApi.getNotifications(localStorage.getItem('token')).then(response => {
                 dispatch(setNotifications(response));
             })

@@ -119,24 +119,24 @@ const UserCard: React.FC<UserCardProps> = (
                             </div>
                     }
                 </div>
-                <div className={styles.userCard_section}>
-                    <div onClick={() => toggleLeak()} className={styles.userCard_articles}>
-                        <span>{type === 'articles' ? 'Статьи' : 'Черновики'} <b>{postCount}</b></span>
-                        <ActiveSvg leak={leak}/>
-                        {
-                            leak && <div className={styles.userCard_newPop}>
-                                <ul>
-                                    <li onClick={() => handleChangeType('articles')}>
-                                        {type === 'articles' && <PointSvg/>}
-                                        Статьи
-                                    </li>
-                                    {isAuthUser && <li onClick={() => handleChangeType('drafts')}>{type === 'drafts' && <PointSvg />} Черновики</li>}
-                                </ul>
-                            </div>
-                        }
-                    </div>
-                    <div className={styles.userCard_comments}><span>Комментарии {commentsCount}</span></div>
-                </div>
+                {/*<div className={styles.userCard_section}>*/}
+                {/*    <div onClick={() => toggleLeak()} className={styles.userCard_articles}>*/}
+                {/*        <span>{type === 'articles' ? 'Статьи' : 'Черновики'} <b>{postCount}</b></span>*/}
+                {/*        <ActiveSvg leak={leak}/>*/}
+                {/*        {*/}
+                {/*            leak && <div className={styles.userCard_newPop}>*/}
+                {/*                <ul>*/}
+                {/*                    <li onClick={() => handleChangeType('articles')}>*/}
+                {/*                        {type === 'articles' && <PointSvg/>}*/}
+                {/*                        Статьи*/}
+                {/*                    </li>*/}
+                {/*                    {isAuthUser && <li onClick={() => handleChangeType('drafts')}>{type === 'drafts' && <PointSvg />} Черновики</li>}*/}
+                {/*                </ul>*/}
+                {/*            </div>*/}
+                {/*        }*/}
+                {/*    </div>*/}
+                {/*    <div className={styles.userCard_comments}><span>Комментарии {commentsCount}</span></div>*/}
+                {/*</div>*/}
             </div>
         </div>
     )

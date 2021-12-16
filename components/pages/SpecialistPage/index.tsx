@@ -91,7 +91,10 @@ export const SpecialistPageComponent = ({ initialSpecialistData, categories }: P
                         profession={spec?.position || 'Описание отсутсвует'}
                         status={spec.description}
                         readyForWork={spec.ready_for_work}
-                        links={[{key: 'facebook', value: 'https://facebook.com'}]}
+                        links={spec.links.map((l) => ({
+                            key: 'facebook',
+                            value: l
+                        }))}
                         id={spec.id}
                     />)}
 
